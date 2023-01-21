@@ -1,15 +1,9 @@
-import BottomNav from '@/src/components/bottom-nav'
-import Header from '@/src/components/header'
-import Meta from '@/src/components/meta'
 import React, { useState } from 'react'
-import Page from '@/src/components/page'
-import Section from '@/src/components/section'
 import { useRouter } from 'next/router'
-import { Button, Form } from 'react-bootstrap'
 import { useAuth } from '../../context/AuthContext'
 import error from 'next/error'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { getLocationOrigin } from 'next/dist/shared/lib/utils'
+
 
 export default function Login(){
   const [email,setEmail] = useState('')
@@ -28,9 +22,11 @@ export default function Login(){
     if (isLoggingIn){
       try {
         await login(email, password)
+        console.log('logged in')
       } catch (err){
         setError("Incorrect Email and Password")
       }
+      console.log('logged in')
       return 
     }
     try {
