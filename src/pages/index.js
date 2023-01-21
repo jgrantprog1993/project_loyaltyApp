@@ -1,10 +1,11 @@
 import Page from '@/src/components/page'
 import Section from '@/src/components/section'
-
+import { useAuth } from '../context/AuthContext'
 import Head from 'next/head'
 import Meta from '@/src/components/meta'
 import Header from '../components/header'
 import BottomNav from '../components/bottom-nav'
+import Login from './login'
 
 // export default function Home() {
 // 	return (
@@ -25,26 +26,23 @@ import BottomNav from '../components/bottom-nav'
 //   }
 
 
-const Index = () => (
-	<Page>
-		<Section>
-			<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
-				Home
-			</h2>
+export default function Index(){
+	
+	return (
+		<>
+				<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
+						Home
+					</h2>
 
-			<div className='mt-2'>
-				<p className='text-zinc-600 dark:text-zinc-400'>
+					<div className='mt-2'>
+						<p className='text-zinc-600 dark:text-zinc-400'>
+						</p>
+					</div>
 					
-				</p>
-
-
-			
-			</div>
-		</Section>
-	</Page>
-)
-
-export default Index
+					
+		</>
+			)
+	}
 
 
 

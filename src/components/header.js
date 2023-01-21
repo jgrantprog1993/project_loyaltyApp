@@ -1,21 +1,24 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { Label, Nav } from 'reactstrap'
+import { useAuth } from '../context/AuthContext'
 
 const links = [
 	{ label: 'Vouchers', href: '/vouchers' },
 	{ label: 'Discover', href: '/discover' },
 	{ label: 'Scan', href: '/scan' },
-	{ label: 'Log In', href: '/login' },
+	// { label: 'Log In', href: '/login' },
+	// { label: 'Sign up', href: '/signup' },
 ]
 
-const Header = () => {
+function Header() {
 	const router = useRouter()
-
+	const {user, logout} = useAuth()
 	return (
 		<div className='fixed top-0 left-0 z-20 w-full bg-zinc-900 pt-safe'>
 			<header className='border-b bg-zinc-100 px-safe dark:border-zinc-800 dark:bg-zinc-900'>
 				<div className='mx-auto flex h-20 max-w-screen-md items-center justify-between px-6'>
-					<Link href='/'>
+					<Link legacyBehavior href='/'>
 						<a>
 							<h1 className='font-medium'>Loyalty App</h1>
 						</a>
@@ -25,7 +28,7 @@ const Header = () => {
 						<div className='hidden sm:block'>
 							<div className='flex items-center space-x-6'>
 								{links.map(({ label, href }) => (
-									<Link key={label} href={href}>
+									<Link legacyBehavior key={label} href={href}>
 										<a
 											className={`text-sm ${
 												router.pathname === href
@@ -37,10 +40,13 @@ const Header = () => {
 										</a>
 									</Link>
 								))}
+								
 							</div>
 						</div>
 
+						<a href='/login'>
 						<div
+							
 							title='userIcon'
 							className='h-10 w-10 rounded-full bg-zinc-200 bg-cover bg-center shadow-inner dark:bg-zinc-800'
 							style={{
@@ -48,6 +54,7 @@ const Header = () => {
 									'url(https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png)',
 							}}
 						/>
+						</a>
 					</nav>
 				</div>
 			</header>

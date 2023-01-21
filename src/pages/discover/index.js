@@ -5,16 +5,14 @@ import React from 'react'
 import Page from '@/src/components/page'
 import Section from '@/src/components/section'
 
-
 export default function Discover() {
   return (
-	  <>
-      <Meta/>
-      <Header/>
-      <Page>
-				<Section>
+	<>
+	
+		
+				
 					<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
-					 Register
+						Discover
 					</h2>
 
 					<div className='mt-2'>
@@ -25,9 +23,11 @@ export default function Discover() {
 
 					
 					</div>
-				</Section>
-			</Page>
-      <BottomNav/>
-    </>
+				
+			
+			
+	</>
   )
 }
+
+
