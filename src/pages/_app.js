@@ -1,12 +1,17 @@
-import type { AppProps } from 'next/app'
+// @ts-ignore
 import { ThemeProvider } from 'next-themes'
+// @ts-ignore
 import Meta from '../components/meta'
 //import '@/styles/globals.css'
+// @ts-ignore
 import { useRouter } from "next/router";
 import '../styles/globals.css';
 import { AuthProvider } from "../context/AuthContext";
+// @ts-ignore
 import ProtectedRoute from "../components/protectedRoute";
+// @ts-ignore
 import Header from '../components/header';
+// @ts-ignore
 import BottomNav from '../components/bottom-nav';
 
 // const protectedRoutes = ["/"];
@@ -23,11 +28,23 @@ import BottomNav from '../components/bottom-nav';
 // }
 
 import Layout from '../components/layout'
+import Head from 'next/head';
 
-export default function MyApp({ Component, pageProps }:{Component:any,pageProps:any}) {
+// @ts-ignore
+function MyApp( {Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <>
+      <Head>
+      <title>Loyalty App </title>
+      </Head>
+      <Meta/>
+      <AuthProvider>
+        <Layout>
+          <Component {...pageProps}/>
+        </Layout>
+      </AuthProvider>
+    </>
   )
 }
+
+export default MyApp

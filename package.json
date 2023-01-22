@@ -1,5 +1,5 @@
 {
-	"name": "next-pwa-template",
+	"name": "next-loyalty-app",
 	"version": "0.0.0",
 	"license": "MIT",
 	"scripts": {
@@ -11,7 +11,7 @@
 	"dependencies": {
 		"bootstrap": "^5.2.3",
 		"firebase": "^9.15.0",
-		"next": "12.1.6",
+		"next": "^13.1.2",
 		"next-pwa": "^5.5.2",
 		"next-themes": "^0.2.0",
 		"react": "^18.1.0",
@@ -30,12 +30,12 @@
 		"eslint": "^8.16.0",
 		"eslint-config-next": "^12.1.6",
 		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-react-hooks": "^4.6.0",
 		"postcss": "^8.4.14",
 		"prettier": "^2.6.2",
 		"prettier-plugin-tailwindcss": "^0.1.11",
 		"tailwindcss": "^3.2.4",
-		"tailwindcss-safe-area": "^0.2.2",
-		"typescript": "^4.6.4"
+		"tailwindcss-safe-area": "^0.2.2"
 	},
 	"prettier": {
 		"semi": false,
