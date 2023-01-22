@@ -1,6 +1,5 @@
 
 ![alt text](https://github.com/jgrantprog1993/project_PWA_test1/blob/main/public/images/playstore.png)
-
 ## Final Project
 Loyalty App
 
