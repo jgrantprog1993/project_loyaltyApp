@@ -17,9 +17,7 @@ const links = [
 
 function Header() {
 	const [openModel, setOpenModal] = useState(false)
-	
-
-	
+	const [currentUser, setCurrentUSer] = useState(null)
 	// @ts-ignore
 	const router = useRouter()
 	// @ts-ignore
@@ -28,7 +26,7 @@ function Header() {
 	// @ts-ignore
 	return (
 		<>
-			{openModel && <Modal setOpenModal={setOpenModal} />}
+			
 			<div className='fixed top-0 left-0 z-20 w-full bg-zinc-900 pt-safe'>
 				<header className='border-b bg-zinc-100 px-safe dark:border-zinc-800 dark:bg-zinc-900'>
 					<div className='mx-auto flex h-20 max-w-screen-md items-center justify-between px-6'>
@@ -59,18 +57,19 @@ function Header() {
 								</div>
 							</div>
 
+							{!openModel && <Modal setOpenModal={setOpenModal} />}
+								<a href='/login'>
+								<div
+									
+									title='userIcon'
+									className='h-10 w-10 rounded-full bg-zinc-200 bg-cover bg-center shadow-inner dark:bg-zinc-800'
+									style={{
+										backgroundImage:
+											'url(https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png)',
+									}}
+								/>
+								</a>
 							
-							<a href='/login'>
-							<div
-								
-								title='userIcon'
-								className='h-10 w-10 rounded-full bg-zinc-200 bg-cover bg-center shadow-inner dark:bg-zinc-800'
-								style={{
-									backgroundImage:
-										'url(https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png)',
-								}}
-							/>
-							</a>
 						</nav>
 					</div>
 				</header>
