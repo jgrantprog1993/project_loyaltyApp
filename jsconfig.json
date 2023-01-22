@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"checkJs": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"jsx": "preserve",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./*"]
+		},
+		"incremental": true
+	},
+	"exclude": ["node_modules"],
+	"include": ["next-env.d.js", "**/*.js", "**/*.js", "src/pages/login.js", "src/layout/index.js", "src/components/meta.js", "src/components/meta.js", "src/components/layout.js", "src/components/layout.js", "src/components/header.js", "src/components/header.js", "src/components/bottom-nav.js", "src/components/bottom-nav.js", "src/common/Button.js", "src/common/Button.js", "src/components/page.js", "src/components/page.js", "src/svg/index.js", "src/svg/index.js", "src/utils/firebase.js", "src/utils/firebase.js", "src/pages/index.js", "src/pages/index.js", "src/pages/_document.js", "src/pages/_document.js", "src/pages/_app.js", "src/pages/_app.js", "src/pages/vouchers/index.js", "src/pages/vouchers/index.js", "src/pages/scan/index.js", "src/pages/register/index.js", "src/pages/register/index.js", "src/pages/login/index.js", "src/pages/login/index.js", "src/pages/discover/index.tsx", "src/pages/discover/index.tsx", "src/pages/dashboard/index.js", "src/pages/dashboard/index.js", "src/context/AuthContext.js", "src/context/AuthContext.js", "src/components/signOut.js", "src/components/signOut.js", "src/components/section.js", "src/components/section.js", "src/components/protectedRoute.js", "src/components/protectedRoute.js"]
+}

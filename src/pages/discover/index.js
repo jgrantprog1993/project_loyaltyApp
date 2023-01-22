@@ -1,17 +1,16 @@
-import BottomNav from '@/src/components/bottom-nav'
-import Header from '@/src/components/header'
-import Meta from '@/src/components/meta'
+import BottomNav from '../../components/bottom-nav'
+import Header from '../../components/header'
+import Meta from '../../components/meta'
 import React from 'react'
-import Page from '@/src/components/page'
-import Section from '@/src/components/section'
+import Page from '../../components/page'
+import Section from '../../components/section'
 
 export default function Discover() {
   return (
 	<>
-			<Meta/>
-			<Header/>
-			<Page>
-				<Section>
+	
+		
+				
 					<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
 						Discover
 					</h2>
@@ -24,9 +23,9 @@ export default function Discover() {
 
 					
 					</div>
-				</Section>
-			</Page>
-			<BottomNav/>
+				
+			
+			
 	</>
   )
 }

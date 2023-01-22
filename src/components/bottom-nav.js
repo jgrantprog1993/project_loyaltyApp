@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-const BottomNav = () => {
+function BottomNav() {
 	const router = useRouter()
 
 	return (
@@ -9,7 +9,7 @@ const BottomNav = () => {
 			<nav className='fixed bottom-0 w-full border-t bg-zinc-100 pb-safe dark:border-zinc-800 dark:bg-zinc-900'>
 				<div className='mx-auto flex h-16 max-w-md items-center justify-around px-6'>
 					{links.map(({ href, label, icon }) => (
-						<Link key={label} href={href}>
+						<Link legacyBehavior key={label} href={href}>
 							<a
 								className={`flex h-full w-full flex-col items-center justify-center space-y-1 ${
 									router.pathname === href

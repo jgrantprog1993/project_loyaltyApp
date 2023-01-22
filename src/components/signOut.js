@@ -6,14 +6,14 @@ import {Container, Row, Col, Button} from 'reactstrap';
 import { signOut } from 'firebase/auth';
 
 const LoggedIn = () => {
-  const { user, loading, register } = useAuth();
+  const { currentUser, loading, register } = useAuth();
   const router = useRouter();
 
   // Listen for changes on loading and authUser, redirect if needed
   useEffect(() => {
-    if (!loading && !user)
+    if (!loading && !currentUser)
       router.push('/')
-  }, [user, loading])
+  }, [currentUser, loading])
 
   return (
     <Container>
