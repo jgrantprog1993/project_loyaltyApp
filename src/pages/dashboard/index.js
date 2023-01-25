@@ -3,7 +3,7 @@ import Header from '@/src/components/header'
 import Meta from '@/src/components/meta'
 import React from 'react'
 
-export default function Home() {
+export default function Dashboard() {
   return (
     <>
         <Meta/>

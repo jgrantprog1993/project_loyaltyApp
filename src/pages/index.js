@@ -26,15 +26,15 @@ import Login from './login'
 //   }
 
 
-export default function Index(){
+export default function Home(){
 	
 	return (
 		<>
-				<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
+				<h2 className='text-xl inline-block align-text-top font-semibold text-zinc-800 dark:text-zinc-200'>
 						Home
 					</h2>
 
-					<div className='mt-2'>
+					<div className='mt-90'>
 						<p className='text-zinc-600 dark:text-zinc-400'>
 						</p>
 					</div>
