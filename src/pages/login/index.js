@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useAuth } from '../../context/AuthContext'
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { useNavigate } from "react-router-dom";
@@ -14,38 +14,39 @@ export default function Login(){
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [isABusiness, setIsABusiness] = useState(false)
-  const [isLoggingIn, setIsLoggingIn] = useState(false)
-  const [LoggedIn, setLoggedIn] = useState(false)
+  const [isLoggingIn, setIsLoggingIn] = useState(true)
+  const [LoggedIn, setLoggedIn] = useState(null)
   const [error, setError] = useState('')
   const {login, register, currentUser, setCurrentUser, logout} = useAuth()
   //console.log(currentUser)
-  //const router = useRouter();
+  const router = useRouter();
   
-  // useEffect(() => {
-  //  console.log('use effect ran')
-  //  if(LoggedIn){
-  //   router.push('/')
-  //  }
-  //  else{
-  //   router.push('/login')logged in
-  //  }
+  useEffect(() => {
+   console.log('use effect ran')
+   if(LoggedIn === false) {
+    router.push('/login')
+   }
+   else{
+    setLoggedIn(true)
+    router.push('/login')
+   }
    
-  // }, [LoggedIn])
+  }, [LoggedIn])
 
 
   onAuthStateChanged(auth, (currentUser) => {
-    console.log(currentUser)
-    console.log(isLoggingIn)
+    // console.log(currentUser)
+    // console.log(isLoggingIn)
     console.log(LoggedIn)
     if (currentUser) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = currentUser.uid;
-      console.log(uid)
+      // console.log(uid)
      
     } else {
       //setIsLoggingIn(true)
-      console.log('do nothing')
+      // console.log('do nothing')
       
     }
   });
@@ -57,11 +58,8 @@ export default function Login(){
     }
     if (isLoggingIn){
       try {
-        const user = login(email, password)
-        console.log('logged in')
-        console.log(user)
-        // setLoggedIn(true)
-        // setIsLoggingIn(false)
+        login(email, password)
+        setLoggedIn(true)
       } catch (err){
         setError("Incorrect Email and Password")
       }
@@ -71,19 +69,12 @@ export default function Login(){
     {
       try {
         const regUSer = await register(email, password)
-        console.log("currentUser")
-        console.log(regUSer)
-        console.log("currentUser.uid")
-        console.log('Test')
-        console.log(regUSer.user.uid)
+        setLoggedIn(true)
         writeDatatoFSUsers(regUSer.user.uid, firstName, lastName, email, password, dbFs)
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
-      // }catch (err){
-      //   setError("Unable to Register")
-      // }
     }
   }
 
@@ -92,8 +83,8 @@ export default function Login(){
     console.log('logged Out Attempt')
     try {
       logout()
-      console.log('logged Out')
       setLoggedIn(false)
+      router.push("/login")
     }catch (err){
       setError("Unable Logout")
     }
@@ -113,8 +104,6 @@ export default function Login(){
  
 
   function writeDatatoFSUsers(userId, firstName, lastName, email, password, dbFs){
-    console.log('isABusiness')
-    console.log(isABusiness)
     const users = doc(dbFs, `users/${userId}`)
     const docData = {
       uid: userId,
@@ -130,7 +119,7 @@ export default function Login(){
 
   return (
     <>
-        {currentUser ? (
+        {LoggedIn ? (
             <div className='flex-1 text-xs sm:text-sm flex flex-col justify-cener items-center gap-2 sm:gap-4'>
                   <button onClick={submitHandlerLogout} className='w-full max-w-[40ch] border border-white border-solid uppercase py-2 duration-300 relative after:absolute after:top-0 after:right-full after:bg-white after:z-10 after:w-full after:h-full overflow-hidden hover:after:translate-x-full after:duration-300 hover:text-slate-900'>
                   <h2 className='relative z-20'>
@@ -145,7 +134,7 @@ export default function Login(){
         <div className='flex-1 text-xs sm:text-sm flex flex-col justify-cener items-center gap-2 sm:gap-4'>
           {isLoggingIn ? (
           <>
-            <div>
+            
               <h1 className='font-extrabold select-none text-2xl sm:text-4xl uppercase'>Login</h1>
               <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
               
@@ -158,7 +147,7 @@ export default function Login(){
                   SUBMIT
                 </h2>
               </button>
-            </div>
+            
           </>
           ):(
           <>
