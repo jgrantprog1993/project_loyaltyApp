@@ -4,35 +4,34 @@ import { useRouter } from 'next/router'
 import { Label, Nav } from 'reactstrap'
 import { useAuth } from '../context/AuthContext'
 import { useEffect, useState } from 'react'
-import Modal from './modal'
+
 
 
 const links = [
-	{ label: 'Vouchers', href: '/aUsers/vouchers' },
-	{ label: 'Discover', href: '/aUsers/discover' },
-	{ label: 'Scan', href: '/aUsers/scan' },
-	// { label: 'Log In', href: '/login' },
-	// { label: 'Sign up', href: '/signup' },
+	{ label: 'Locations', href: '/aBusin/locations' },
+	{ label: 'Profile', href: '/aBusin/profile' },
+	//{ label: 'Notifications', href: '/aBusin/notifications' },
+	{ label: 'Setup Tag', href: '/aBusin/tagsetup'},
+	//{ label: 'Billing', href: '/aBusin/billing' },
+
 ]
 
 function Header() {
-	const [openModel, setOpenModal] = useState(false)
-	const [currentUser, setCurrentUSer] = useState(null)
+	
 	// @ts-ignore
 	const router = useRouter()
 	// @ts-ignore
-	const {user, logout} = useAuth()
-	
 	// @ts-ignore
 	return (
 		<>
 			
-			<div className='fixed top-0 left-0 z-20 w-full bg-zinc-900 pt-safe'>
-				<header className='border-b bg-zinc-100 px-safe dark:border-zinc-800 dark:bg-zinc-900'>
+			<div className='fixed top-0 left-0 z-20 w-full bg-black-900 pt-safe'>
+				<header className='border-b bg-zinc-100 px-safe dark:border-black-800 dark:bg-black-900'>
 					<div className='mx-auto flex h-20 max-w-screen-md items-center justify-between px-6'>
 						<Link legacyBehavior href='/'>
 							<a>
-								<h1 className='font-medium'>Loyalty App</h1>
+								<h1 className='font-medium'>Loyalty App - Buisn</h1>
+								
 							</a>
 						</Link>
 
@@ -46,7 +45,7 @@ function Header() {
 													// @ts-ignore
 													router.pathname === href
 														? 'text-indigo-500 dark:text-indigo-400'
-														: 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50'
+														: 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-black-50'
 												}`}
 											>
 												{label}
@@ -57,12 +56,11 @@ function Header() {
 								</div>
 							</div>
 
-							{!openModel && <Modal setOpenModal={setOpenModal} />}
 								<a href='/login'>
 								<div
 									
 									title='userIcon'
-									className='h-10 w-10 rounded-full bg-zinc-200 bg-cover bg-center shadow-inner dark:bg-zinc-800'
+									className='h-10 w-10 rounded-full bg-zinc-200 bg-cover bg-center shadow-inner dark:bg-black-800'
 									style={{
 										backgroundImage:
 											'url(https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png)',

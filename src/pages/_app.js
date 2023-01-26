@@ -35,7 +35,7 @@ function MyApp( {Component, pageProps }) {
   return (
     <>
       <Head>
-      <title>Loyalty App </title>
+      <title>Loyalty App</title>
       </Head>
       <Meta/>
       <AuthProvider>

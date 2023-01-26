@@ -42,11 +42,11 @@ export default function Login(){
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = currentUser.uid;
-      // console.log(uid)
+      console.log(uid)
      
     } else {
       //setIsLoggingIn(true)
-      // console.log('do nothing')
+      console.log('No1 Loggedin')
       
     }
   });

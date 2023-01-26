@@ -12,7 +12,7 @@ const Page = (title, children ) => (
 	<>
 		{title ? (
 			<Head>
-				<title>Loyalty AppXYZ | {title}</title>
+				<title>Loyalty App | {title}</title>
 			</Head>
 		) : null}
 

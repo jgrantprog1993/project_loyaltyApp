@@ -34,7 +34,7 @@ export default function Home(){
 						Home
 					</h2>
 
-					<div className='mt-90'>
+					<div className='mt-2'>
 						<p className='text-zinc-600 dark:text-zinc-400'>
 						</p>
 					</div>
