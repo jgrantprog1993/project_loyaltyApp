@@ -33,10 +33,11 @@ export default function Layout({title, keywords, description, children}) {
           <title> {title} : User</title>
           <Meta></Meta>
         </Head>
-        <div className='flex flex-col min-h-screen relative bg-slate-300'>
+        <div className='flex justify-center bg-slate-300'>
          <Navbar />
-            <main className='flex-1'></main>
-            {children}
+            <main>
+              {children}
+            </main>
          <Footer/>
         </div>
        </>
