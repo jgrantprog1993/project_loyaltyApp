@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '../../context/AuthContext'
-// import { useAuthState } from "react-firebase-hooks/auth";
-// import { useNavigate } from "react-router-dom";
-import error from 'next/error'
+import { useAuth } from '../context/AuthContext'
+// @ts-ignore
 import { getDatabase, ref, set } from "firebase/database";
-import {auth, app, db, dbFs, doc, setDoc, onAuthStateChanged} from "../../utils/firebase"
-//import { setDoc } from 'firebase/firestore'
+// @ts-ignore
+import {auth, app, db, dbFs, doc, setDoc, onAuthStateChanged} from "../utils/firebase"
+import Layout from "../components/layout"
 
 export default function Login(){
   const [email,setEmail] = useState('')
@@ -17,8 +16,8 @@ export default function Login(){
   const [isLoggingIn, setIsLoggingIn] = useState(true)
   const [LoggedIn, setLoggedIn] = useState(null)
   const [error, setError] = useState('')
+  // @ts-ignore
   const {login, register, currentUser, setCurrentUser, logout} = useAuth()
-  //console.log(currentUser)
   const router = useRouter();
   
   useEffect(() => {
@@ -27,8 +26,7 @@ export default function Login(){
     router.push('/login')
    }
    else{
-    setLoggedIn(true)
-    router.push('/login')
+  
    }
    
   }, [LoggedIn])
@@ -39,13 +37,11 @@ export default function Login(){
     // console.log(isLoggingIn)
     console.log(LoggedIn)
     if (currentUser) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
+
       const uid = currentUser.uid;
       console.log(uid)
      
     } else {
-      //setIsLoggingIn(true)
       console.log('No1 Loggedin')
       
     }
@@ -59,6 +55,7 @@ export default function Login(){
     if (isLoggingIn){
       try {
         login(email, password)
+        // @ts-ignore
         setLoggedIn(true)
       } catch (err){
         setError("Incorrect Email and Password")
@@ -69,8 +66,10 @@ export default function Login(){
     {
       try {
         const regUSer = await register(email, password)
+        // @ts-ignore
         setLoggedIn(true)
         writeDatatoFSUsers(regUSer.user.uid, firstName, lastName, email, password, dbFs)
+        // @ts-ignore
         console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
@@ -83,6 +82,7 @@ export default function Login(){
     console.log('logged Out Attempt')
     try {
       logout()
+      // @ts-ignore
       setLoggedIn(false)
       router.push("/login")
     }catch (err){
@@ -90,19 +90,9 @@ export default function Login(){
     }
     console.log('logged Out Func Complete')
   }
-
-  // function writeUserData(userId, firstName, lastName, email, password) {
-  //   const db = getDatabase();
-  //   set(ref(db, '/users/' + userId), {
-  //     firstName: firstName,
-  //     lastNAme: lastName,
-  //     email: email,
-  //     password: password
-  
-  //   });
-  // }
  
 
+  // @ts-ignore
   function writeDatatoFSUsers(userId, firstName, lastName, email, password, dbFs){
     const users = doc(dbFs, `users/${userId}`)
     const docData = {
@@ -118,7 +108,7 @@ export default function Login(){
 
 
   return (
-    <>
+    <Layout title='Login/Register' keywords='{undefined}' description='{undefined}' >
         {LoggedIn ? (
             <div className='flex-1 text-xs sm:text-sm flex flex-col justify-cener items-center gap-2 sm:gap-4'>
                   <button onClick={submitHandlerLogout} className='w-full max-w-[40ch] border border-white border-solid uppercase py-2 duration-300 relative after:absolute after:top-0 after:right-full after:bg-white after:z-10 after:w-full after:h-full overflow-hidden hover:after:translate-x-full after:duration-300 hover:text-slate-900'>
@@ -136,7 +126,9 @@ export default function Login(){
           <>
             
               <h1 className='font-extrabold select-none text-2xl sm:text-4xl uppercase'>Login</h1>
-              <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
+              <div 
+                // @ts-ignore
+              class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
               
               </div>
               {error && <div className='w-fill max-w-[40ch] border-rose-400 border text-center border-solid text-rose-400 py-2'>{error} </div>}
@@ -152,27 +144,45 @@ export default function Login(){
           ):(
           <>
             <div>
-              <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div class="flex items-center pl-3">
+              <ul 
+                // @ts-ignore
+              class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <li 
+                // @ts-ignore
+                class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                  <div 
+                  // @ts-ignore
+                  class="flex items-center pl-3">
                     <input id="horizontal-list-radio-license" 
                             type="radio" 
                             value="User"
+                            // @ts-ignore
                             onChange={e=>setIsABusiness(e.target.value)}
                             name="list-radio" 
+                            // @ts-ignore
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"></input>
-                    <label for="horizontal-list-radio-license" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">User </label>
+                    <label 
+                      // @ts-ignore
+                    for="horizontal-list-radio-license" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">User </label>
                   </div>
                 </li>
-                <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div class="flex items-center pl-3">
+                <li 
+                // @ts-ignore
+                class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                  <div 
+                  // @ts-ignore
+                  class="flex items-center pl-3">
                     <input id="horizontal-list-radio-id" 
                             type="radio" 
                             value="Business"
+                            // @ts-ignore
                             onChange={e=>setIsABusiness(e.target.value)}
                             name="list-radio" 
+                            // @ts-ignore
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"></input>
-                    <label for="horizontal-list-radio-id" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Buisness</label>
+                    <label 
+                      // @ts-ignore
+                    for="horizontal-list-radio-id" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Buisness</label>
                   </div>
                 </li>
               </ul>
@@ -195,6 +205,6 @@ export default function Login(){
         )
 
        } 
-    </>
+    </Layout>
   )
 }

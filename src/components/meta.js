@@ -12,7 +12,7 @@ const Meta = () => (
 		/>
 		<meta name='apple-mobile-web-app-title' content='Loyalty App' />
 		<meta name='application-name' content='Loyalty App' />
-		<meta name='description' content='Scan to collect loyalty tockens' />
+		<meta name='description' content='Scan to collect loyalty tokens' />
 		<meta
 			name='theme-color'
 			content='#f4f4f5'

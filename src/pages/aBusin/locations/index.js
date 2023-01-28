@@ -1,9 +1,3 @@
-import BottomNav from '../../../components/bottom-nav'
-import Header from '../../../components/header'
-import Meta from '../../../components/meta'
-import React from 'react'
-import Page from '../../../components/page'
-import Section from '../../../components/section'
 
 export default function Busin_locations() {
   return (

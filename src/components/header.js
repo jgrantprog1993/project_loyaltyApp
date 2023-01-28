@@ -1,29 +1,17 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-// @ts-ignore
-import { Label, Nav } from 'reactstrap'
-import { useAuth } from '../context/AuthContext'
-import { useEffect, useState } from 'react'
-import Modal from './modal'
 
 
 const links = [
 	{ label: 'Vouchers', href: '/aUsers/vouchers' },
 	{ label: 'Discover', href: '/aUsers/discover' },
 	{ label: 'Scan', href: '/aUsers/scan' },
-	// { label: 'Log In', href: '/login' },
-	// { label: 'Sign up', href: '/signup' },
 ]
 
 function Header() {
-	const [openModel, setOpenModal] = useState(false)
-	const [currentUser, setCurrentUSer] = useState(null)
-	// @ts-ignore
-	const router = useRouter()
-	// @ts-ignore
-	const {user, logout} = useAuth()
 	
-	// @ts-ignore
+	const router = useRouter()
+
 	return (
 		<>
 			
@@ -57,8 +45,8 @@ function Header() {
 								</div>
 							</div>
 
-							{!openModel && <Modal setOpenModal={setOpenModal} />}
-								<a href='/login'>
+							
+								<Link href='/login'>
 								<div
 									
 									title='userIcon'
@@ -68,16 +56,14 @@ function Header() {
 											'url(https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png)',
 									}}
 								/>
-								</a>
+								</Link>
 							
 						</nav>
 					</div>
 				</header>
 			</div>
 		</>
-	// @ts-ignore
 	)
-// @ts-ignore
 }
 
 export default Header
