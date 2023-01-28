@@ -7,7 +7,7 @@ import Image from "next/image"
 // @ts-ignore
 export default function DiscoverItem({location}) {
   return (
-    <>
+    <div className="my-2">
         <Link href={`/locations/${location.slug}`} class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
             <figure class="md:flex bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800">
                 <img class="w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto" src={location.icon} alt=""/>
@@ -28,6 +28,6 @@ export default function DiscoverItem({location}) {
                 </div>
             </figure>
         </Link>
-    </>
+    </div>
   )
 }
