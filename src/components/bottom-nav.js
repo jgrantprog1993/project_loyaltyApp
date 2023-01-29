@@ -35,7 +35,7 @@ export default BottomNav
 const links = [
 	{
 		label: 'Home',
-		href: '/aUsers/',
+		href: '/',
 		icon: (
 			<svg
 				viewBox='0 0 15 15'
@@ -53,7 +53,7 @@ const links = [
 	},
 	{
 		label: 'Discover',
-		href: '/aUsers/discover',
+		href: '/discover',
 		icon: (
 			<svg
 				viewBox='0 0 15 15'
@@ -71,7 +71,7 @@ const links = [
 	},
 	{
 		label: 'Scan',
-		href: '/aUsers/scan',
+		href: '/scan',
 		icon: (
 			<svg
 			viewBox='0 0 22 20'
@@ -89,7 +89,7 @@ const links = [
 	},
 	{
 		label: 'Vouchers',
-		href: '/aUsers/vouchers',
+		href: '/vouchers',
 		icon: (
 			<svg
 				viewBox='0 0 15 15'

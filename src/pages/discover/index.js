@@ -1,7 +1,7 @@
 // @ts-nocheck
-import Layout from "../../../components/layout"
-import { API_URL } from "../../../utils/config"
-import DiscoverItem from "../../../components/DiscoverItem"
+import Layout from "../../components/layout"
+import { API_URL } from "../../utils/config"
+import DiscoverItem from "../../components/DiscoverItem"
 
 // @ts-ignore
 export default function Discover({locations}) {
@@ -9,7 +9,7 @@ export default function Discover({locations}) {
 	return (
 	<Layout title='Discover' keywords='' description=''>
 
-					<div className='my-20'>
+					<div className='my-20 h-screen'>
 						<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
 							Discover
 						</h2>

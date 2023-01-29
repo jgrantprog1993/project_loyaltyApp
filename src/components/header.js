@@ -3,9 +3,10 @@ import { useRouter } from 'next/router'
 
 
 const links = [
-	{ label: 'Vouchers', href: '/aUsers/vouchers' },
-	{ label: 'Discover', href: '/aUsers/discover' },
-	{ label: 'Scan', href: '/aUsers/scan' },
+	{ label: 'Offers', href: '/offers' },
+	{ label: 'Vouchers', href: '/vouchers' },
+	{ label: 'Discover', href: '/discover' },
+	{ label: 'Scan', href: '/scan' },
 ]
 
 function Header() {

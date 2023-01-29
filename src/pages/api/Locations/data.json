@@ -29,7 +29,21 @@
           }
         ],
         "icon":"/images/playstore.png",
-        "image":"/images/playstore.png"
+        "image":"/images/playstore.png",
+        "offers": [
+          {
+            "offerId": "Offer-1",
+            "offerTitle": "Offer1 - Arch-1",
+            "offerDesc": "OfferDesc1- Arch-1",
+            "offerEndDate": "DATE"
+          },
+          {
+            "offerId": "Offer-2",
+            "offerTitle": "Offer2 - Arch-1",
+            "offerDesc": "OfferDesc2- Arch-1",
+            "offerEndDate": "DATE"
+          }
+        ]
       },
       {
         "business": "Arch",
@@ -58,7 +72,21 @@
             "SunClosed": "Closed"
         }],
         "icon":"/images/playstore.png",
-        "image":"/images/playstore.png"
+        "image":"/images/playstore.png",
+        "offers": [
+          {
+            "offerId": "Offer-3",
+            "offerTitle": "Offer1 - Arch-2",
+            "offerDesc": "OfferDesc1- Arch-2",
+            "offerEndDate": "DATE"
+          },
+          {
+            "offerId": "Offer-4",
+            "offerTitle": "Offer2 - Arch-2",
+            "offerDesc": "OfferDesc2- Arch-2",
+            "offerEndDate": "DATE"
+          }
+        ]
       },
       {
         "business": "Arch",
@@ -87,7 +115,21 @@
             "SunClosed": "Closed"
         }],
         "icon":"/images/playstore.png",
-        "image":"/images/playstore.png"
+        "image":"/images/playstore.png",
+        "offers": [
+          {
+            "offerId": "Offer-5",
+            "offerTitle": "Offer1 - Arch-3",
+            "offerDesc": "OfferDesc1- Arch-3",
+            "offerEndDate": "DATE"
+          },
+          {
+            "offerId": "Offer-6",
+            "offerTitle": "Offer2 - Arch-3",
+            "offerDesc": "OfferDesc2- Arch-3",
+            "offerEndDate": "DATE"
+          }
+        ]
       },
       {
         "business": "CakeFace",
@@ -116,7 +158,21 @@
             "SunClosed": "Closed"
         }],
         "icon":"/images/playstore.png",
-        "image":"/images/playstore.png"
+        "image":"/images/playstore.png",
+        "offers": [
+          {
+            "offerId": "Offer-7",
+            "offerTitle": "Offer1 - CakeFace Patisserie",
+            "offerDesc": "OfferDesc1- CakeFace Patisserie",
+            "offerEndDate": "DATE"
+          },
+          {
+            "offerId": "Offer-8",
+            "offerTitle": "Offer2 - CakeFace Patisserie",
+            "offerDesc": "OfferDesc2- CakeFace Patisserie",
+            "offerEndDate": "DATE"
+          }
+        ]
       },
       {
         "business": "CakeFace",
@@ -142,7 +198,21 @@
             "SatOpen":"09:00",
             "SatClosed":"16:00",
             "SunOpen": "Closed",
-            "SunClosed": "Closed"
+            "SunClosed": "Closed",
+            "offers": [
+              {
+                "offerId": "Offer-9",
+                "offerTitle": "Offer1 - Face2",
+                "offerDesc": "OfferDesc1- Face2",
+                "offerEndDate": "DATE"
+              },
+              {
+                "offerId": "Offer-10",
+                "offerTitle": "Offer2 - Face2",
+                "offerDesc": "OfferDesc2 - Face2",
+                "offerEndDate": "DATE"
+              }
+            ]
         }],
         "icon":"/images/playstore.png",
         "image":"/images/playstore.png"
