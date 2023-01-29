@@ -144,6 +144,7 @@ export default function Login(){
           </>
           ):(
           <>
+           <h1 className='font-extrabold select-none text-2xl sm:text-4xl uppercase'>Register</h1>
             <div>
               <ul 
                 // @ts-ignore
@@ -201,7 +202,7 @@ export default function Login(){
           </>
           )
           }
-          <h2 className='duration-300 hover:scale-110 cursor-pointer' onClick={() => setIsLoggingIn(!isLoggingIn)}>{!isLoggingIn ? 'Login' : 'Register'}</h2>
+          <h2 className='duration-300 hover:scale-110 cursor-pointer' onClick={() => setIsLoggingIn(!isLoggingIn)}>{!isLoggingIn ? 'Already Registered? -> Login' : 'Have you registered yet? -> Register'}</h2>
         </div>
         )
 
