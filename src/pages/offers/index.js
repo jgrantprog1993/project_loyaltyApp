@@ -5,7 +5,10 @@ import OfferItem from "../../components/OfferItem"
 
 // @ts-ignore
 export default function Offers({offers}) {
- 
+
+	console.log(offers)
+	const offersData = offers.data
+	console.log(offersData)
 	return (
 	<Layout title='Discover' keywords='' description=''>
 
@@ -14,10 +17,10 @@ export default function Offers({offers}) {
 							Offers
 						</h2>
 						<p className='text-zinc-600 dark:text-zinc-400'></p>
-						{offers.length===0 && <h3> No Offers to show </h3>}
+						{offersData.length===0 && <h3> No Offers to show </h3>}
 						
-						{offers.map((offer) => (
-							<OfferItem key={offer.id} offer={offer}/>
+						{offersData.map((offer) => (
+							<OfferItem key={offersData.id} offer={offer}/>
 						))}
 					</div>
 				
@@ -27,7 +30,7 @@ export default function Offers({offers}) {
 
 
 export async function getServerSideProps() {
-	const res = await fetch(`${API_URL}/api/Offers`)
+	const res = await fetch(`${API_URL}/api/offers?populate=*`)
 	const offers = await res.json()
    
    

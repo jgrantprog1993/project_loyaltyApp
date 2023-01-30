@@ -19,7 +19,7 @@ export default function Layout({title, keywords, description, children}) {
         <title> {title} : Buisness</title>
         <Meta></Meta>
       </Head>
-        <div className='flex flex-col min-h-screen relative bg-black-300'>
+        <div className='flex flex-col h-screen relative bg-black-300'>
           <BuisNavbar />
             <main className='flex-1'></main>
             {children}
@@ -33,7 +33,7 @@ export default function Layout({title, keywords, description, children}) {
           <title> {title} : User</title>
           <Meta></Meta>
         </Head>
-        <div className='flex justify-center bg-slate-300'>
+        <div className='flex-col justify-center bg-slate-300'>
          <Navbar />
             <main>
               {children}

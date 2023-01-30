@@ -9,7 +9,7 @@ export default function LocationPage({location}) {
     console.log('delete')
   }
   
-  
+  console.log(location)
   return (
     <Layout title='{location.name}' keywords='{undefined}' description='{undefined}' >
 		<div className='my-20 h-screen'>
@@ -25,12 +25,12 @@ export default function LocationPage({location}) {
         </Link> */}
         </div>
         <span>{location.business}</span>
-        <h1> Address: {location.address}</h1>
+        <h1> Address: {location.attributes.address}</h1>
         
-        <p>Lat: {location.lat}</p>
-        <p>Lon: {location.lon}</p>
-        <p>Description: {location.description}</p>
-        <p>Opening Hours: {location.openingHours[0].MonOpen}</p>
+        <p>Lat: {location.attributes.lat}</p>
+        <p>Lon: {location.attributes.lon}</p>
+        <p>Description: {location.attributes.description}</p>
+        <p>Opening Hours: {location.attributes.openHrs[0].MonOpen}</p>
      
       </div>
 		</div>
@@ -38,13 +38,14 @@ export default function LocationPage({location}) {
   )
 }
 
-export async function getServerSideProps({ query: { slug} } ) {
- const res = await fetch (`${API_URL}/api/Locations/${slug}`)
+export async function getServerSideProps({ params: { slug} } ) {
+ const res = await fetch (`${API_URL}/api/locations?filters[slug][0]=${slug}&populate=*`)
  const locations = await res.json()
-
+ console.log(locations)
+ const locationsdata = locations.data
   return {
     props: {
-      location: locations[0],
+      location: locationsdata[0]
     },
   }
 }
