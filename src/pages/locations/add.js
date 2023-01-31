@@ -1,5 +1,6 @@
 // @ts-nocheck
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {useState} from 'react'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
@@ -12,21 +13,63 @@ export default function add() {
         name:'',
         lat:'',
         lon:'',
-        openHrs:'',
         description:'',
         address:'',
+        category:'',
         images:'',
         logo:'',
-        category:'',
-        slug:'',
-        user:'',
-        offers:'',
-        
+        MonOpen:'',
+        MonClosed:'',
+        TuesOpen:'',
+        TuesClosed:'',
+        WedOpen:'',
+        WedClosed:'',
+        ThurOpen:'',
+        ThurClosed:'',
+        FriOpen:'',
+        FriClosed:'',
+        SatOpen:'',
+        SatClosed:'',
+        SunOpen:'',
+        SunClosed:'',
+       
+       
     })
     const router = useRouter()
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(values);
+        //console.log(values)
+        // const anyEmptyField = Object.values(values).some(
+            
+        //     (element) => element === '')
+    
+        //     if(anyEmptyField){
+        //         toast.error('Please fill in all Fields')
+        //     }
+            var valuesObj = JSON.stringify({
+                'data': {
+                    name:values.name,
+                    lat:values.lat,
+                    lon:values.lon,
+                    description:values.description,
+                    address:values.address,
+                    category:values.category,
+                }
+              });
+              //console.log(valuesObj)
+            const res =  await fetch (`${API_URL}/api/locations`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: valuesObj,
+            }).then((res) => res.json())
+            
+            console.log(res)
+            //TODO Check if error first 
+            toast.success(`Added Location: ${res.data.attributes.name}`)
+            //router.push(`/discover`)
+          
     }
     const handleInputChange = (e) => {
         const {name, value} = e.target
@@ -37,6 +80,7 @@ export default function add() {
         <Link href='/locations'>Go Back</Link>
         <div className='my-20 h-screen'>
             <h1>Add Location</h1>
+            <ToastContainer />
             <form onSubmit={handleSubmit} id="form1"> 
                 <div >
                     <div>
@@ -50,7 +94,7 @@ export default function add() {
                         />
                     </div>
                     <div>
-                    <label htmlFor='lat'>Lon</label>
+                    <label htmlFor='lat'>Lat</label>
                         <input
                         type='number'
                         step="0.000001"
@@ -68,16 +112,6 @@ export default function add() {
                         name='lon'
                         id='lon'
                         value={values.lon}
-                        onChange={handleInputChange}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor='OpeningHrs'>OpeningHrs</label>
-                        <input
-                        type='text'
-                        name='OpeningHrs'
-                        id='OpeningHrs'
-                        value={values.OpeningHrs}
                         onChange={handleInputChange}
                         />
                     </div>
@@ -103,48 +137,17 @@ export default function add() {
                     </div>
                 </div>
                 <div>
-                    <label htmlFor='images'>Location Image</label>
-                    <textarea
-                        type='image'
-                        name='images'
-                        id='images'
-                        value={values.images}
-                        onChange={handleInputChange}
-                    ></textarea>
-                </div>
-                <div>
-                    <label htmlFor='logo'>Location Logo</label>
-                    <textarea
-                        type='image'
-                        name='logo'
-                        id='logo'
-                        value={values.logo}
-                        onChange={handleInputChange}
-                    ></textarea>
-                </div>
-                <div>
                     <label htmlFor='category'>category</label>
-                    <textarea
-                        type='image'
+                    <input
+                        type='text'
                         name='category'
                         id='category'
                         value={values.category}
                         onChange={handleInputChange}
-                    ></textarea>
-                </div>
-                <div>
-                    <label htmlFor='slug'>Slug</label>
-                    <textarea
-                        type='image'
-                        name='slug'
-                        id='slug'
-                        value={values.slug}
-                        onChange={handleInputChange}
-                    ></textarea>
+                    />
                 </div>
             </form>
             <button type='submit' form='form1' value='Submit'>Submit</button>
-            
         </div>
         </Layout>
   )
