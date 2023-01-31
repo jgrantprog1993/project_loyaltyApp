@@ -68,7 +68,7 @@ export default function add() {
             console.log(res)
             //TODO Check if error first 
             toast.success(`Added Location: ${res.data.attributes.name}`)
-            //router.push(`/discover`)
+            router.push(`/discover`)
           
     }
     const handleInputChange = (e) => {
