@@ -4,6 +4,7 @@ import { AuthProvider } from "../context/AuthContext";
 // @ts-ignore
 import Layout from '../components/layout'
 import Head from 'next/head';
+import { ToastContainer } from 'react-toastify';
 
 // @ts-ignore
 function MyApp( {Component, pageProps }) {
@@ -14,6 +15,7 @@ function MyApp( {Component, pageProps }) {
       </Head>
       <Meta/>
       <AuthProvider>
+      <ToastContainer />
           <Component {...pageProps}/>
       </AuthProvider>
     </>

@@ -7,6 +7,7 @@ const links = [
 	{ label: 'Vouchers', href: '/vouchers' },
 	{ label: 'Discover', href: '/discover' },
 	{ label: 'Scan', href: '/scan' },
+	{ label: 'Add Location', href: '/locations/add' },
 ]
 
 function Header() {

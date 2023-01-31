@@ -5,7 +5,11 @@ import DiscoverItem from "../../components/DiscoverItem"
 
 // @ts-ignore
 export default function Discover({locations}) {
-  console.log(locations)
+  console.log(locations.data)
+  const locationsData = locations.data
+  console.log(locationsData)
+
+
 	return (
 	<Layout title='Discover' keywords='' description=''>
 
@@ -14,10 +18,10 @@ export default function Discover({locations}) {
 							Discover
 						</h2>
 						<p className='text-zinc-600 dark:text-zinc-400'></p>
-						{locations.length===0 && <h3> No Evnets to show </h3>}
+						{locationsData.length===0 && <h3> No Evnets to show </h3>}
 						
-						{locations.map((location) => (
-							<DiscoverItem key={location.id} location={location}/>
+						{locationsData.map((location) => (
+							<DiscoverItem key={locationsData.id} location={location}/>
 						))}
 					</div>
 				
@@ -27,7 +31,7 @@ export default function Discover({locations}) {
 
 
 export async function getServerSideProps() {
-	const res = await fetch(`${API_URL}/api/Locations`)
+	const res = await fetch(`${API_URL}/api/locations?populate=*`)
 	const locations = await res.json()
 
 
