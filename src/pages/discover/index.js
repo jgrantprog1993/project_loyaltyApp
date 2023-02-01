@@ -5,9 +5,11 @@ import DiscoverItem from "../../components/DiscoverItem"
 
 // @ts-ignore
 export default function Discover({locations}) {
-  console.log(locations.data)
-  const locationsData = locations.data
-  console.log(locationsData)
+	console.log('locations.data')
+	console.log(locations.data)
+  	const locationsData = locations.data
+	console.log('locationsData')
+  	console.log(locationsData)
 
 
 	return (
