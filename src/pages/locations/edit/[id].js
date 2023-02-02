@@ -66,7 +66,10 @@ export default function editLocation({location}) {
                 body: valuesObj,
             }).then((res) => res.json())
             
-            console.log(res)
+           
+            console.log(res.body)
+          
+            
             //TODO Check if error first 
             toast.success(`Updated Location: ${res.data.attributes.name}`)
             router.push(`/discover`)
