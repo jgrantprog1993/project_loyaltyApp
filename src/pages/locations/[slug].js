@@ -12,42 +12,43 @@ import { useRouter  } from "next/router";
 export default function LocationPage({location}) {
   const router = useRouter()
   const deleteLocation = async (e) => {
-  
+
+    console.log('id')
+    console.log(location.id)
     if(confirm('Are you sure?')){
-      const res = await fetch(`${API_URL}/locations/${location.id}`,
+      const res = await fetch(`${API_URL}/api/locations/${location.id}`,
       {
         method: 'DELETE',
       })
 
-      const data = await res.json()
+      //const data = await res.json()
 
-      if(!res.ok){
-        toast.error(data.message)
-      } else {
-        Router.push('/locations')
-      }
+      //TODO - put in ifs / try / catches
+      toast.success(`Deleted Location: ${location.attributes.name}`)
+  
+      router.push('/discover')
+    
     }
   }
   
-  console.log(location)
+  //console.log(location)
   return (
     <Layout title='{location.name}' keywords='{undefined}' description='{undefined}' >
 		<div className='my-20 h-screen'>
 			<div>
         <div>
-        <Link href={`/locations/edit/${location.id}`}>
+        <Link legacyBehavior href={`/locations/edit/${location.id}`}>
           <a>
             <FaPencilAlt /> Edit Location
           </a>
-          <a href="#" className="" onClick={deleteLocation}>
-            <FaTimes /> Delete
-          </a>
         </Link>
-        </div>
-        <span>{location.business}</span>
-        <h1> Address: {location.attributes.address}</h1>
-        <ToastContainer />
+        <a className="" onClick={deleteLocation}>
+          <FaTimes /> Delete
+        </a>
         
+        </div>
+        <span>Name: {location.attributes.name}</span>
+        <h1> Address: {location.attributes.address}</h1>
         <p>Lat: {location.attributes.lat}</p>
         <p>Lon: {location.attributes.lon}</p>
         <p>Description: {location.attributes.description}</p>
@@ -62,8 +63,8 @@ export default function LocationPage({location}) {
 export async function getServerSideProps({ params: { slug} } ) {
  const res = await fetch (`${API_URL}/api/locations?filters[slug][0]=${slug}&populate=*`)
  const locations = await res.json()
- console.log(locations)
  const locationsdata = locations.data
+
   return {
     props: {
       location: locationsdata[0]
