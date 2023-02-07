@@ -1,74 +1,111 @@
 // @ts-nocheck
 
 import React, {useContext, useState, useEffect, useRef, createContext} from "react";
-import {auth, db} from '../utils/firebase'
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut } from "@firebase/auth";
-import {doc, getDoc} from 'firebase/firestore'
+import {router, useRouter} from 'next/router'
 
+import { NEXT_URL } from "../utils/config";
 //const auth = getAuth();
 
-const AuthContext = React.createContext()
+const AuthContext = createContext()
 
-
-// const AuthContext = createContext<{
-//   currentUser: User | null;
-//   loading: boolean;
-//   login: (email: string, password: string) => Promise<UserCredential>;
-//   logout: () => Promise<void>;
-//   register: (email: string, password: string) => Promise<UserCredential>;
-// }>({
-//   currentUser: null,
-//   loading: true,
-//   login: (email: string, password: string) =>
-//     signInWithEmailAndPassword(auth, email, password),
-//   logout: () => Promise.resolve(),
-//   register: (email: string, password: string) =>
-//     createUserWithEmailAndPassword(auth, email, password),
-// });
-
-export function useAuth() {
-  return useContext(AuthContext)
-}
-
-export function AuthProvider ({children}){
-  const [currentUser, setCurrentUser] = useState(null)
+export const AuthProvider = ({children}) => {
+  const [user, setUser] = useState(null)
+  const [error, setError] = useState(true)
   const [loading, setLoading] = useState(true)
-  const userInfo = useRef()
 
-  const register = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password)
+  useEffect(() => checkUserLoggedIn(), [])
+
+  const register = async (username, email, password) => {
+    const res = await fetch(`${NEXT_URL}/api/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        {username: username,
+        email: email, 
+        password:password})
+    })
+
+    const data = await res.json()
+    
+    console.log(data)
+    if(res.ok){
+     setUser(data.user)
+     router.push('/vouchers')
+    } else {
+      console.log("ERRORR!!!!")
+      setError(data.message)
+      setError(null)
+    }   
+    
   }
 
-  const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
+  const login = async({email: identifier, password}) => {
+    
+    const res = await fetch(`${NEXT_URL}/api/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ identifier, password})
+    })
+
+    const data = await res.json()
+    
+    console.log(data)
+    if(res.ok){
+     setUser(data.user)
+     router.push('/vouchers')
+    } else {
+      console.log("ERRORR!!!!")
+      setError(data.message)
+      setError(null)
+    }   
+    
   }
 
-  const logout = async () => {
-    return await signOut(auth)
+  const logout = async(user) => {
+    
+    console.log('logout')
+    const res = await fetch(`${NEXT_URL}/api/logout`,
+    {
+      method: 'POST'
+    })
+    if(res.ok) {
+      setUser(null)
+      router.push('/')
+    }
+    const data = await res.json()
+  }
+
+  const checkUserLoggedIn = async () => {
+    const res = await fetch(`${NEXT_URL}/api/user`)
+    const data = await res.json()
+
+    if(res.ok){
+      setUser(data.user)
+    }else{
+      setUser(null)
+    }
   }
   
   useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, async user => {
-          setCurrentUser(user)
-          setLoading(false)
-      })
-      return unsubscribe()
+   
     }, [])
 
     const value = {
-      currentUser,
+      user,
       login,
       register,
       logout,
-      userInfo
+      error
     }
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   )
 }
+
+export default AuthContext
