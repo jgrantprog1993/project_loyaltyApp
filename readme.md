@@ -12,3 +12,4 @@ Auto Slug in Stripe v4 -> https://strapi.io/blog/how-to-create-a-slug-system-in-
 Create a slug system with Strapi v4 -> https://dev.to/elchiconube/create-a-slug-system-with-strapi-v4-1abm <br />
 Strapi v4 Crash Course -> https://www.youtube.com/watch?v=vcopLqUq594&t=4336s <br />
 Cannot set headers after they are sent to the client  -> https://bobbyhadz.com/blog/javascript-error-cannot-set-headers-after-they-are-sent-to-client<br />
+Strapi v4 Register new users -> https://www.youtube.com/watch?v=sVrUk3zaaqQ
