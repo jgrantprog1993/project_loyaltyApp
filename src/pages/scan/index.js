@@ -1,4 +1,5 @@
 import Layout from "../../components/layout"
+import Qrscan from '../../Qrscan'  // QR code scanner
 
 export default function Scan() {
   return (
@@ -7,10 +8,8 @@ export default function Scan() {
 			<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
 				Scan
 			</h2>
-
-			<div className='mt-2'>
-				<p className='text-zinc-600 dark:text-zinc-400'>
-				</p>
+			<div className="px-32" >
+				<Qrscan />
 			</div>
 		</div>
     </Layout>
