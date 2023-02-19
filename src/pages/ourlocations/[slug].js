@@ -26,16 +26,27 @@ export default function LocationPage({location}) {
       //TODO - put in ifs / try / catches
       toast.success(`Deleted Location: ${location.attributes.name}`)
   
-      router.push('/discover')
+      router.push('/ourlocations')
     
     }
   }
   
   //console.log(location)
   return (
-    <Layout title={location.attributes.name} keywords='{undefined}' description='{undefined}' >
+    <Layout title='{location.name}' keywords='{undefined}' description='{undefined}' >
 		<div className='my-20 h-screen'>
 			<div>
+        <div>
+        <Link legacyBehavior href={`/locations/edit/${location.id}`}>
+          <a>
+            <FaPencilAlt /> Edit Location
+          </a>
+        </Link>
+        <a className="" onClick={deleteLocation}>
+          <FaTimes /> Delete
+        </a>
+        
+        </div>
         <span>Name: {location.attributes.name}</span>
         <h1> Address: {location.attributes.address}</h1>
         <p>Lat: {location.attributes.lat}</p>

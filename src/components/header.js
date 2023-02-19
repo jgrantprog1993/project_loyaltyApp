@@ -18,8 +18,8 @@ const userLinks = [
 	{ label: 'Vouchers', href: '/vouchers' }
 ]
 const busiLinks = [
-	{ label: 'Add Location', href: '/locations/add' },
-	{ label: 'Our Locations', href: '/discover' },
+	{ label: 'Add Location', href: '/ourlocations/add' },
+	{ label: 'Our Locations', href: '/ourlocations' },
 	{ label: 'Dashboard', href: '/dashboard' },
 	
 ]
