@@ -19,4 +19,5 @@ Enabling the Microphone/Camera in Chrome for (Local) Unsecure Origins -> https:/
 
 
 QRCode scanner -> https://github.com/Musawirkhann/react_qrcode_generation_scanner/blob/main/src/App.js
+-> https://github.com/react-qr-reader/react-qr-reader
 QRScanner overlay on camera -> https://github.com/react-qr-reader/react-qr-reader/issues/265

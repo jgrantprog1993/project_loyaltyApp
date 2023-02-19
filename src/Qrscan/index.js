@@ -10,7 +10,7 @@ const Qrscan = () => {
     
     let handleScan = (result, error) => {
         if (!!result) {
-            setResult(result?.text);
+            setResult(JSON.stringify(result?.text));
           }
 
           if (!!error) {
