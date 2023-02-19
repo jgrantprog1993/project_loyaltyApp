@@ -6,9 +6,14 @@ import {useRouter} from 'next/router'
 import Link from 'next/link'
 import Layout from '../../components/layout'
 import { API_URL } from '../../utils/config'
+import { useContext } from 'react'
+import AuthContext from '../../context/AuthContext'
+import { async } from '@firebase/util';
+import cookie from 'cookie'
 
-
-export default function add() {
+export default function add(token) {
+    const {user} = useContext(AuthContext)
+    //console.log(token)
     const [values, setValues] = useState({
         name:'',
         lat:'',
@@ -32,20 +37,14 @@ export default function add() {
         SatClosed:'',
         SunOpen:'',
         SunClosed:'',
-       
+        users_permissions_user:''
        
     })
     const router = useRouter()
     const handleSubmit = async (e) => {
         e.preventDefault()
-        //console.log(values)
-        // const anyEmptyField = Object.values(values).some(
-            
-        //     (element) => element === '')
-    
-        //     if(anyEmptyField){
-        //         toast.error('Please fill in all Fields')
-        //     }
+      
+        console.log(user)
             var valuesObj = JSON.stringify({
                 'data': {
                     name:values.name,
@@ -54,17 +53,26 @@ export default function add() {
                     description:values.description,
                     address:values.address,
                     category:values.category,
+                    users_permissions_user: user.id
                 }
               });
               //console.log(valuesObj)
             const res =  await fetch (`${API_URL}/api/locations`, {
-                method: 'post',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
                 },
                 body: valuesObj,
             }).then((res) => res.json())
             
+            if(!res.ok){
+                if(res.status===403 || res.status === 401){
+                    toast.error("No Token Included")
+                    return
+                }
+            }
+            //console.log(body)
             console.log(res)
             //TODO Check if error first 
             toast.success(`Added Location: ${res.data.attributes.name}`)
@@ -151,4 +159,12 @@ export default function add() {
         </div>
         </Layout>
   )
+}
+
+export async function getServerSideProps({req}) {
+    const {token} = cookie.parse(req.headers.cookie)
+
+    return {
+        props: {token}
+    }
 }

@@ -5,7 +5,7 @@ import { AuthProvider } from "../context/AuthContext";
 import Layout from '../components/layout'
 import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
-
+import { CookiesProvider } from "react-cookie"
 // @ts-ignore
 function MyApp( {Component, pageProps }) {
   return (
@@ -14,10 +14,12 @@ function MyApp( {Component, pageProps }) {
       <title>Loyalty App</title>
       </Head>
       <Meta/>
+     
       <AuthProvider>
       <ToastContainer />
           <Component {...pageProps}/>
       </AuthProvider>
+    
     </>
   )
 }

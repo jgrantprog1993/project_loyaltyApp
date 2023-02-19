@@ -2,15 +2,22 @@
 import Layout from "../../components/layout"
 import { API_URL } from "../../utils/config"
 import DiscoverItem from "../../components/DiscoverItem"
+//import AuthContext from "../../context/AuthContext"
+import { getCookies, getCookie, setCookies, removeCookies } from 'cookies-next';
 
+//import { cookies } from 'next/headers'; // Import cookies
 // @ts-ignore
-export default function Discover({locations}) {
-	console.log('locations.data')
-	console.log(locations.data)
-  	const locationsData = locations.data
-	console.log('locationsData')
-  	console.log(locationsData)
 
+export default function Discover({userData}) {
+	
+  	const locationsData = userData
+	//console.log('locationsData')
+	//console.log(locationsData)
+  	// console.log(locationsData.id)
+	// console.log(locationsData.locations.name)
+	
+
+	
 
 	return (
 	<Layout title='Discover' keywords='' description=''>
@@ -20,24 +27,33 @@ export default function Discover({locations}) {
 							Discover
 						</h2>
 						<p className='text-zinc-600 dark:text-zinc-400'></p>
-						{locationsData.length===0 && <h3> No Evnets to show </h3>}
+						{locationsData.locations.length===0 && <h3> No Locations to show </h3>}
 						
-						{locationsData.map((location) => (
-							<DiscoverItem key={locationsData.id} location={location}/>
+ 					{locationsData.locations.map((location) => (
+							<DiscoverItem key={locationsData.locations.id} location={location}/>
 						))}
 					</div>
 				
-	</Layout>
+	 </Layout>
   )
 }
 
 
-export async function getServerSideProps() {
-	const res = await fetch(`${API_URL}/api/locations?populate=*`)
-	const locations = await res.json()
-
+export async function getServerSideProps ({req, res})  {
+	const cookieToken = getCookie('token', { req, res});
+	console.log(cookieToken)
+	const response = await fetch(`${API_URL}/api/users/me?populate=*`,
+	{
+		method: 'GET',
+			headers: {
+				Authorization:`Bearer ${cookieToken}`
+			}
+	})
+	const userData= await response.json()
+	//console.log(userData)
 
 	return {
-		props: {locations}
+		props: {userData}
 	}
 }
+

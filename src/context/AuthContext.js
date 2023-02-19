@@ -15,7 +15,7 @@ export const AuthProvider = ({children}) => {
 
   useEffect(() => checkUserLoggedIn(), [])
 
-  const register = async (username, email, password) => {
+  const register = async (username, fname,lname, business, email, password) => {
     const res = await fetch(`${NEXT_URL}/api/register`, {
       method: 'POST',
       headers: {
@@ -23,6 +23,9 @@ export const AuthProvider = ({children}) => {
       },
       body: JSON.stringify(
         {username: username,
+        fname:fname,
+        lname:lname, 
+        business:business,
         email: email, 
         password:password})
     })

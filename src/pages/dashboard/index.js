@@ -1,9 +1,12 @@
+// @ts-nocheck
 import BottomNav from '@/src/components/bottom-nav'
 import Header from '@/src/components/header'
 import Meta from '@/src/components/meta'
 import React from 'react'
 
 export default function Dashboard() {
+  
+  
   return (
     <>
         <Meta/>
