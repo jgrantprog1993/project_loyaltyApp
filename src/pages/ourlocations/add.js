@@ -4,49 +4,47 @@ import 'react-toastify/dist/ReactToastify.css';
 import {useState} from 'react'
 import {useRouter} from 'next/router'
 import Link from 'next/link'
-import Layout from '../../../components/layout'
-import { API_URL } from '../../../utils/config'
+import Layout from '../../components/layout'
+import { API_URL } from '../../utils/config'
+import { useContext } from 'react'
+import AuthContext from '../../context/AuthContext'
+import { async } from '@firebase/util';
+import cookie from 'cookie'
 
-
-export default function editLocation({location}) {
-    console.log(location)
+export default function add(token) {
+    const {user} = useContext(AuthContext)
+    //console.log(token)
     const [values, setValues] = useState({
-        name:location.data.attributes.name,
-        lat:location.data.attributes.lat,
-        lon:location.data.attributes.lon,
-        description:location.data.attributes.description,
-        address:location.data.attributes.address,
-        category:location.data.attributes.category,
-        images:location.data.attributes.images,
-        logo:location.data.attributes.logo,
-        MonOpen:location.data.attributes.MonOpen,
-        MonClosed:location.data.attributes.MonClosed,
-        TuesOpen:location.data.attributes.TuesOpen,
-        TuesClosed:location.data.attributes.TuesClosed,
-        WedOpen:location.data.attributes.WedOpen,
-        WedClosed:location.data.attributes.WedClosed,
-        ThurOpen:location.data.attributes.ThurOpen,
-        ThurClosed:location.data.attributes.ThurClosed,
-        FriOpen:location.data.attributes.ThurClosed,
-        FriClosed:location.data.attributes.FriClosed,
-        SatOpen:location.data.attributes.SatOpen,
-        SatClosed:location.data.attributes.SatClosed,
-        SunOpen:location.data.attributes.SunOpen,
-        SunClosed:location.data.attributes.SunClosed,
-       
+        name:'',
+        lat:'',
+        lon:'',
+        description:'',
+        address:'',
+        category:'',
+        images:'',
+        logo:'',
+        MonOpen:'',
+        MonClosed:'',
+        TuesOpen:'',
+        TuesClosed:'',
+        WedOpen:'',
+        WedClosed:'',
+        ThurOpen:'',
+        ThurClosed:'',
+        FriOpen:'',
+        FriClosed:'',
+        SatOpen:'',
+        SatClosed:'',
+        SunOpen:'',
+        SunClosed:'',
+        users_permissions_user:''
        
     })
     const router = useRouter()
     const handleSubmit = async (e) => {
         e.preventDefault()
-        //console.log(values)
-        // const anyEmptyField = Object.values(values).some(
-            
-        //     (element) => element === '')
-    
-        //     if(anyEmptyField){
-        //         toast.error('Please fill in all Fields')
-        //     }
+      
+        console.log(user)
             var valuesObj = JSON.stringify({
                 'data': {
                     name:values.name,
@@ -55,24 +53,30 @@ export default function editLocation({location}) {
                     description:values.description,
                     address:values.address,
                     category:values.category,
+                    users_permissions_user: user.id
                 }
               });
               //console.log(valuesObj)
-            const res =  await fetch (`${API_URL}/api/locations/${location.data.id}`, {
-                method: 'PUT',
+            const res =  await fetch (`${API_URL}/api/locations`, {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
                 },
                 body: valuesObj,
             }).then((res) => res.json())
             
-           
-            console.log(res.body)
-          
-            
+            if(!res.ok){
+                if(res.status===403 || res.status === 401){
+                    toast.error("No Token Included")
+                    return
+                }
+            }
+            //console.log(body)
+            console.log(res)
             //TODO Check if error first 
-            toast.success(`Updated Location: ${res.data.attributes.name}`)
-            router.push(`/discover`)
+            toast.success(`Added Location: ${res.data.attributes.name}`)
+            router.push(`/ourlocations`)
           
     }
     const handleInputChange = (e) => {
@@ -80,7 +84,7 @@ export default function editLocation({location}) {
         setValues({...values,[name]:value})
     }
     return (
-       <Layout title='Edit Location'>
+       <Layout title='Add new Location'>
         <Link href='/locations'>Go Back</Link>
         <div className='my-20 h-screen'>
             <h1>Add Location</h1>
@@ -151,22 +155,16 @@ export default function editLocation({location}) {
                     />
                 </div>
             </form>
-            <button type='submit' form='form1' value='Submit'>Update</button>
+            <button type='submit' form='form1' value='Submit'>Submit</button>
         </div>
         </Layout>
   )
 }
 
-export async function getServerSideProps({params: {id}, req
-}) {
-    const res = await fetch(`${API_URL}/api/locations/${id}`)
-    const location = await res.json()
+export async function getServerSideProps({req}) {
+    const {token} = cookie.parse(req.headers.cookie)
 
-    console.log(req.headers.cookie)
-
-    return{
-       props: {
-        location
-       } 
+    return {
+        props: {token}
     }
 }

@@ -58,7 +58,7 @@ export default function editLocation({location}) {
                 }
               });
               //console.log(valuesObj)
-            const res =  await fetch (`${API_URL}/api/locations/${location.data.id}`, {
+            const res =  await fetch (`${API_URL}/api/ourlocations/${location.data.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ export default function editLocation({location}) {
        <Layout title='Edit Location'>
         <Link href='/locations'>Go Back</Link>
         <div className='my-20 h-screen'>
-            <h1>Add Location</h1>
+            <h1>Edit Location</h1>
             <ToastContainer />
             <form onSubmit={handleSubmit} id="form1"> 
                 <div >
@@ -159,7 +159,7 @@ export default function editLocation({location}) {
 
 export async function getServerSideProps({params: {id}, req
 }) {
-    const res = await fetch(`${API_URL}/api/locations/${id}`)
+    const res = await fetch(`${API_URL}/api/ourlocations/${id}`)
     const location = await res.json()
 
     console.log(req.headers.cookie)
