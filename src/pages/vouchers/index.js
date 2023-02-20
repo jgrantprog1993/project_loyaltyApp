@@ -5,9 +5,9 @@ import VoucherItem from "../../components/voucherItem"
 import { getCookies, getCookie, setCookies, removeCookies } from 'cookies-next';
 
 export default function Vouchers({vouchers}) {
-	console.log(vouchers)
+	//console.log(vouchers)
 	const vouchersData = vouchers.vouchers
-	console.log(vouchersData)
+	//console.log(vouchersData)
   return (
 	  <Layout title='Vouchers' keywords='{undefined}' description='{undefined}' >
 					<div className='my-20 h-screen'>
@@ -28,7 +28,7 @@ export default function Vouchers({vouchers}) {
 
 export async function getServerSideProps({req, res})  {
 	const cookieToken = getCookie('token', { req, res})
-	console.log(cookieToken)
+	//console.log(cookieToken)
 	const response = await fetch(`${API_URL}/api/users/me?populate=*`,
 	{
 		method: 'GET',
