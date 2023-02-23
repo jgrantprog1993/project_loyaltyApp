@@ -4,8 +4,8 @@ import { getCookies, getCookie, setCookies, removeCookies } from 'cookies-next';
 
 export default function VoucherItem({voucher}) {
     
-    console.log('voucher')
-     console.log(voucher)
+    // console.log('voucher')
+    //  console.log(voucher)
     // console.log('voucher.attributes.voucher.voucherPoints')
     // console.log(voucher.attributes.voucher.data)
    

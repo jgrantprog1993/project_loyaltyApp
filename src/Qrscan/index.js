@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState, useEffect }from 'react';
+import React, { useState, useEffect, useCallback }from 'react';
 import { QrReader } from 'react-qr-reader';
 import { useRouter } from "next/router";
 import { toast } from 'react-toastify';
@@ -8,12 +8,15 @@ import { getCookies, getCookie, setCookies, removeCookies } from 'cookies-next';
 import axios from 'axios'
 import { API_URL } from "../utils/config"
 import { concat } from 'next-pwa/cache';
+import { STATIC_PROPS_ID } from 'next/dist/shared/lib/constants';
+import { data } from 'autoprefixer';
 
 const Qrscan = (cookieToken) => {
     const router = useRouter();
 	const [result, setResult] = useState('No result');
     const [dataX, setDataX] = useState(null);
     
+
     useEffect(
         () => {
           // This runs AFTER the first render,
@@ -22,22 +25,24 @@ const Qrscan = (cookieToken) => {
           if (result!=='No result'){
             const obj = JSON?.parse(result)
             console.log(obj);
-            const resultID = obj.id
             
-            console.log("token");
-            console.log(cookieToken)
-            const fetchData = async () => {
-                const response = await fetch(`${API_URL}/api/users/me?populate=*`,{
-                    method: "GET", 
+          
+
+            // const resultID = obj.id
+            // console.log("token");
+            // console.log(cookieToken)
+            // const fetchData = async () => {
+            //     const response = await fetch(`${API_URL}/api/users/me?populate=*`,{
+            //         method: "GET", 
                     
-                    headers: {"x-auth-token": localStorage.getItem("token")}
-                })
-                const newData = await response.json();
-                console.log("newData");
-                console.log(newData)
-             }
-            fetchData()
-            console.log(resultID)
+            //         headers: {"x-auth-token": localStorage.getItem("token")}
+            //     })
+            //     const newData = await response.json();
+            //     console.log("newData");
+            //     console.log(newData)
+            //  }
+            // fetchData()
+            // console.log(resultID)
            
           }
         },
@@ -49,14 +54,14 @@ const Qrscan = (cookieToken) => {
         if (!!result) {
             setResult(result?.text);
             const obj = JSON.parse(result?.text)
-            ///console.log(obj)
+            console.log(obj)
             //toast.success(`Collected ${obj.reward} Stamp for: ${obj.id}`)
+            fetchData(obj.id)
 
 
-
-
+            console.log('HERE 8')
             router.push(`/vouchers`)
-
+            console.log('HERE 9')
           }
 
           if (!!error) {
@@ -64,6 +69,14 @@ const Qrscan = (cookieToken) => {
           }
       };
     
+    async function fetchData(slug){
+        console.log('HERE 1')
+    //     const response = await fetch(`${API_URL}/api/vouchers/${slug}?populate=*`)
+    //    console.log(response)
+    router.push(`/vouchers/${slug}`)
+      //  return response
+    }  
+
     let handleError = err => {
     // alert(err);
     };
