@@ -56,12 +56,12 @@ const Qrscan = (cookieToken) => {
             const obj = JSON.parse(result?.text)
             console.log(obj)
             //toast.success(`Collected ${obj.reward} Stamp for: ${obj.id}`)
-            fetchData(obj.id)
+            // fetchData(obj.id)
+            router.push(`/vouchers/${obj.id}`)
 
-
-            console.log('HERE 8')
-            router.push(`/vouchers`)
-            console.log('HERE 9')
+            // console.log('HERE 8')
+            // router.push(`/vouchers`)
+            // console.log('HERE 9')
           }
 
           if (!!error) {
