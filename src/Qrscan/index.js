@@ -12,9 +12,9 @@ import { STATIC_PROPS_ID } from 'next/dist/shared/lib/constants';
 import { data } from 'autoprefixer';
 
 const Qrscan = (cookieToken) => {
-    const router = useRouter();
+  const router = useRouter();
 	const [result, setResult] = useState('No result');
-    const [dataX, setDataX] = useState(null);
+  const [dataX, setDataX] = useState(null);
     
 
     useEffect(
