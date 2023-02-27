@@ -21,3 +21,7 @@ Enabling the Microphone/Camera in Chrome for (Local) Unsecure Origins -> https:/
 QRCode scanner -> https://github.com/Musawirkhann/react_qrcode_generation_scanner/blob/main/src/App.js
 -> https://github.com/react-qr-reader/react-qr-reader
 QRScanner overlay on camera -> https://github.com/react-qr-reader/react-qr-reader/issues/265
+
+Strapi v4 update Entry -> https://docs.strapi.io/dev-docs/plugins/i18n#updating-an-entry
+Strapi v4 issue with put -> https://stackoverflow.com/questions/71187083/problem-with-post-action-on-strapi-via-postman
+https://forum.strapi.io/t/post-url-is-not-working/18749
