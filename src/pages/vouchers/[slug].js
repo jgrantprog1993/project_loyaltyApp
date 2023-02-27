@@ -10,8 +10,42 @@ import cookie from 'cookie'
 
 
 
-export default function VoucherPage({voucherPoints, id, token}) {
+export default async function VoucherPage({location, user, vouchers, token}) {
     console.log('HERE 5')
+    console.log(vouchers)
+    console.log('location')
+    console.log(location)
+    console.log(location.data[0].id)
+    console.log(user.id)
+    console.log(vouchers.data[0].id)
+    console.log(vouchers.data[0].attributes.voucherPoints)
+    if(vouchers.data.length == 0)
+    {
+        console.log('HERE Creating')
+        var newVoucher= JSON.stringify({
+            "data": {
+                "location": location.data[0].id,
+                "users_permissions_user":user.id,
+                "voucherPoints":1
+            }
+        })
+        console.log(newVoucher)
+        const voucherCreated = await fetch (`${API_URL}/api/vouchers`, {
+            method: 'POST',
+            headers: {
+                Authorization:`Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: newVoucher
+        })
+        const dataCreated = await voucherCreated.json()
+        console.log('Created')
+        console.log(dataCreated)
+    }
+    console.log('Finished Creating')
+    const id = vouchers.data[0].id
+    const voucherPoints = vouchers.data[0].attributes.voucherPoints
+    
     console.log(token)
     console.log(id)
     console.log(voucherPoints)
@@ -68,8 +102,29 @@ export default function VoucherPage({voucherPoints, id, token}) {
 export async function getServerSideProps({ params: { slug} ,req}) {
     console.log('HERE 2')
     const {token} = cookie.parse(req.headers.cookie)
-    console.log(token)
-    const res = await fetch (`${API_URL}/api/vouchers?filters[location][slug]=${slug}&populate=*`, {
+    const userRes = await fetch (`${API_URL}/api/users/me?populate=*`, {
+        method: 'GET',
+        headers: {
+            Authorization:`Bearer ${token}`
+        }
+    }) 
+    const userResJSON = await userRes.json()
+    console.log('userResJSON')
+    console.log(userResJSON)
+    console.log('userResJSON.id')
+    console.log(userResJSON.id)
+    
+    const locId = await fetch (`${API_URL}/api/locations?filters[slug]=${slug}&populate=*`, {
+        method: 'GET',
+        headers: {
+            Authorization:`Bearer ${token}`
+        }
+    }) 
+    const locIdJson = await locId.json()
+    
+
+
+    const res = await fetch (`${API_URL}/api/vouchers?filters[location][slug]=${slug}&filters[users_permissions_user][id]=${userResJSON.id}&populate=*`, {
         method: 'GET',
         headers: {
             Authorization:`Bearer ${token}`
@@ -79,22 +134,29 @@ export async function getServerSideProps({ params: { slug} ,req}) {
     // // then print JSON data that was parsed
     // .then((data) => console.log(data));
     //console.log(res)
-    const locations = await res.json()
+    const vouchers = await res.json()
    
-    console.log(locations)
+    
     console.log('HERE 3')
     //console.log(locations)
-    console.log('HERE 4')
-     const id = locations.data[0].attributes.location.data.id
-    const voucherPoints = locations.data[0].attributes.voucherPoints
-    // console.log(locations)
-    console.log(id)
-    console.log(voucherPoints)
+    
+    
+    
+    // console.log('HERE 4')
+    // const id = locations.data.id
+    // console.log(id)
+    // const voucherPoints = locations.data
+    // console.log(voucherPoints)
+    
+  
      return {
        props: {
-        voucherPoints: voucherPoints,
-        id:id,
-        token: token
+
+            location: locIdJson,
+            user:userResJSON,
+            token:token,
+            vouchers: vouchers
+
        },
      }
    }

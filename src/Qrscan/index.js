@@ -69,13 +69,13 @@ const Qrscan = (cookieToken) => {
           }
       };
     
-    async function fetchData(slug){
-        console.log('HERE 1')
-    //     const response = await fetch(`${API_URL}/api/vouchers/${slug}?populate=*`)
-    //    console.log(response)
-    router.push(`/vouchers/${slug}`)
-      //  return response
-    }  
+    // async function fetchData(slug){
+    //     console.log('HERE 1')
+    // //     const response = await fetch(`${API_URL}/api/vouchers/${slug}?populate=*`)
+    // //    console.log(response)
+    // router.push(`/vouchers/${slug}`)
+    //   //  return response
+    // }  
 
     let handleError = err => {
     // alert(err);

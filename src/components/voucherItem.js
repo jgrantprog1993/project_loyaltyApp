@@ -3,16 +3,21 @@ import { API_URL } from "../utils/config"
 import {  getCookie } from 'cookies-next';
 import Link from 'next/link'
 
-export default function VoucherItem({voucher, token}) {
-    
-    var voucherPoints = voucher.attributes.voucher.data?.attributes.voucherPoints
-    const voucherPointsPec = (voucherPoints/10) * 100
-   
+export default function VoucherItem({voucher}) {
+    console.log('voucherItem')
+    console.log(voucher)
+    var voucherPoints = voucher.attributes.voucherPoints
+    var voucherPointsPec 
+    if(voucherPoints<10){
+        voucherPointsPec = (voucherPoints/10) * 100
+    } else{
+        voucherPointsPec = 100
+    }
     async function redeem() {
        console.log(voucher.id)
         var raw = JSON.stringify({
             "data": {
-            "voucherPoints": 0,
+            "voucherPoints": voucherPoints - 10,
             }
         });
         const res = await fetch (`${API_URL}/api/vouchers/${voucher.id}`, {
@@ -32,12 +37,12 @@ export default function VoucherItem({voucher, token}) {
             <div class="p-5">
             <div class="flex items-center space-x-4">
                 <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt=""></img>
-                <div class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{voucher.attributes.name}</div>
+                <div class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{voucher.attributes.location.data.attributes.name}</div>
                 
             </div>        
-            <div class="mb-3 font-normal text-gray-700 dark:text-gray-400">{voucher.attributes.category}</div>
-                
-                    {voucherPoints ==10 ? 
+            <div class="mb-3 font-normal text-gray-700 dark:text-gray-400">{voucher.attributes.location.data.attributes.category}</div>
+            
+                    {voucherPoints >=10 ? 
                     <Link href="/vouchers" passHref>
                     <button onClick={redeem} class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Redeem</button>
                     </Link>

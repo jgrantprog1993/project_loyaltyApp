@@ -6,14 +6,21 @@ import { getCookies, getCookie, setCookies, removeCookies } from 'cookies-next';
 import { useContext } from 'react'
 import AuthContext from '../../context/AuthContext'
 
-export default function Vouchers({vouchers,locations, token}) {
+export default function Vouchers({userInfo,locations, vouchers}) {
 	const {user} = useContext(AuthContext)
-	const vouchersData = vouchers.vouchers
+	const userInfoData = userInfo
 	const locationsData = locations.data
-
-	const items = locationsData.filter(item => {
-		return item?.attributes?.users_permissions_user?.data?.id === user?.id
-	})
+	
+	console.log('userInfoData')
+	console.log(userInfoData.vouchers)
+	// console.log('locationsData')
+	
+	// console.log(locationsData)
+	// console.log('vouchers')
+	// console.log(vouchers)
+	let vouchersData = vouchers.data
+	console.log('vouchersData')
+	console.log(vouchersData)
 
   return (
 	  <Layout title='Vouchers' keywords='{undefined}' description='{undefined}' >
@@ -24,9 +31,9 @@ export default function Vouchers({vouchers,locations, token}) {
 						<p className='text-zinc-600 dark:text-zinc-400'></p>
 						{vouchersData.length===0 && <h3> No Vouchers to show </h3>}
 						<>
-							{items.map((item) => (
+							{vouchersData.map((voucher) => (
 								<>
-									<VoucherItem voucher={item} token={token}/>
+									<VoucherItem voucher={voucher}/>
 								</>	
 								))
 							}
@@ -45,8 +52,17 @@ export async function getServerSideProps({req, res}) {
 				Authorization:`Bearer ${token}`
 			}
 	})
-	const vouchers = await response.json()
-	console.log(vouchers)
+	const userInfo = await response.json()
+	//// Make the string for query
+	const userInfoVouchers = userInfo.vouchers
+	var string = ''
+	for(let i =0; i<=userInfoVouchers.length-1; i++){
+			string +='&filters[id]='+userInfoVouchers[i].id
+	}
+	console.log('SADFGHJMK<JHGFDSAFGHJKLJHGFDS')
+	console.log(string)
+	const query = string.substring(1);
+	console.log(query);
 	const response2 = await fetch(`${API_URL}/api/locations?populate=*`,
 	{
 		method: 'GET',
@@ -56,7 +72,16 @@ export async function getServerSideProps({req, res}) {
 	})
 	const locations = await response2.json()
 	
+	const response3 = await fetch(`${API_URL}/api/vouchers?${query}&populate=*`,
+	{
+		method: 'GET',
+			headers: {
+				Authorization:`Bearer ${token}`
+			}
+	})
+	const vouchers = await response3.json()
+	
 	return {
-		props: {vouchers:vouchers,locations:locations, token:token}
+		props: {userInfo:userInfo,locations:locations, vouchers:vouchers}
 	}
 }
