@@ -59,7 +59,7 @@ export const AuthProvider = ({children}) => {
     console.log(data)
     if(res.ok){
      setUser(data.user)
-     router.push('/vouchers')
+     router.push('/')
     } else {
       console.log("ERRORR!!!!")
       setError(data.message)

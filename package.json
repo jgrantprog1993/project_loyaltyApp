@@ -26,7 +26,8 @@
 		"react-qr-reader": "^3.0.0-beta-1",
 		"react-router-dom": "^6.7.0",
 		"react-toastify": "^9.1.1",
-		"reactstrap": "^9.1.5"
+		"reactstrap": "^9.1.5",
+		"strapi-plugin-populate-deep": "^2.0.0"
 	},
 	"devDependencies": {
 		"@svgr/webpack": "^6.5.1",
