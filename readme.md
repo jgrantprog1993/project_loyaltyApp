@@ -25,3 +25,5 @@ QRScanner overlay on camera -> https://github.com/react-qr-reader/react-qr-reade
 Strapi v4 update Entry -> https://docs.strapi.io/dev-docs/plugins/i18n#updating-an-entry
 Strapi v4 issue with put -> https://stackoverflow.com/questions/71187083/problem-with-post-action-on-strapi-via-postman
 https://forum.strapi.io/t/post-url-is-not-working/18749
+
+How to count certain elements in array? -> https://stackoverflow.com/questions/6120931/how-to-count-certain-elements-in-array

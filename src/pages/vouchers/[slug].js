@@ -121,33 +121,34 @@ export async function getServerSideProps({ params: { slug} ,req}) {
         }
     }) 
     const locIdJson = await locId.json()
-    
-
 
     const res = await fetch (`${API_URL}/api/vouchers?filters[location][slug]=${slug}&filters[users_permissions_user][id]=${userResJSON.id}&populate=*`, {
         method: 'GET',
         headers: {
             Authorization:`Bearer ${token}`
         }
-    })  // first, extract JSON data from `Response` object
-    // .then((res) => res.json())
-    // // then print JSON data that was parsed
-    // .then((data) => console.log(data));
-    //console.log(res)
+    })  
     const vouchers = await res.json()
-   
-    
+
     console.log('HERE 3')
-    //console.log(locations)
-    
-    
-    
-    // console.log('HERE 4')
-    // const id = locations.data.id
-    // console.log(id)
-    // const voucherPoints = locations.data
-    // console.log(voucherPoints)
-    
+   
+    var valuesObj = JSON.stringify({
+        'data': {
+            location:locIdJson.data[0].id,
+            // users_permissions_user:userResJSON.id,
+            // voucher:vouchers.data[0].id,
+            scannedAt:new Date()
+        }
+      });
+
+    const res2 = await fetch (`${API_URL}/api/scans`, {
+        method: 'POST',
+        headers: {
+            Authorization:`Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: valuesObj,
+    })  
   
      return {
        props: {
