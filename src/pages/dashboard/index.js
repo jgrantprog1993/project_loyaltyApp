@@ -8,6 +8,8 @@ import Chart from 'chart.js/auto'
 import React, { useEffect, useRef } from "react";
 require("core-js/actual/array/group-by-to-map");
 require("core-js/actual/array/group-by");
+import dateFormat, { masks } from "dateformat";
+import moment from 'moment';
 
 export default function Dashboard({userData,busLocData, scanData}) {
   
@@ -43,16 +45,21 @@ export default function Dashboard({userData,busLocData, scanData}) {
 		counts[el] = counts[el] ? (counts[el] + 1) : 1;
 	  })
 	const countsObj = Object.entries(counts)
-	console.log(countsObj)
-
+	
 	//Weekly
 	const scanDataData = scanData.data
-	console.log(scanDataData); 
+	
 	const groupByCategory = scanDataData.groupBy(scan => {
 		return scan.attributes.scannedAtDate
 	  });
-	  console.log(groupByCategory); 
-
+	/////// order by date
+	var orderedDates = {};
+	Object.keys(groupByCategory).sort(function(a, b) {
+		return moment(b, 'YYYY-MM-DD').toDate() - moment(a, 'YYYY-MM-DD').toDate();
+	}).forEach(function(key) {
+		orderedDates[key] = groupByCategory[key];
+	})
+	console.log(orderedDates)
 	 
 	const canvasEl = useRef(null);
 
@@ -77,21 +84,53 @@ export default function Dashboard({userData,busLocData, scanData}) {
 		gradient.addColorStop(0, colors.purple.half);
 		gradient.addColorStop(0.65, colors.purple.quarter);
 		gradient.addColorStop(1, colors.purple.zero);
-	
-		const weight = [0, 0, 0, 0,3, 1, 2, ];
-	
-		const labels= [
-		  "2023-02-23",
-		  "2023-02-24",
-		  "2023-02-25",
-		  "2023-02-26",
-		  "2023-02-27",
-		  "2023-02-28",
-		  "2023-03-01",
-		];
+
+
+		function scanCountstoArrayLast7Days(countObj){
+			var scanCounts = [];
+			
+			for (var i=0; i<7; i++) {
+				scanCounts[i] = Object.values(countObj)[i]
+			}
+			 return(scanCounts)
+			// for (var i=0; i<7; i++) {
+			// 	result[i] = scanCounts[i].length()
+			
+			// }
+		}
+		const scanCountstoArrayLast7DaysVar = scanCountstoArrayLast7Days(orderedDates)
+		console.log(scanCountstoArrayLast7DaysVar)
 		
+		function scanCountsLast7Days(scanCountstoArrayLast7DaysVar){
+			var result = [];
+			for (var i=0; i<7; i++) {
+				if (scanCountstoArrayLast7DaysVar[i] != undefined){
+				result[i] = scanCountstoArrayLast7DaysVar[i].length
+				}
+				else{result[i] = 0}
+			}
+			console.log(result)
+			return(result)
+		}
+
+		const weight = scanCountsLast7Days(scanCountstoArrayLast7DaysVar).reverse()
+		//const weight = Object.values(weightObj);
+		//const weight = [2, 1, 3, 0, 0, 0, 0]
+
+		function Last7Days () {
+			var result = [];
+			for (var i=0; i<7; i++) {
+				var d = new Date();
+				d.setDate(d.getDate() - i);
+				result.push(dateFormat(d, "mmm dd yyyy").toString())
+				
+			}
+			return(result.reverse());
+		}
+		const last7Days = Last7Days()	
+
 		const data = {
-		  labels: labels,
+		  labels: last7Days,
 		  datasets: [
 			{
 			  backgroundColor: gradient,
