@@ -60,9 +60,69 @@ export default function Dashboard({userData,busLocData, scanData}) {
 		orderedDates[key] = groupByCategory[key];
 	})
 	console.log(orderedDates)
-	 
-	const canvasEl = useRef(null);
+	
+	
+	// No of Customers
 
+	var busUsers = []
+	for(let i =0; i< scanData.data.length-1; i++){
+		busUsers[i] = scanData.data[i].attributes.users_permissions_user.data.attributes.username
+		
+	}
+	console.log('busUsers')
+	const uniqBusUsers = [...new Set(busUsers)];
+	const countUniqBusUsers = uniqBusUsers.length
+	console.log(countUniqBusUsers)
+	
+	var weightAvg = 0
+	function scanCountstoArrayLast7Days(countObj){
+		var scanCounts = [];
+		
+		for (var i=0; i<7; i++) {
+			scanCounts[i] = Object.values(countObj)[i]
+		}
+		 return(scanCounts)
+		// for (var i=0; i<7; i++) {
+		// 	result[i] = scanCounts[i].length()
+		
+		// }
+	}
+	const scanCountstoArrayLast7DaysVar = scanCountstoArrayLast7Days(orderedDates)
+	console.log(scanCountstoArrayLast7DaysVar)
+	
+	function scanCountsLast7Days(scanCountstoArrayLast7DaysVar){
+		var result = [];
+		for (var i=0; i<7; i++) {
+			if (scanCountstoArrayLast7DaysVar[i] != undefined){
+			result[i] = scanCountstoArrayLast7DaysVar[i].length
+			}
+			else{result[i] = 0}
+		}
+		console.log(result)
+		return(result)
+	}
+
+	const weight = scanCountsLast7Days(scanCountstoArrayLast7DaysVar).reverse()
+	const weightSum = weight.reduce((partialSum, a) => partialSum + a, 0)
+	weightAvg = weightSum/7
+	//const weight = Object.values(weightObj);
+	//const weight = [2, 1, 3, 0, 0, 0, 0]
+
+	function Last7Days () {
+		var result = [];
+		for (var i=0; i<7; i++) {
+			var d = new Date();
+			d.setDate(d.getDate() - i);
+			result.push(dateFormat(d, "mmm dd yyyy").toString())
+			
+		}
+		return(result.reverse());
+	}
+	const last7Days = Last7Days()	
+
+
+
+	const canvasEl = useRef(null);
 	const colors = {
 		purple: {
 		  default: "rgba(149, 76, 233, 1)",
@@ -73,7 +133,13 @@ export default function Dashboard({userData,busLocData, scanData}) {
 		indigo: {
 		  default: "rgba(80, 102, 120, 1)",
 		  quarter: "rgba(80, 102, 120, 0.25)"
-		}
+		},
+		other: {
+			default: "rgba(255,255, 233, 1)",
+			half: "rgba(149, 255, 233, 0.5)",
+			quarter: "rgba(149, 255, 233, 0.25)",
+			zero: "rgba(149, 255, 233, 0)"
+		  },
 	  };
 
 	  useEffect(() => {
@@ -86,49 +152,7 @@ export default function Dashboard({userData,busLocData, scanData}) {
 		gradient.addColorStop(1, colors.purple.zero);
 
 
-		function scanCountstoArrayLast7Days(countObj){
-			var scanCounts = [];
-			
-			for (var i=0; i<7; i++) {
-				scanCounts[i] = Object.values(countObj)[i]
-			}
-			 return(scanCounts)
-			// for (var i=0; i<7; i++) {
-			// 	result[i] = scanCounts[i].length()
-			
-			// }
-		}
-		const scanCountstoArrayLast7DaysVar = scanCountstoArrayLast7Days(orderedDates)
-		console.log(scanCountstoArrayLast7DaysVar)
-		
-		function scanCountsLast7Days(scanCountstoArrayLast7DaysVar){
-			var result = [];
-			for (var i=0; i<7; i++) {
-				if (scanCountstoArrayLast7DaysVar[i] != undefined){
-				result[i] = scanCountstoArrayLast7DaysVar[i].length
-				}
-				else{result[i] = 0}
-			}
-			console.log(result)
-			return(result)
-		}
-
-		const weight = scanCountsLast7Days(scanCountstoArrayLast7DaysVar).reverse()
-		//const weight = Object.values(weightObj);
-		//const weight = [2, 1, 3, 0, 0, 0, 0]
-
-		function Last7Days () {
-			var result = [];
-			for (var i=0; i<7; i++) {
-				var d = new Date();
-				d.setDate(d.getDate() - i);
-				result.push(dateFormat(d, "mmm dd yyyy").toString())
-				
-			}
-			return(result.reverse());
-		}
-		const last7Days = Last7Days()	
-
+	
 		const data = {
 		  labels: last7Days,
 		  datasets: [
@@ -142,7 +166,18 @@ export default function Dashboard({userData,busLocData, scanData}) {
 			  lineTension: 0.2,
 			  pointBackgroundColor: colors.purple.default,
 			  pointRadius: 3
-			}
+			},
+			{
+				backgroundColor: gradient,
+				label: "Avg Daily Scans",
+				data: [2,2,2,2,2,2,2],
+				fill: false,
+				borderWidth: 1,
+				borderColor: colors.indigo.default,
+				lineTension: 0.2,
+				pointBackgroundColor: colors.indigo.default,
+				pointRadius: 1
+			  }
 		  ]
 		};
 		const config = {
@@ -167,9 +202,32 @@ export default function Dashboard({userData,busLocData, scanData}) {
 			
         </main>
 		<body>
+		<div>
+			
+			<dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+				<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+				<dt class="truncate text-sm font-medium text-gray-500">Total Scans</dt>
+				<dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{scanDataIdArray.length}</dd>
+				</div>
+
+				<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+				<dt class="truncate text-sm font-medium text-gray-500">Total Unique Customers</dt>
+				<dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{countUniqBusUsers}</dd>
+				</div>
+
+				<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+				<dt class="truncate text-sm font-medium text-gray-500">Avg. Scans per Day</dt>
+				<dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{weightAvg}</dd>
+				</div>
+			</dl>
+			</div>
+			<div class="w-full p-8 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+			<span>Business Insights - Last 7 days</span>
+			<canvas id="myChart" ref={canvasEl} height="100" />
+		</div>
 		<div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
 			<div class="flex items-center justify-between mb-4">
-				<h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Total Scans</h5>
+				<h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Total Scans per Location</h5>
 			</div>
 			<div class="flow-root">
 				<ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -193,28 +251,10 @@ export default function Dashboard({userData,busLocData, scanData}) {
 					</li>
 					))}
 				</ul>
-				<ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-				<li class="py-3 sm:py-4">
-						<div class="flex items-center space-x-4">
-						<div class="flex-shrink-0">
-						</div>
-						<div class="flex-1 min-w-0">
-							<p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-								Overall Total 
-							</p>
-						</div>
-						<div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-							{scanDataIdArray.length}
-						</div>
-						</div>
-				</li>
-				</ul>
+				
 			</div>
 		</div>
-		<div class="w-full p-8 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-			<span>Business Insights - Last 7 days</span>
-			<canvas id="myChart" ref={canvasEl} height="100" />
-		</div>
+		
 		</body> 
         <BottomNav/>
     </>
