@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Head from 'next/head'
 
 const Meta = () => (
@@ -30,6 +31,7 @@ const Meta = () => (
 		<link rel='apple-touch-icon' href='/images/playstore.png' />
 		<link rel='icon' type='image/png' href='/images/playstore.png' />
 		<link rel='manifest' href='/manifest.json' />
+		
 	</Head>
 )
 
