@@ -6,8 +6,8 @@ import {FaPencilAlt, FaTimes} from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter  } from "next/router";
-
-
+import Map from '../../components/Map'
+const DEFAULT_CENTER = [52.5, -7.36546]
 
 export default function LocationPage({location}) {
   const router = useRouter()
@@ -44,6 +44,25 @@ export default function LocationPage({location}) {
         <p>Opening Hours: {location.attributes.MonOpen}</p>
      
       </div>
+      <Map className="w-full h-64" width="800" height="400" center={DEFAULT_CENTER} zoom={8}>
+							{({ TileLayer, Marker, Popup }) => (
+							<>
+								<TileLayer
+								url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+								attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+								/>
+							
+									<Marker position={[location.attributes.lat, location.attributes.lon]}>
+										<Popup>
+											<b>Name:</b> {location.attributes.name} <br/>
+											<b>Category:</b> {location.attributes.category}
+										</Popup>
+									</Marker>
+							
+								
+							</>
+							)}
+						</Map>
 		</div>
     </Layout>
   )
