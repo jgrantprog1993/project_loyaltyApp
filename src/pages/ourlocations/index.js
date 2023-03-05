@@ -47,7 +47,7 @@ export default function OurLocations({userData}) {
 							))}
 						</>
 						:
-						<Map className="w-full h-64" width="800" height="400" center={DEFAULT_CENTER} zoom={12}>
+						<Map className="w-full h-64" width="800" height="400" center={DEFAULT_CENTER} zoom={8}>
 							{({ TileLayer, Marker, Popup }) => (
 							<>
 								<TileLayer

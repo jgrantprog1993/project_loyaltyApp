@@ -8,10 +8,8 @@ import {useState} from 'react'
 //import { cookies } from 'next/headers'; // Import cookies
 import Map from '../../components/Map'
 const DEFAULT_CENTER = [52.5, -7.36546]
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
 
-const icon = L.icon({ iconUrl: "marker-icon.png" });
+
 
 export default function Discover({userData}) {
 	const [toggleViewMode, setToggleViewMode] = useState(false);
@@ -51,19 +49,19 @@ export default function Discover({userData}) {
 					</>
 				:
 				
-				<Map className="w-full h-64" width="800" height="400" center={DEFAULT_CENTER} zoom={12}>
+				<Map className="w-full h-64" width="800" height="400" center={DEFAULT_CENTER} zoom={8}>
 				{({ TileLayer, Marker, Popup }) => (
 				<>
 					<TileLayer
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 					attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
 					/>
-					{locationsData.locations.map((location) => (
+					{locationsData.data.map((location) => (
 						
-						<Marker position={[location.lat, location.lon]}>
+						<Marker position={[location.attributes.lat, location.attributes.lon]}>
 							<Popup>
-								<b>Name:</b> {location.name} <br/>
-								<b>Category:</b> {location.category}
+								<b>Name:</b> {location.attributes.name} <br/>
+								<b>Category:</b> {location.attributes.category}
 							</Popup>
 						</Marker>
 					))}
