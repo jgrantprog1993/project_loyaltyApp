@@ -1,24 +1,25 @@
 // @ts-nocheck
 import Layout from "../../components/layout"
-import { API_URL } from "../../utils/config"
+import { API_URL, NEXT_URL } from "../../utils/config"
 import OurLocationsItem from "../../components/OurLocationsItem"
 //import AuthContext from "../../context/AuthContext"
 import { getCookies, getCookie, setCookies, removeCookies } from 'cookies-next';
 import Map from '../../components/Map'
 const DEFAULT_CENTER = [52.5, -7.36546]
 import {useState} from 'react'
-
+const PER_PAGE = 3
+import Link from "next/link";
 //import { cookies } from 'next/headers'; // Import cookies
 // @ts-ignore
 
-export default function OurLocations({userData}) {
+export default function OurLocations({userData, page, total}) {
 	const [toggleViewMode, setToggleViewMode] = useState(false);
   	const locationsData = userData
 	console.log(locationsData.locations)
 	//console.log(locationsData)
   	// console.log(locationsData.id)
 	// console.log(locationsData.locations.name)
-	
+	const lastPage = Math.ceil(total / PER_PAGE)
 	
 	
 
@@ -45,6 +46,9 @@ export default function OurLocations({userData}) {
 								<OurLocationsItem key={locationsData.locations.id} location={location}/>
 							</div>
 							))}
+							
+						
+							
 						</>
 						:
 						<Map className="w-full h-64" width="800" height="400" center={DEFAULT_CENTER} zoom={8}>
@@ -76,7 +80,14 @@ export default function OurLocations({userData}) {
 }
 
 
-export async function getServerSideProps ({req, res})  {
+export async function getServerSideProps ({query: {page = 1}, req, res})  {
+	//calc stat page
+	const start = +page === 1 ? 0 : (+page) * PER_PAGE
+
+	// Fetch total 
+	// const totalRes = await fetch(`${API_URL}/api/locations/count`)
+	// const total= await totalRes.json()
+
 	const cookieToken = getCookie('token', { req, res});
 	console.log(cookieToken)
 	const response = await fetch(`${API_URL}/api/users/me?populate=*`,
@@ -87,11 +98,11 @@ export async function getServerSideProps ({req, res})  {
 			}
 	})
 	const userData= await response.json()
-	// console.log('userData')
-	// console.log(userData)
+	const locations = userData.locations
 
+	const total = locations.length
 	return {
-		props: {userData}
+		props: {userData,page: +page, total}
 	}
 }
 
