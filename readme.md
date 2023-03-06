@@ -34,3 +34,5 @@ Demo -> https://codesandbox.io/s/l6qs1
 How to count certain elements in array? -> https://stackoverflow.com/questions/6120931/how-to-count-certain-elements-in-array
 
 Grouping dates in JSON -> https://stackoverflow.com/questions/62654005/transform-json-by-grouping-by-date-and-thereafter-by-datetime-in-nodejs
+
+STRAPI - How to count in REST API V4 -> https://forum.strapi.io/t/how-to-count-in-rest-api-in-v4/14765/2

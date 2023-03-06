@@ -1,23 +1,26 @@
 // @ts-nocheck
 import Layout from "../../components/layout"
-import { API_URL } from "../../utils/config"
+import { API_URL, NEXT_URL } from "../../utils/config"
 import DiscoverItem from "../../components/DiscoverItem"
 //import AuthContext from "../../context/AuthContext"
 import { getCookies, getCookie, setCookies, removeCookies } from 'cookies-next';
 import {useState} from 'react'
+import Link from "next/link";
 //import { cookies } from 'next/headers'; // Import cookies
 import Map from '../../components/Map'
 const DEFAULT_CENTER = [52.5, -7.36546]
+const PER_PAGE = 3
 
 
-
-export default function Discover({userData}) {
+export default function Discover({userData, page, total}) {
 	const [toggleViewMode, setToggleViewMode] = useState(false);
   	const locationsData = userData
-	// console.log(locationsData.data.length)  
-	console.log('locationsData')
-	console.log(locationsData)
-	console.log(toggleViewMode)
+	
+	const lastPage = Math.ceil(total / PER_PAGE)
+
+	console.log('page && Total')
+	console.log(page)
+	console.log(total)
   	// console.log(locationsData.id)
 	// console.log(locationsData.locations.name)
 	
@@ -46,6 +49,39 @@ export default function Discover({userData}) {
 							<DiscoverItem key={locationsData.data.id} location={location}/>
 						</div>
 						))}
+						{page == 1 && (
+							<div class="flex flex-col items-center">
+							
+							<span class="text-sm text-gray-700 dark:text-gray-400">
+							Showing <span class="font-semibold text-gray-900 dark:text-white"> {(page * 3)-2} - {(page * 3)}</span> of <span class="font-semibold text-gray-900 dark:text-white">{total}</span> Entries
+							</span>
+							<div class="inline-flex mt-2 xs:mt-0">
+							  
+							  <button class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+								  <Link href={`${NEXT_URL}/discover?page=${page+1}`}>Next</Link>
+								  <svg aria-hidden="true" class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+							  </button>
+							</div>
+						  </div>
+						)}
+						{(page> 1 && page < lastPage)  && (
+							<div class="flex flex-col items-center">
+							
+							<span class="text-sm text-gray-700 dark:text-gray-400">
+								Showing <span class="font-semibold text-gray-900 dark:text-white"> {(page * 3)-2} - {(page * 3)}</span> of <span class="font-semibold text-gray-900 dark:text-white">{total}</span> Entries
+							</span>
+							<div class="inline-flex mt-2 xs:mt-0">
+							
+							 
+								<Link href={`${NEXT_URL}/discover?page=${page-1}`} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"> Prev</Link>
+							  
+							
+								<Link href={`${NEXT_URL}/discover?page=${page+1}`} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
+								
+							 
+							</div>
+						  </div>
+						)}
 					</>
 				:
 				
@@ -83,17 +119,22 @@ export default function Discover({userData}) {
 }
 
 
-export async function getServerSideProps ({req, res})  {
-	const cookieToken = getCookie('token', { req, res});
-	console.log(cookieToken)
-	const response = await fetch(`${API_URL}/api/locations?populate=*`)
+export async function getServerSideProps ({query: {page = 1}})  {
 	
+	//calc stat page
+	const start = +page === 1 ? 0 : (+page) * PER_PAGE
+
+	// Fetch total 
+	const totalRes = await fetch(`${API_URL}/api/locations/count`)
+	const total= await totalRes.json()
+
+	const response = await fetch(`${API_URL}/api/locations?pagination[start]=${start}&pagination[limit]=${PER_PAGE}&populate=*`)
 	const userData= await response.json()
 	console.log('userData')
 	console.log(userData)
 
 	return {
-		props: {userData}
+		props: {userData, page: +page, total}
 	}
 }
 
