@@ -21,10 +21,6 @@ export default function Discover({userData, page, total}) {
 	console.log('page && Total')
 	console.log(page)
 	console.log(total)
-  	// console.log(locationsData.id)
-	// console.log(locationsData.locations.name)
-	
-
 
 	return (
 	<Layout title='Discover' keywords='' description=''>
@@ -71,14 +67,10 @@ export default function Discover({userData, page, total}) {
 								Showing <span class="font-semibold text-gray-900 dark:text-white"> {(page * 3)-2} - {(page * 3)}</span> of <span class="font-semibold text-gray-900 dark:text-white">{total}</span> Entries
 							</span>
 							<div class="inline-flex mt-2 xs:mt-0">
-							
-							 
+
 								<Link href={`${NEXT_URL}/discover?page=${page-1}`} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"> Prev</Link>
-							  
-							
 								<Link href={`${NEXT_URL}/discover?page=${page+1}`} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
-								
-							 
+
 							</div>
 						  </div>
 						)}
