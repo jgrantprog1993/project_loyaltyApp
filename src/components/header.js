@@ -38,9 +38,11 @@ function Header() {
 			<div className='fixed top-0 left-0 z-20 w-full bg-zinc-900 pt-safe'>
 				<header className='border-b bg-zinc-100 px-safe dark:border-zinc-800 dark:bg-zinc-900'>
 					<div className='mx-auto flex h-20 items-center justify-between px-6'>
+					
 						<Link legacyBehavior href='/'>
-							<a>
-								<h1 className='font-medium'>Loyalty App</h1>
+							<a className='columns-2 gap-0'>
+								<img src="../images/playstore.png" alt="" className="display: block rounded-full w-16 h-16 "/>
+								<br/><h1 className='align-bottom inline-block font-medium'>Loyalty App</h1>
 							</a>
 						</Link>
 						

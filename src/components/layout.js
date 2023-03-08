@@ -30,7 +30,7 @@ export default function Layout({title, keywords, description, children}) {
       (
         <>
         <Head>
-          <title> {title} : User</title>
+          <title>{title}</title>
           <Meta></Meta>
         </Head>
         <div className='flex-col justify-center '>
