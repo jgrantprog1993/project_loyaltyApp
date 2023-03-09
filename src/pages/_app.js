@@ -10,6 +10,10 @@ import { CookiesProvider } from "react-cookie"
 // @ts-ignore
 import { useRouter } from 'next/router';
 import { useState,useEffect } from 'react'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false
+
 
 function Loading() {
   const router = useRouter();

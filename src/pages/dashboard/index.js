@@ -11,21 +11,15 @@ require("core-js/actual/array/group-by");
 import dateFormat, { masks } from "dateformat";
 import moment from 'moment';
 
+import { FaQrcode } from 'react-icons/fa';
+
 export default function Dashboard({userData,busLocData, scanData}) {
   
-   	// console.log(userData)
-	// console.log(userData.id)
-	// console.log(busLocData)
-  	//console.log(busVouchData)
-	// for(let i =0; i<=busVouchData.length -1; i++){
-	//   console.log(busVouchData.data[i].createdAt)
-	// }
 	console.log(busLocData)
 	console.log(scanData)
 	let busLocDataIdArray = []
 	let scanDataIdArray = []
-	
-	
+
 	for(let i=0; i<= busLocData.length-1; i++){
 		
 		busLocDataIdArray[i] = busLocData[i].id
@@ -202,59 +196,67 @@ export default function Dashboard({userData,busLocData, scanData}) {
 			
         </main>
 		<body>
-		<div>
-			
-			<dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-				<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-				<dt class="truncate text-sm font-medium text-gray-500">Total Scans</dt>
-				<dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{scanDataIdArray.length}</dd>
-				</div>
+			<div>
+				<dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+					<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+						<dt class="truncate text-sm font-medium text-gray-500">Total Scans </dt>
+						<dd class="mt-1 text-3xl font-semibold tracking-tight text-indigo-600">{scanDataIdArray.length}</dd>
+					</div>
 
-				<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-				<dt class="truncate text-sm font-medium text-gray-500">Total Unique Customers</dt>
-				<dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{countUniqBusUsers}</dd>
-				</div>
+					<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+						<dt class="truncate text-sm font-medium text-gray-500">Total Unique Customers</dt>
+						<dd class="mt-1 text-3xl font-semibold tracking-tight text-indigo-600">{countUniqBusUsers}</dd>
+					</div>
 
-				<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
-				<dt class="truncate text-sm font-medium text-gray-500">Avg. Scans per Day</dt>
-				<dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{weightAvg}</dd>
-				</div>
-			</dl>
-			</div>
-			<div class="w-full p-8 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-			<span>Business Insights - Last 7 days</span>
-			<canvas id="myChart" ref={canvasEl} height="100" />
-		</div>
-		<div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-			<div class="flex items-center justify-between mb-4">
-				<h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Total Scans per Location</h5>
-			</div>
-			<div class="flow-root">
-				<ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-					{countsObj.map((count) => (
-					<li class="py-3 sm:py-4">
-						<div class="flex items-center space-x-4">
-						<div class="flex-shrink-0">
-						</div>
-						<div class="flex-1 min-w-0">
-							<p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-								{count[0]}
-							</p>
-							<p class="text-sm text-gray-500 truncate dark:text-gray-400">
-								PlaceHolder
-							</p>
-						</div>
-						<div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-							{count[1]}
-						</div>
-						</div>
-					</li>
-					))}
-				</ul>
-				
-			</div>
-		</div>
+					<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
+						<dt class="truncate text-sm font-medium text-gray-500">Avg. Scans per Day</dt>
+						<dd class="mt-1 text-3xl font-semibold tracking-tight text-indigo-600">{weightAvg}</dd>
+					</div>
+				</dl>
+			<div/>
 		
+			<hr class="border-b-2 border-gray-300 my-8 mx-4"></hr>
+			<div class="flex flex-row flex-wrap mt-2">
+				<div class="w-full lg:w-1/2 p-3">
+					<div class="w-full p-8 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+					<h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Total Scans per Location</h5>
+						<canvas id="myChart" ref={canvasEl} height="100" />
+					</div>
+				</div>  
+			
+				<div class="w-full lg:w-1/2  p-3">
+					<div class="w-full p-8 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+						<div class="flex items-center justify-between mb-4">
+							<h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Total Scans per Location</h5>
+						</div>
+						<div class="flow-root">
+							<ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+								{countsObj.map((count) => (
+								<li class="py-3 sm:py-4">
+									<div class="flex items-center space-x-4">
+									<div class="flex-shrink-0">
+									</div>
+									<div class="flex-1 min-w-0">
+										<p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+											{count[0]}
+										</p>
+										<p class="text-sm text-gray-500 truncate dark:text-gray-400">
+											PlaceHolder
+										</p>
+									</div>
+									<div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+										{count[1]}
+									</div>
+									</div>
+								</li>
+								))}
+							</ul>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
 		</body> 
         <BottomNav/>
     </>

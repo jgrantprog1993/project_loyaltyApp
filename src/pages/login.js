@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import loginImg from '../../public/images/pic5.jpg'
 
 export default function Login(){
   const [email,setEmail] = useState('')
@@ -26,24 +27,42 @@ export default function Login(){
 
 
   return (
-    <Layout title='Login' keywords='{undefined}' description='{undefined}' >
-       <div className='my-20 h-screen'>
-       
-      
-        <div className='flex-1 text-xs sm:text-sm flex flex-col justify-cener items-center gap-2 sm:gap-4'>
-       
-            
-              <h1 className='font-extrabold select-none text-2xl sm:text-4xl uppercase'>Login</h1>
-              <div className="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700"></div>
-             
-              <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email Address' className='outline-none duration-300 border-b-2 border-solid border-white focus:border-cyan-300 text-slate-900 p-2 w-full max-w-[40ch]' />
-              <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder='Password' className='outline-none text-slate-900 p-2 w-full max-w-[40ch] duration-300 border-b-2 border-solid boarder while focus:border-cyan-300' />
-              <button onClick={handleSubmit} className='w-full max-w-[40ch] border border-white border-solid uppercase py-2 duration-300 relative after:absolute after:top-0 after:right-full after:bg-white after:z-10 after:w-full after:h-full overflow-hidden hover:after:translate-x-full after:duration-300 hover:text-slate-900'>
+  <Layout title='Login' keywords='{undefined}' description='{undefined}' >
+   <section class="flex flex-col md:flex-row h-screen items-center">
+
+<div class="bg-blue-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">
+  <img src="images/pic1.jpg" alt="" class="w-full h-full object-cover"/>
+</div>
+
+<div class="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+      flex items-center justify-center">
+
+  <div class="w-full h-100">
+  <img src="images/playstore.png" alt="" className=" mx-auto w-1/2 h-1/2 "/>
+    <h1 class="text-center text-xl font-bold">Loyalty App Login</h1>
+    <h1 class="text-center text-xl md:text-2xl font-bold leading-tight mt-12">Log in to your account</h1>
+
+    <form class="mt-6" action="#" method="POST">
+      <div>
+        <label class="block text-gray-700">Email Address</label>
+        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} name="" id="" placeholder="Enter Email Address" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required/>
+      </div>
+      <div class="mt-4">
+        <label class="block text-gray-700">Password</label>
+        <input value={password} onChange={(e) => setPassword(e.target.value)} name="" id="" placeholder="Enter Password" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+              focus:bg-white focus:outline-none" required/>
+      </div>
+      <button onClick={handleSubmit} className="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg  px-4 py-3 mt-6">
                 <h2 className='relative z-20'>SUBMIT</h2>
               </button>
-          <p> Don't have an Account yet? <Link href='/register'>Register</Link></p>
-        </div>
+    </form>
+    <hr class="my-6 border-gray-300 w-full"/>
+          <p> Don't have an Account yet? <Link class="text-blue-500 hover:text-blue-700 font-semibold" href='/register'>Create an Account</Link></p>
       </div>
-    </Layout>
+
+    </div>
+  
+  </section>
+  </Layout>
   )
 }

@@ -19,14 +19,11 @@ export default function Offers({offers, page, total}) {
 	<Layout title='Discover' keywords='' description=''>
 
 					<div className='my-20 h-screen'>
-						<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
-							Offers
-						</h2>
-						<p className='text-zinc-600 dark:text-zinc-400'></p>
+						<p className='text-zinc-600 dark:text-zinc-400'>
 						{offersData.length===0 && <h3> No Offers to show </h3>}
-						
+						</p>
 						{offersData.map((offer) => (
-							<div className='flex justify-center items-center flex-col text-zinc-600 dark:text-zinc-400'>
+							<div className='my-2 flex justify-center items-center flex-col text-zinc-600 dark:text-zinc-400 '>
 								<OfferItem key={offersData.id} offer={offer}/>
 							</div>
 						))}

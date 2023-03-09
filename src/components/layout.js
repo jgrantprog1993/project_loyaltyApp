@@ -30,10 +30,10 @@ export default function Layout({title, keywords, description, children}) {
       (
         <>
         <Head>
-          <title> {title} : User</title>
+          <title>{title}</title>
           <Meta></Meta>
         </Head>
-        <div className='flex-col justify-center bg-slate-300'>
+        <div className='flex-col justify-center '>
          <Navbar />
             <main>
               {children}
