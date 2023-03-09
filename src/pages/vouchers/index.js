@@ -34,10 +34,12 @@ export default function Vouchers({userInfo,locations, vouchers, page, total}) {
 						{vouchersData.length===0 && <h3> No Vouchers to show </h3>}
 						<>
 							{vouchersData.map((voucher) => (
-								<div className='flex justify-center items-center flex-col text-zinc-600 dark:text-zinc-400'>
+								// <div className='grid place-items-center'>
+									<div className='flex grid justify-center p-4 flex-col text-zinc-600 dark:text-zinc-400'>
 
-									<VoucherItem voucher={voucher}/>
-								</div>	
+										<VoucherItem voucher={voucher}/>
+									</div>	
+								// </div>
 								))
 							}
 							{ (page == 1 && page == lastPage)&& (

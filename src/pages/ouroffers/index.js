@@ -14,17 +14,16 @@ export default function OurOffers({id,result2JSON,offers}) {
 
 	
 	return (
-	<Layout title='Discover' keywords='' description=''>
+	<Layout title='Our Offers' keywords='' description=''>
 
 					<div className='my-20 h-screen'>
-						<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
-							Our Offers
-						</h2>
 						<p className='text-zinc-600 dark:text-zinc-400'></p>
 						{resOffers.length===0 && <h3> No Offers to show </h3>}
 						
 						{resOffers.map((offer) => (
-							<OurOfferItem key={resOffers.id} offer={offer}/>
+							<div className='my-2 flex justify-center items-center flex-col text-zinc-600 dark:text-zinc-400 '>
+								<OurOfferItem key={resOffers.id} offer={offer}/>
+							</div>
 						))}
 					</div>
 				
