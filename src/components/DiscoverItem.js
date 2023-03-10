@@ -8,10 +8,10 @@ import Image from "next/image"
 export default function DiscoverItem({location}) {
 
     return (
-    <div className="my-2">
-        <Link href={`/locations/${location.attributes.slug}`} className="flex bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div className="my-2 flex justify-center">
+        <Link href={`/locations/${location.attributes.slug}`} className="grow bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
             <figure className="flex slate-100 rounded-xl p-8 dark:bg-slate-800">
-                <img className="w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto" src={location.attributes.images} alt=""/>
+                <img className=" grow w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto" src={location.attributes.images} alt=""/>
                 <div className="pt-6 md:p-8 text-center md:text-left space-y-4">
                    <h1>{location.attributes.name}</h1>
                     <p className="text-sm font-small">
