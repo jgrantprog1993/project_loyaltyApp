@@ -34,36 +34,92 @@ export default function LocationPage({location}) {
   //console.log(location)
   return (
     <Layout title={location.attributes.name} keywords='{undefined}' description='{undefined}' >
-		<div className='my-20 h-screen'>
-			<div>
-        <span>Name: {location.attributes.name}</span>
-        <h1> Address: {location.attributes.address}</h1>
-        <p>Lat: {location.attributes.lat}</p>
-        <p>Lon: {location.attributes.lon}</p>
-        <p>Description: {location.attributes.description}</p>
-        <p>Opening Hours: {location.attributes.MonOpen}</p>
-     
+      <div className='my-20 h-screen'>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+        <h1 class="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">{location.attributes.name}</h1>
+        <br/>
+        <dl>
+            <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Description</dt>
+            <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{location.attributes.description}</dd>
+        </dl>
+        <dl>
+            <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Address</dt>
+            <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{location.attributes.address}</dd>
+        </dl>
+        <dl class="flex items-center space-x-6">
+            <div>
+                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Category</dt>
+                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{location.attributes.category}</dd>
+            </div>
+          
+        </dl>
+        <dl class="flex items-center space-x-6">
+            <div>
+                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Lattitude</dt>
+                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{location.attributes.lat}</dd>
+            </div>
+            <div>
+                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Longitude</dt>
+                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{location.attributes.lon}</dd>
+            </div>
+        </dl>
+        <div class="flex items-center space-x-4">
+          
+        </div>
       </div>
+      <div className='py-8 px-4 mx-auto max-w-2xl lg:py-16'>
+       
+            <br/><br/><br/>
+        <dl>
+              <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Opening Hours</dt>
+              <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
+              <div class="grid grid-cols-2 gap-1">
+                <div>
+                  Monday:<br/>
+                  Tuesday:<br/>
+                  Wednesday:<br/>
+                  Thursday:<br/>
+                  Friday:<br/>
+                  Saturday:<br/>
+                  Sunday:
+                </div>
+                <div>
+                  {location.attributes.MonOpen} - {location.attributes.MonClosed}<br/>
+                  {location.attributes.TuesOpen} - {location.attributes.TuesClosed}<br/>
+                  {location.attributes.WedOpen} - {location.attributes.WedClosed}<br/>
+                  {location.attributes.ThurOpen} - {location.attributes.ThurClosed}<br/>
+                  {location.attributes.FriOpen} - {location.attributes.FriClosed}<br/>
+                  {location.attributes.SatOpen} - {location.attributes.SatClosed}<br/>
+                  {location.attributes.SunOpen} - {location.attributes.SunClosed}
+                </div>
+              </div>
+              </dd>
+        </dl>
+      </div>
+      </div>
+      <div class="container mx-auto ">
       <Map className="w-full h-64" width="800" height="400" center={DEFAULT_CENTER} zoom={8}>
-							{({ TileLayer, Marker, Popup }) => (
-							<>
-								<TileLayer
-								url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-								attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-								/>
-							
-									<Marker position={[location.attributes.lat, location.attributes.lon]}>
-										<Popup>
-											<b>Name:</b> {location.attributes.name} <br/>
-											<b>Category:</b> {location.attributes.category}
-										</Popup>
-									</Marker>
-							
-								
-							</>
-							)}
-						</Map>
-		</div>
+              {({ TileLayer, Marker, Popup }) => (
+              <>
+                <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                />
+              
+                  <Marker position={[location.attributes.lat, location.attributes.lon]}>
+                    <Popup>
+                      <b>Name:</b> {location.attributes.name} <br/>
+                    </Popup>
+                  </Marker>
+              
+              </>
+              )}
+          </Map>
+          </div>
+
+      </div>
     </Layout>
   )
 }

@@ -91,7 +91,7 @@ export default function editLocation({location}) {
                             <form onSubmit={handleSubmit} id="form1">
                                 <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
                                     <div class="sm:col-span-2">
-                                        <label HTMLfor="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                        <label htmlFor="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                                         <input 
                                             type='text'
                                             id='name'
@@ -101,7 +101,7 @@ export default function editLocation({location}) {
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
                                     </div>
                                     <div class="w-full">
-                                        <label HTMLfor="lat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lat</label>
+                                        <label htmlFor="lat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lat</label>
                                         <input 
                                             type='number'
                                             step="0.000001"

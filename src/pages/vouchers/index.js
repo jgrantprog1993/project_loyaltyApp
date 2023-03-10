@@ -13,25 +13,28 @@ export default function Vouchers({userInfo,locations, vouchers, page, total}) {
 	const userInfoData = userInfo
 	const locationsData = locations.data
 	const lastPage = Math.ceil(total / PER_PAGE)
+	console.log('vouchers')
+	console.log(vouchers)
 	console.log('userInfoData')
 	console.log(userInfoData.vouchers)
-	// console.log('locationsData')
+	let vouchersData = []
 	
-	// console.log(locationsData)
-	// console.log('vouchers')
-	// console.log(vouchers)
-	let vouchersData = vouchers.data
-	console.log('vouchersData')
-	console.log(vouchersData)
+	if(vouchers != null)
+	{
+		vouchersData = vouchers.data
+		console.log('vouchersData')
+		console.log(vouchersData)
+	} else{
+		vouchersData = []
+	}
 
   return (
 	  <Layout title='Vouchers' keywords='{undefined}' description='{undefined}' >
 					<div className='my-20 h-screen'>
-						<h2 className='text-xl font-semibold text-zinc-800 dark:text-zinc-200'>
-							Vochers
-						</h2>
+						
 						<p className='text-zinc-600 dark:text-zinc-400'></p>
-						{vouchersData.length===0 && <h3> No Vouchers to show </h3>}
+						{vouchersData.length===0 && <><p className="text-center text-4xl font-black text-gray-900 dark:text-white"> No Vouchers to show </p><br />
+						<h2 className="text-center text-4xl font-normal text-gray-900 dark:text-white">Collect tokens at one of the locations listed <Link href={`${NEXT_URL}/discover`} className="font-semibold text-purple-400 underline dark:text-white decoration-indigo-300"> HERE</Link></h2></> }
 						<>
 							{vouchersData.map((voucher) => (
 								// <div className='grid place-items-center'>
@@ -42,41 +45,41 @@ export default function Vouchers({userInfo,locations, vouchers, page, total}) {
 								// </div>
 								))
 							}
-							{ (page == 1 && page == lastPage)&& (
+							{ (page == 1 && page == lastPage && vouchersData.length!=0)&& (
 							<div class="flex flex-col items-center">
 								<span class="text-sm text-gray-700 dark:text-gray-400">
 								Showing <span class="font-semibold text-gray-900 dark:text-white"> {(page * 3)-2} - {(page * 3)}</span> of <span class="font-semibold text-gray-900 dark:text-white">{total}</span> Entries
 							</span>
 							</div>
-						)}
-						{(page> 1 && page < lastPage)  && (
-							<div class="flex flex-col items-center">
-							
-							<span class="text-sm text-gray-700 dark:text-gray-400">
-								Showing <span class="font-semibold text-gray-900 dark:text-white"> {(page * 3)-2} - {(page * 3)}</span> of <span class="font-semibold text-gray-900 dark:text-white">{total}</span> Entries
-							</span>
-							<div class="inline-flex mt-2 xs:mt-0">
-							
-								<Link href={`${NEXT_URL}/vouchers?page=${page-1}`} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"> Prev</Link>
-								<Link href={`${NEXT_URL}/vouchers?page=${page+1}`} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
-							 
+								)}
+							{(page> 1 && page < lastPage)  && (
+								<div class="flex flex-col items-center">
+								
+								<span class="text-sm text-gray-700 dark:text-gray-400">
+									Showing <span class="font-semibold text-gray-900 dark:text-white"> {(page * 3)-2} - {(page * 3)}</span> of <span class="font-semibold text-gray-900 dark:text-white">{total}</span> Entries
+								</span>
+								<div class="inline-flex mt-2 xs:mt-0">
+								
+									<Link href={`${NEXT_URL}/vouchers?page=${page-1}`} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"> Prev</Link>
+									<Link href={`${NEXT_URL}/vouchers?page=${page+1}`} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</Link>
+								
+								</div>
 							</div>
-						  </div>
-						)}
-						{(page>1 && page == lastPage)  && (
-							<div class="flex flex-col items-center">
-							
-							<span class="text-sm text-gray-700 dark:text-gray-400">
-								Showing <span class="font-semibold text-gray-900 dark:text-white"> {(page * 4)-3} - {(page * 4)}</span> of <span class="font-semibold text-gray-900 dark:text-white">{total}</span> Entries
-							</span>
-							<div class="inline-flex mt-2 xs:mt-0">
-							
-								<Link href={`${NEXT_URL}/vouchers?page=${page-1}`} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"> Prev</Link>
-							
-							 
+							)}
+							{(page>1 && page == lastPage)  && (
+								<div class="flex flex-col items-center">
+								
+								<span class="text-sm text-gray-700 dark:text-gray-400">
+									Showing <span class="font-semibold text-gray-900 dark:text-white"> {(page * 4)-3} - {(page * 4)}</span> of <span class="font-semibold text-gray-900 dark:text-white">{total}</span> Entries
+								</span>
+								<div class="inline-flex mt-2 xs:mt-0">
+								
+									<Link href={`${NEXT_URL}/vouchers?page=${page-1}`} className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"> Prev</Link>
+								
+								
+								</div>
 							</div>
-						  </div>
-						)}
+							)}
 						
 						</>
 					</div>
@@ -94,6 +97,7 @@ export async function getServerSideProps({query: {page = 1}, req, res}) {
 	const totalRes = await fetch(`${API_URL}/api/vouchers/count`)
 	const total = await totalRes.json()
 
+	var vouchers = []
 	const response = await fetch(`${API_URL}/api/users/me?populate=*`,
 	{
 		method: 'GET',
@@ -108,9 +112,11 @@ export async function getServerSideProps({query: {page = 1}, req, res}) {
 	for(let i =0; i<=userInfoVouchers.length-1; i++){
 			string +='&filters[id]='+userInfoVouchers[i].id
 	}
-	console.log('SADFGHJMK<JHGFDSAFGHJKLJHGFDS')
-	console.log(string)
+	
 	const query = string.substring(1);
+	console.log('string');
+	console.log(string);
+	console.log('query');
 	console.log(query);
 	const response2 = await fetch(`${API_URL}/api/locations?populate=*`,
 	{
@@ -121,15 +127,19 @@ export async function getServerSideProps({query: {page = 1}, req, res}) {
 	})
 	const locations = await response2.json()
 	
-	const response3 = await fetch(`${API_URL}/api/vouchers?${query}&populate=*`,
-	{
-		method: 'GET',
-			headers: {
-				Authorization:`Bearer ${token}`
-			}
-	})
-	const vouchers = await response3.json()
-	
+	if(query != '')
+	{	
+		const response3 = await fetch(`${API_URL}/api/vouchers?${query}&populate=*`,
+		{
+			method: 'GET',
+				headers: {
+					Authorization:`Bearer ${token}`
+				}
+		})
+		vouchers = await response3.json()
+	} else{
+		vouchers = null
+	}
 	return {
 		props: {
 			userInfo:userInfo,

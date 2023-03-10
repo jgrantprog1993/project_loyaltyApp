@@ -3,7 +3,8 @@
 import React, {useContext, useState, useEffect, useRef, createContext} from "react";
 import {router, useRouter} from 'next/router'
 
-import { NEXT_URL } from "../utils/config";
+import { API_URL, NEXT_URL } from "../utils/config";
+import { toast } from "react-toastify";
 //const auth = getAuth();
 
 const AuthContext = createContext()
@@ -11,9 +12,9 @@ const AuthContext = createContext()
 export const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null)
   const [error, setError] = useState(true)
-  const [loading, setLoading] = useState(true)
+ 
 
-  useEffect(() => checkUserLoggedIn(), [])
+  // useEffect(() => {checkUserLoggedIn()}, [])
 
   const register = async (username, fname,lname, business, email, password) => {
     const res = await fetch(`${NEXT_URL}/api/register`, {
@@ -30,17 +31,22 @@ export const AuthProvider = ({children}) => {
         password:password})
     })
 
-    const data = await res.json()
+      const data = await res.json()
     
-    console.log(data)
-    if(res.ok){
-     setUser(data.user)
-     router.push('/vouchers')
-    } else {
-      console.log("ERRORR!!!!")
-      setError(data.message)
-      setError(null)
-    }   
+    
+
+      if (res.ok) {
+        setUser(data.user)
+        toast.success(`Welcome, ${data.user.fname} !`)
+        router.push('/')
+      } else {
+        setError(data.message)
+        setError(null)
+      }
+      // console.log("ERRORR!!!!")
+      // setError(data.message)
+      // setError(null)
+    // } 
     
   }
 
@@ -57,11 +63,13 @@ export const AuthProvider = ({children}) => {
     const data = await res.json()
     
     console.log(data)
+    
     if(res.ok){
      setUser(data.user)
+     toast.success(`Welcome, ${data.user.fname} !`)
      router.push('/')
     } else {
-      console.log("ERRORR!!!!")
+      toast.error('Invalid Credentials')
       setError(data.message)
       setError(null)
     }   
@@ -77,25 +85,28 @@ export const AuthProvider = ({children}) => {
     })
     if(res.ok) {
       setUser(null)
-      router.push('/')
+      toast.success(`Successfully Logged Out!`)
+      router.push('/login')
     }
     const data = await res.json()
   }
 
-  const checkUserLoggedIn = async () => {
-    const res = await fetch(`${NEXT_URL}/api/user`)
-    const data = await res.json()
+  // const checkUserLoggedIn = async () => {
+  //   const res = await fetch(`${API_URL}/api/users/me`)
+  //   const data = await res.json()
 
-    if(res.ok){
-      setUser(data.user)
-    }else{
-      setUser(null)
-    }
-  }
+  //   console.log('res')
+  //   console.log(res)
+  //   console.log('data')
+  //   console.log(data)
+
+  //   if(res.ok){
+  //     setUser(data.user)
+  //   }else{
+  //     setUser(null)
+  //   }
+  // }
   
-  useEffect(() => {
-   
-    }, [])
 
     const value = {
       user,

@@ -26,12 +26,11 @@ export default async (req, res) => {
 
         const data = await strapiRes.json()
         console.log(data)
-        const data1 = strapiRes.body
-        console.log(data1)
+       
         console.log(strapiRes.ok)
 
         if(strapiRes.ok){
-           
+          
             res.setHeader(
                 'Set-Cookie', 
                 cookie.serialize ('token', data.jwt, {
