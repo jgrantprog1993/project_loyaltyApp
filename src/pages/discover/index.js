@@ -125,7 +125,7 @@ export default function Discover({userData, locationsAll, page, total}) {
 export async function getServerSideProps ({query: {page = 1}})  {
 	
 	//calc stat page
-	const start = +page === 1 ? 0 : (+page) * PER_PAGE
+	const start = +page === 1 ? 0 : (((+page) * PER_PAGE) - PER_PAGE)
 
 	// Fetch total 
 	const totalRes = await fetch(`${API_URL}/api/locations/count`)

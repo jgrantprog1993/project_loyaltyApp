@@ -23,11 +23,11 @@ export default function Offers({offers, page, total}) {
 						{offersData.length===0 && <h3> No Offers to show </h3>}
 						</p>
 						{offersData.map((offer) => (
-							<div className='my-2 flex justify-center items-center flex-col text-zinc-600 dark:text-zinc-400 '>
+							<div className='my-2 flex text-zinc-600 dark:text-zinc-400 '>
 								<OfferItem key={offersData.id} offer={offer}/>
 							</div>
 						))}
-						{page == 1 && (
+						{(page == 1 && page !== lastPage) && (
 							<div class="flex flex-col items-center">
 							
 								<span class="text-sm text-gray-700 dark:text-gray-400">
@@ -53,7 +53,7 @@ export default function Offers({offers, page, total}) {
 							</div>
 						  </div>
 						)}
-						{(page == lastPage)  && (
+						{(page >1 && page == lastPage)  && (
 							<div class="flex flex-col items-center">
 							
 							<span class="text-sm text-gray-700 dark:text-gray-400">
@@ -67,6 +67,15 @@ export default function Offers({offers, page, total}) {
 							</div>
 						  </div>
 						)}
+						{(page ==1 && page == lastPage)  && (
+							<div class="flex flex-col items-center">
+							
+								<span class="text-sm text-gray-700 dark:text-gray-400">
+									Showing <span class="font-semibold text-gray-900 dark:text-white"> {(page * 4)-3} - {(page * 4)}</span> of <span class="font-semibold text-gray-900 dark:text-white">{total}</span> Entries
+								</span>
+							
+						  	</div>
+						)}
 					</div>
 				
 	</Layout>
@@ -75,8 +84,11 @@ export default function Offers({offers, page, total}) {
 
 
 export async function getServerSideProps({query: {page = 1}}) {
-	const start = +page === 1 ? 0 : (+page) * PER_PAGE
-
+	const start = +page === 1 ? 0 : (((+page) * PER_PAGE) - PER_PAGE)
+	console.log('start')
+	console.log(start)
+	console.log('page')
+	console.log(page)
 	// Fetch total 
 	const totalRes = await fetch(`${API_URL}/api/offers/count`)
 	const total= await totalRes.json()
