@@ -27,7 +27,7 @@ export default function Offers({offers, page, total}) {
 								<OfferItem key={offersData.id} offer={offer}/>
 							</div>
 						))}
-						{page == 1 && (
+						{(page == 1 && page !== lastPage) && (
 							<div class="flex flex-col items-center">
 							
 								<span class="text-sm text-gray-700 dark:text-gray-400">
@@ -53,7 +53,7 @@ export default function Offers({offers, page, total}) {
 							</div>
 						  </div>
 						)}
-						{(page == lastPage)  && (
+						{(page >1 && page == lastPage)  && (
 							<div class="flex flex-col items-center">
 							
 							<span class="text-sm text-gray-700 dark:text-gray-400">
@@ -66,6 +66,15 @@ export default function Offers({offers, page, total}) {
 							 
 							</div>
 						  </div>
+						)}
+						{(page ==1 && page == lastPage)  && (
+							<div class="flex flex-col items-center">
+							
+								<span class="text-sm text-gray-700 dark:text-gray-400">
+									Showing <span class="font-semibold text-gray-900 dark:text-white"> {(page * 4)-3} - {(page * 4)}</span> of <span class="font-semibold text-gray-900 dark:text-white">{total}</span> Entries
+								</span>
+							
+						  	</div>
 						)}
 					</div>
 				
