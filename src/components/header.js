@@ -5,6 +5,17 @@ import { useContext } from 'react'
 import AuthContext from '../context/AuthContext'
 import Logout from '../pages/logout'
 
+import { Fragment, useState } from 'react'
+import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
+import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
+const Profile_Logout = [
+	{ name: 'Profile', href: '/profile' }
+]
+
+  const LoginRegis = [
+	{ name: 'Sign-In', href: '/login' },
+	{ name: 'Register', href: '/register' },
+  ]
 const noUserLinks = [
 	{ label: 'Offers', href: '/offers' },
 	{ label: 'Discover', href: '/discover' },
@@ -25,11 +36,13 @@ const busiLinks = [
 	{ label: 'Dashboard', href: '/dashboard' },
 	
 ]
+
+
 function Header() {
 	
 	const router = useRouter()
 	const {user, logout} = useContext(AuthContext)
-	//console.log(user)
+	console.log(user)
 	//console.log(user.business)
 
 	return (
@@ -114,32 +127,76 @@ function Header() {
 								</div>
 							</>} 
 							{user ? <>
-								 <Link href='/account'>
-									<div
+								<Popover className="relative">
+										<Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+										<span class="sr-only">Open user menu</span>
+										<img class="w-8 h-8 mr-2 rounded-full" src="/images/placeholder.png" alt="user photo"/>
+										<ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+										</Popover.Button>
+
+										<Transition
+										as={Fragment}
+										enter="transition ease-out duration-200"
+										enterFrom="opacity-0 translate-y-1"
+										enterTo="opacity-100 translate-y-0"
+										leave="transition ease-in duration-150"
+										leaveFrom="opacity-100 translate-y-0"
+										leaveTo="opacity-0 translate-y-1"
+										>
+										<Popover.Panel className="absolute -left-36 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5">
+											<p class="text-sm font-black text-gray-900 dark:text-white">User:</p> <p class="text-sm font-extralight text-gray-900 dark:text-white"> {user?.username}</p>
+											{Profile_Logout.map((item) => (
+											<a
+												key={item.name}
+												href={item.href}
+												className="block rounded-lg py-2 px-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+											>
+												{item.name}
+											</a>
+											
+											))}
+											<button onClick={() => {
+												console.log("LOGOUT") 
+												logout()
+												}}type="button" className="block rounded-lg py-2 px-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50">Log-Out</button>
+										</Popover.Panel>
+										</Transition>
 										
-										title='userIcon'
-										className='h-10 w-10 rounded-full bg-zinc-200 bg-cover bg-center shadow-inner dark:bg-zinc-800'
-										style={{
-											backgroundImage:
-												'url(https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png)',
-										}}
-									/>
-									</Link>
-									<button onClick={() => logout()}type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Log-Out</button>
+									</Popover>
 									
 								</> :
 								<>
-								<Link href='/login'>
-								<div
-									
-									title='userIcon'
-									className='h-10 w-10 rounded-full bg-zinc-200 bg-cover bg-center shadow-inner dark:bg-zinc-800'
-									style={{
-										backgroundImage:
-											'url(https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png)',
-									}}
-								/>
-								</Link>
+								 	<Popover className="relative">
+										<Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+										<span class="sr-only">Open user menu</span>
+										<img class="w-8 h-8 mr-2 rounded-full" src="/images/placeholder.png" alt="user photo"/>
+											Sign-In / Register
+										
+										<ChevronDownIcon className="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
+										</Popover.Button>
+
+										<Transition
+										as={Fragment}
+										enter="transition ease-out duration-200"
+										enterFrom="opacity-0 translate-y-1"
+										enterTo="opacity-100 translate-y-0"
+										leave="transition ease-in duration-150"
+										leaveFrom="opacity-100 translate-y-0"
+										leaveTo="opacity-0 translate-y-1"
+										>
+										<Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5">
+											{LoginRegis.map((item) => (
+											<a
+												key={item.name}
+												href={item.href}
+												className="block rounded-lg py-2 px-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+											>
+												{item.name}
+											</a>
+											))}
+										</Popover.Panel>
+										</Transition>
+									</Popover>
 							</> 
 							}
 						</nav>
