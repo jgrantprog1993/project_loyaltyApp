@@ -1,6 +1,7 @@
 // @ts-nocheck
 import Layout from "../components/layout"
 import Hero from "../components/Hero"
+import 'react-toastify/dist/ReactToastify.css'
 export default function Home(){
 	return (
 

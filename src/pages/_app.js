@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 import { useState,useEffect } from 'react'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import 'react-toastify/dist/ReactToastify.css'
 config.autoAddCss = false
 
 
@@ -49,6 +50,7 @@ function MyApp( {Component, pageProps }) {
 		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
 			integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
 			crossorigin=""></script>
+      <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" />
       </Head>
       <Meta/>
      
@@ -57,7 +59,7 @@ function MyApp( {Component, pageProps }) {
       <Loading/>
           <Component {...pageProps}/>
       </AuthProvider>
-    
+      <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
     </>
   )
 }

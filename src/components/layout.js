@@ -30,6 +30,7 @@ export default function Layout({title, keywords, description, children}) {
       (
         <>
         <Head>
+        <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" />
           <title>{title}</title>
           <Meta></Meta>
         </Head>
@@ -38,8 +39,11 @@ export default function Layout({title, keywords, description, children}) {
             <main>
               {children}
             </main>
+            
          <Footer/>
+         
         </div>
+        <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
        </>
       )
     }
