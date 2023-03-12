@@ -6,7 +6,8 @@ import Modal from 'react-modal'
 import React, { useState } from 'react'
 
 export default function Account({userData}) {
-
+	console.log('userData in Account')
+	console.log(userData)
 	const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -70,7 +71,7 @@ export default function Account({userData}) {
 }
 
 export async function getServerSideProps ({ req, res})  {
-	
+	console.log('cookieToken in GETSP')
 	const cookieToken = getCookie('token', { req, res});
 	console.log(cookieToken)
 	const response = await fetch(`${API_URL}/api/users/me?`,
@@ -81,6 +82,7 @@ export async function getServerSideProps ({ req, res})  {
 			}
 	})
 	const userData= await response.json()
+	console.log('userData in GETSP')
 	console.log(userData)
 
 	return {

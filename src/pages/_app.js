@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 import { useState,useEffect } from 'react'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
+import 'react-toastify/dist/ReactToastify.css'
 config.autoAddCss = false
 
 

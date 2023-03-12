@@ -8,14 +8,16 @@ import Logout from '../pages/logout'
 import { Fragment, useState } from 'react'
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
+
 const Profile_Logout = [
 	{ name: 'Profile', href: '/profile' }
 ]
 
-  const LoginRegis = [
+const LoginRegis = [
 	{ name: 'Sign-In', href: '/login' },
 	{ name: 'Register', href: '/register' },
-  ]
+]
+
 const noUserLinks = [
 	{ label: 'Offers', href: '/offers' },
 	{ label: 'Discover', href: '/discover' },
@@ -42,6 +44,7 @@ function Header() {
 	
 	const router = useRouter()
 	const {user, logout} = useContext(AuthContext)
+	console.log(' in Header')
 	console.log(user)
 	//console.log(user.business)
 
@@ -72,7 +75,7 @@ function Header() {
 														// @ts-ignore
 														router.pathname === href
 															? 'text-indigo-500 dark:text-indigo-400'
-															: 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50'
+															: 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-500'
 													}`}
 												>
 													{label}
@@ -146,14 +149,13 @@ function Header() {
 										<Popover.Panel className="absolute -left-36 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5">
 											<p class="text-sm font-black text-gray-900 dark:text-white">User:</p> <p class="text-sm font-extralight text-gray-900 dark:text-white"> {user?.username}</p>
 											{Profile_Logout.map((item) => (
-											<a
-												key={item.name}
-												href={item.href}
-												className="block rounded-lg py-2 px-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
-											>
-												{item.name}
-											</a>
-											
+											<Link legacyBehavior key={item.name} href={item.href}>
+												<a
+													className="block rounded-lg py-2 px-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+												>
+													{item.name}
+												</a>
+											</Link>
 											))}
 											<button onClick={() => {
 												console.log("LOGOUT") 
@@ -186,13 +188,13 @@ function Header() {
 										>
 										<Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5">
 											{LoginRegis.map((item) => (
-											<a
-												key={item.name}
-												href={item.href}
-												className="block rounded-lg py-2 px-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
-											>
-												{item.name}
-											</a>
+											<Link legacyBehavior key={item.name} href={item.href}>
+												<a
+													className="block rounded-lg py-2 px-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-50"
+												>
+													{item.name}
+												</a>
+											</Link>
 											))}
 										</Popover.Panel>
 										</Transition>

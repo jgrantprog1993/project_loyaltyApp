@@ -14,7 +14,7 @@ export const AuthProvider = ({children}) => {
   const [error, setError] = useState(true)
  
 
-  // useEffect(() => {checkUserLoggedIn()}, [])
+   useEffect(() => {checkUserLoggedIn()}, [])
 
   const register = async (username, fname,lname, business, email, password) => {
     const res = await fetch(`${NEXT_URL}/api/register`, {
@@ -91,21 +91,21 @@ export const AuthProvider = ({children}) => {
     const data = await res.json()
   }
 
-  // const checkUserLoggedIn = async () => {
-  //   const res = await fetch(`${API_URL}/api/users/me`)
-  //   const data = await res.json()
+  const checkUserLoggedIn = async (user) => {
+    const res = await fetch(`${NEXT_URL}/api/user`)
+    const data = await res.json()
 
-  //   console.log('res')
-  //   console.log(res)
-  //   console.log('data')
-  //   console.log(data)
+    console.log('res')
+    console.log(res)
+    console.log('data')
+    console.log(data)
 
-  //   if(res.ok){
-  //     setUser(data.user)
-  //   }else{
-  //     setUser(null)
-  //   }
-  // }
+    if(res.ok){
+      setUser(data.user)
+    }else{
+      setUser(null)
+    }
+  }
   
 
     const value = {
