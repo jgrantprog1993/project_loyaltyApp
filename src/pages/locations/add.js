@@ -75,7 +75,7 @@ export default function add(token) {
             //console.log(body)
             console.log(res)
             //TODO Check if error first 
-            toast.success(`Added Location: ${res.data.attributes.name}`)
+            toast.success(`Added Location`)
             router.push(`/discover`)
           
     }

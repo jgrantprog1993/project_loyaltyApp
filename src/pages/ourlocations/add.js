@@ -13,7 +13,8 @@ import cookie from 'cookie'
 
 export default function add(token) {
     const {user} = useContext(AuthContext)
-    //console.log(token)
+    console.log('token')
+    console.log(token)
     const [values, setValues] = useState({
         name:'',
         lat:'',
@@ -46,18 +47,19 @@ export default function add(token) {
       
         console.log(user)
             var valuesObj = JSON.stringify({
-                'data': {
-                    name:values.name,
-                    lat:values.lat,
-                    lon:values.lon,
-                    description:values.description,
-                    address:values.address,
-                    category:values.category,
-                    users_permissions_user: user.id
+                "data": {
+                    "name":values.name,
+                    "lat":values.lat,
+                    "lon":values.lon,
+                    "description":values.description,
+                    "address":values.address,
+                    "category":values.category,
+                    "users_permissions_user": user.id
                 }
               });
-              //console.log(valuesObj)
-            const res =  await fetch (`${API_URL}/api/locations`, {
+              console.log('valuesObj')
+              console.log(valuesObj)
+            const res =  await fetch (`https://loyalty-app-final-proj-jg1.herokuapp.com/api/locations`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,10 +74,10 @@ export default function add(token) {
                     return
                 }
             }
-            //console.log(body)
+            console.log('res')
             console.log(res)
             //TODO Check if error first 
-            toast.success(`Added Location: ${res.data.attributes.name}`)
+            toast.success(`Added Location`)
             router.push(`/ourlocations`)
           
     }

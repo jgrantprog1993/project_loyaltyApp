@@ -99,7 +99,7 @@ export default function LocationPage({location}) {
         </dl>
       </div>
       </div>
-      <div class="container mx-auto ">
+      <div class="container mx-auto  ">
       <Map className="w-full h-64" width="800" height="400" center={DEFAULT_CENTER} zoom={8}>
               {({ TileLayer, Marker, Popup }) => (
               <>

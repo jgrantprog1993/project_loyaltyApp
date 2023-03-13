@@ -16,7 +16,7 @@ export default function Home() {
                     <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl">
                         <div className="hidden sm:mb-10 sm:flex">
                             </div>
-                                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Digital TEST for you loyalty vouchers</h1>
+                                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Digital wallet for you loyalty vouchers</h1>
                                 <p className="mt-6 text-lg leading-8 text-gray-600">Now you can save all of your rewards and loyalty tokens in one place. Developed in Next.js and Tailwind</p>
                                     <div className="mt-10 flex items-center gap-x-6">
                                         <a href="/register" className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get started</a>
