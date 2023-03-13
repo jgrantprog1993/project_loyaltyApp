@@ -1,48 +1,65 @@
-// @ts-ignore
-import { ThemeProvider } from 'next-themes'
-// @ts-ignore
+// @ts-nocheck
 import Meta from '../components/meta'
-//import '@/styles/globals.css'
-// @ts-ignore
-import { useRouter } from "next/router";
 import '../styles/globals.css';
 import { AuthProvider } from "../context/AuthContext";
 // @ts-ignore
-import ProtectedRoute from "../components/protectedRoute";
-// @ts-ignore
-import Header from '../components/header';
-// @ts-ignore
-import BottomNav from '../components/bottom-nav';
-
-// const protectedRoutes = ["/"];
-
-// export default function App({ Component, pageProps }:{Component:any,pageProps:any}) {
-//   return (
-//    <>
-//     <Header />
-//     <Component {...pageProps} />
-//     <BottomNav />
-//    </>
-
-//   )
-// }
-
 import Layout from '../components/layout'
 import Head from 'next/head';
-
+import { ToastContainer } from 'react-toastify';
+import { CookiesProvider } from "react-cookie"
 // @ts-ignore
+import { useRouter } from 'next/router';
+import { useState,useEffect } from 'react'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+import 'react-toastify/dist/ReactToastify.css'
+config.autoAddCss = false
+
+
+function Loading() {
+  const router = useRouter();
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+      const handleStart = (url) => (url !== router.asPath) && setLoading(true);
+      const handleComplete = (url) => (url === router.asPath) && setTimeout(() =>{setLoading(false)},1000);
+
+      router.events.on('routeChangeStart', handleStart)
+      router.events.on('routeChangeComplete', handleComplete)
+      router.events.on('routeChangeError',  handleComplete)
+
+      return () => {
+          router.events.off('routeChangeStart', handleStart)
+          router.events.off('routeChangeComplete', handleComplete)
+          router.events.off('routeChangeError', handleComplete)
+      }
+  })
+  return loading && (<div className='spinner-wrapper'>
+  <div className="spinner"></div></div>)
+}
+
 function MyApp( {Component, pageProps }) {
   return (
     <>
       <Head>
-      <title>Loyalty App </title>
+      <title>Loyalty App</title>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+			integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+			crossorigin=""/>
+		<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+			integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+			crossorigin=""></script>
+      <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" />
       </Head>
       <Meta/>
+     
       <AuthProvider>
-        <Layout>
+      <ToastContainer />
+      <Loading/>
           <Component {...pageProps}/>
-        </Layout>
       </AuthProvider>
+      <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
     </>
   )
 }

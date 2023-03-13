@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Head from 'next/head'
 
 const Meta = () => (
@@ -12,7 +13,7 @@ const Meta = () => (
 		/>
 		<meta name='apple-mobile-web-app-title' content='Loyalty App' />
 		<meta name='application-name' content='Loyalty App' />
-		<meta name='description' content='Scan to collect loyalty tockens' />
+		<meta name='description' content='Scan to collect loyalty tokens' />
 		<meta
 			name='theme-color'
 			content='#f4f4f5'
@@ -30,6 +31,8 @@ const Meta = () => (
 		<link rel='apple-touch-icon' href='/images/playstore.png' />
 		<link rel='icon' type='image/png' href='/images/playstore.png' />
 		<link rel='manifest' href='/manifest.json' />
+		<link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" />
+		
 	</Head>
 )
 

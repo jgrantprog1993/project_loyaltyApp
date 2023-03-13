@@ -1,14 +1,45 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
+import AuthContext from '../context/AuthContext'
+
+
 
 function BottomNav() {
 	const router = useRouter()
+	const {user, logout} = useContext(AuthContext)
+
+
 
 	return (
 		<div className='sm:hidden'>
 			<nav className='fixed bottom-0 w-full border-t bg-zinc-100 pb-safe dark:border-zinc-800 dark:bg-zinc-900'>
-				<div className='mx-auto flex h-16 max-w-md items-center justify-around px-6'>
-					{links.map(({ href, label, icon }) => (
+				
+				{user ? <>
+					
+					{user.business === 'False' ? 
+					<div className='mx-auto flex h-16 max-w-md items-center justify-around px-6'>
+						{userLinks.map(({ href, label, icon }) => (
+							<Link legacyBehavior key={label} href={href}>
+								<a
+									className={`flex h-full w-full flex-col items-center justify-center space-y-1 ${
+										router.pathname === href
+											? 'text-indigo-500 dark:text-indigo-400'
+											: 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50'
+									}`}
+								>
+									{icon}
+									<span className='text-xs text-zinc-600 dark:text-zinc-400'>
+										{label}
+									</span>
+								</a>
+							</Link>
+						))}
+					</div>
+					
+				:
+				<div className='mx-auto flex h-16 max-w-md items-center justify-around'>
+					{busiLinks.map(({ href, label, icon }) => (
 						<Link legacyBehavior key={label} href={href}>
 							<a
 								className={`flex h-full w-full flex-col items-center justify-center space-y-1 ${
@@ -24,7 +55,29 @@ function BottomNav() {
 							</a>
 						</Link>
 					))}
-				</div>
+					</div>
+				}
+				</> : <>
+				<div className='mx-auto flex h-16 max-w-md items-center justify-around px-6'>
+					{noUserLinks.map(({ href, label, icon }) => (
+						<Link legacyBehavior key={label} href={href}>
+							<a
+								className={`flex h-full w-full flex-col items-center justify-center space-y-1 ${
+									router.pathname === href
+										? 'text-indigo-500 dark:text-indigo-400'
+										: 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50'
+								}`}
+							>
+								{icon}
+								<span className='text-xs text-zinc-600 dark:text-zinc-400'>
+									{label}
+								</span>
+							</a>
+						</Link>
+					))}
+					</div>
+					</>} 
+				
 			</nav>
 		</div>
 	)
@@ -32,7 +85,7 @@ function BottomNav() {
 
 export default BottomNav
 
-const links = [
+const userLinks = [
 	{
 		label: 'Home',
 		href: '/',
@@ -104,5 +157,93 @@ const links = [
 				/>
 			</svg>
 		),
+	},
+	{
+		label: 'Offers',
+		href: '/offers',
+		icon: (
+			<svg
+				viewBox='0 0 15 15'
+				fill='none'
+				xmlns='http://www.w3.org/2000/svg'
+				width='18'
+				height='18'
+			>
+				<path
+					d='M2.5.5V0H2v.5h.5zm10 0h.5V0h-.5v.5zM4.947 4.724a.5.5 0 00-.894-.448l.894.448zM2.5 8.494l-.447-.223-.146.293.21.251.383-.32zm5 5.997l-.384.32a.5.5 0 00.769 0l-.385-.32zm5-5.996l.384.32.21-.251-.146-.293-.447.224zm-1.553-4.219a.5.5 0 00-.894.448l.894-.448zM8 9.494v-.5H7v.5h1zm-.5-4.497A4.498 4.498 0 013 .5H2a5.498 5.498 0 005.5 5.497v-1zM2.5 1h10V0h-10v1zM12 .5a4.498 4.498 0 01-4.5 4.497v1c3.038 0 5.5-2.46 5.5-5.497h-1zM4.053 4.276l-2 3.995.895.448 2-3.995-.895-.448zM2.116 8.815l5 5.996.769-.64-5-5.996-.769.64zm5.768 5.996l5-5.996-.768-.64-5 5.996.769.64zm5.064-6.54l-2-3.995-.895.448 2 3.995.895-.448zM8 14.49V9.494H7v4.997h1z'
+					fill='currentColor'
+				/>
+			</svg>
+		),
 	}
+]
+
+const noUserLinks = [
+	
+	{
+		label: 'Discover',
+		href: '/discover',
+		icon: (
+			<svg className="svg-icon" viewBox="0 0 20 20">
+							<path d="M10,1.375c-3.17,0-5.75,2.548-5.75,5.682c0,6.685,5.259,11.276,5.483,11.469c0.152,0.132,0.382,0.132,0.534,0c0.224-0.193,5.481-4.784,5.483-11.469C15.75,3.923,13.171,1.375,10,1.375 M10,17.653c-1.064-1.024-4.929-5.127-4.929-10.596c0-2.68,2.212-4.861,4.929-4.861s4.929,2.181,4.929,4.861C14.927,12.518,11.063,16.627,10,17.653 M10,3.839c-1.815,0-3.286,1.47-3.286,3.286s1.47,3.286,3.286,3.286s3.286-1.47,3.286-3.286S11.815,3.839,10,3.839 M10,9.589c-1.359,0-2.464-1.105-2.464-2.464S8.641,4.661,10,4.661s2.464,1.105,2.464,2.464S11.359,9.589,10,9.589">
+
+							</path>
+						</svg>)	},
+	{
+		label: 'Offers',
+		href: '/offers',
+		icon: (
+			<svg className="svg-icon" viewBox="0 0 20 20">
+							<path d="M17.35,2.219h-5.934c-0.115,0-0.225,0.045-0.307,0.128l-8.762,8.762c-0.171,0.168-0.171,0.443,0,0.611l5.933,5.934c0.167,0.171,0.443,0.169,0.612,0l8.762-8.763c0.083-0.083,0.128-0.192,0.128-0.307V2.651C17.781,2.414,17.587,2.219,17.35,2.219M16.916,8.405l-8.332,8.332l-5.321-5.321l8.333-8.332h5.32V8.405z M13.891,4.367c-0.957,0-1.729,0.772-1.729,1.729c0,0.957,0.771,1.729,1.729,1.729s1.729-0.772,1.729-1.729C15.619,5.14,14.848,4.367,13.891,4.367 M14.502,6.708c-0.326,0.326-0.896,0.326-1.223,0c-0.338-0.342-0.338-0.882,0-1.224c0.342-0.337,0.881-0.337,1.223,0C14.84,5.826,14.84,6.366,14.502,6.708"></path>
+						</svg>
+		),
+	}
+]
+const busiLinks = [
+	{
+		label: 'Add Location',
+		href: '/ourlocations/add',
+		icon: (
+			<svg className="svg-icon" viewBox="0 0 20 20">
+							<path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
+						</svg>
+		),
+	},
+	{
+		label: 'Our Locations',
+		href: '/ourlocations',
+		icon: (
+			<svg className="svg-icon" viewBox="0 0 20 20">
+							<path d="M10,1.375c-3.17,0-5.75,2.548-5.75,5.682c0,6.685,5.259,11.276,5.483,11.469c0.152,0.132,0.382,0.132,0.534,0c0.224-0.193,5.481-4.784,5.483-11.469C15.75,3.923,13.171,1.375,10,1.375 M10,17.653c-1.064-1.024-4.929-5.127-4.929-10.596c0-2.68,2.212-4.861,4.929-4.861s4.929,2.181,4.929,4.861C14.927,12.518,11.063,16.627,10,17.653 M10,3.839c-1.815,0-3.286,1.47-3.286,3.286s1.47,3.286,3.286,3.286s3.286-1.47,3.286-3.286S11.815,3.839,10,3.839 M10,9.589c-1.359,0-2.464-1.105-2.464-2.464S8.641,4.661,10,4.661s2.464,1.105,2.464,2.464S11.359,9.589,10,9.589"></path>
+						</svg>
+		),
+	},
+	{
+		label: 'Add Offer',
+		href: '/ouroffers/add',
+		icon: (
+			<svg className="svg-icon" viewBox="0 0 20 20">
+							<path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
+						</svg>
+		),
+	},
+	{
+		label: 'Our Offers',
+		href: '/ouroffers',
+		icon: (
+			<svg className="svg-icon" viewBox="0 0 20 20">
+							<path d="M17.35,2.219h-5.934c-0.115,0-0.225,0.045-0.307,0.128l-8.762,8.762c-0.171,0.168-0.171,0.443,0,0.611l5.933,5.934c0.167,0.171,0.443,0.169,0.612,0l8.762-8.763c0.083-0.083,0.128-0.192,0.128-0.307V2.651C17.781,2.414,17.587,2.219,17.35,2.219M16.916,8.405l-8.332,8.332l-5.321-5.321l8.333-8.332h5.32V8.405z M13.891,4.367c-0.957,0-1.729,0.772-1.729,1.729c0,0.957,0.771,1.729,1.729,1.729s1.729-0.772,1.729-1.729C15.619,5.14,14.848,4.367,13.891,4.367 M14.502,6.708c-0.326,0.326-0.896,0.326-1.223,0c-0.338-0.342-0.338-0.882,0-1.224c0.342-0.337,0.881-0.337,1.223,0C14.84,5.826,14.84,6.366,14.502,6.708"></path>
+						</svg>
+		),
+	},
+	{
+		label: 'Dashboard',
+		href: '/dashboard',
+		icon: (
+			<svg className="svg-icon" viewBox="0 0 20 20">
+							<path d="M17.431,2.156h-3.715c-0.228,0-0.413,0.186-0.413,0.413v6.973h-2.89V6.687c0-0.229-0.186-0.413-0.413-0.413H6.285c-0.228,0-0.413,0.184-0.413,0.413v6.388H2.569c-0.227,0-0.413,0.187-0.413,0.413v3.942c0,0.228,0.186,0.413,0.413,0.413h14.862c0.228,0,0.413-0.186,0.413-0.413V2.569C17.844,2.342,17.658,2.156,17.431,2.156 M5.872,17.019h-2.89v-3.117h2.89V17.019zM9.587,17.019h-2.89V7.1h2.89V17.019z M13.303,17.019h-2.89v-6.651h2.89V17.019z M17.019,17.019h-2.891V2.982h2.891V17.019z"></path>
+						</svg>
+		),
+	},
+	
 ]

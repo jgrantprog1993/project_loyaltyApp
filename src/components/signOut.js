@@ -11,7 +11,7 @@ const LoggedIn = () => {
 
   // Listen for changes on loading and authUser, redirect if needed
   useEffect(() => {
-    if (!loading && !currentUser)
+    if (currentUser)
       router.push('/')
   }, [currentUser, loading])
 
