@@ -33,13 +33,12 @@ export default function add({token, locations}) {
                     title:values.title,
                     description:values.description,
                     location:values.location,
-                    description:values.description,
                     endDate:values.endDate
                    
                 }
               });
               console.log(valuesObj)
-            const res =  await fetch (`${API_URL}/api/offers`, {
+            const res =  await fetch (`https://loyalty-app-final-proj-jg1.herokuapp.com/api/offers`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,7 +56,7 @@ export default function add({token, locations}) {
             //console.log(body)
             console.log(res)
             //TODO Check if error first 
-            toast.success(`Offer Added: ${res.data.attributes.name}`)
+            toast.success(`Offer Added `)
             router.push(`/ouroffers`)
           
     }

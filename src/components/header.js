@@ -44,8 +44,8 @@ function Header() {
 	
 	const router = useRouter()
 	const {user, logout} = useContext(AuthContext)
-	console.log(' in Header')
-	console.log(user)
+	// console.log(' in Header')
+	// console.log(user)
 	//console.log(user.business)
 
 	return (
@@ -130,7 +130,7 @@ function Header() {
 								</div>
 							</>} 
 							{user ? <>
-								<Popover className="relative">
+								<Popover className="relative z-[100]">
 										<Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
 										<span class="sr-only">Open user menu</span>
 										<img class="w-8 h-8 mr-2 rounded-full" src="/images/placeholder.png" alt="user photo"/>
@@ -146,7 +146,7 @@ function Header() {
 										leaveFrom="opacity-100 translate-y-0"
 										leaveTo="opacity-0 translate-y-1"
 										>
-										<Popover.Panel className="absolute -left-36 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5">
+										<Popover.Panel className="absolute -left-36 top-full z-[1100] mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5">
 											<p class="text-sm font-black text-gray-900 dark:text-white">User:</p> <p class="text-sm font-extralight text-gray-900 dark:text-white"> {user?.username}</p>
 											{Profile_Logout.map((item) => (
 											<Link legacyBehavior key={item.name} href={item.href}>
@@ -168,7 +168,7 @@ function Header() {
 									
 								</> :
 								<>
-								 	<Popover className="relative">
+								 	<Popover className="relative z-[100] ">
 										<Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
 										<span class="sr-only">Open user menu</span>
 										<img class="w-8 h-8 mr-2 rounded-full" src="/images/placeholder.png" alt="user photo"/>
@@ -186,7 +186,7 @@ function Header() {
 										leaveFrom="opacity-100 translate-y-0"
 										leaveTo="opacity-0 translate-y-1"
 										>
-										<Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5">
+										<Popover.Panel className="absolute -left-8 top-full z-[1100] mt-3 w-56 rounded-xl bg-white p-2 shadow-lg ring-1 ring-gray-900/5">
 											{LoginRegis.map((item) => (
 											<Link legacyBehavior key={item.name} href={item.href}>
 												<a

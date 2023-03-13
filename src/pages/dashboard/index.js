@@ -26,9 +26,9 @@ export default function Dashboard({userData,busLocData, scanData}) {
 	}
 	console.log(busLocDataIdArray)
 	
-	for(let i=0; i<= scanData.data.length-1; i++){
+	for(let i=0; i<= scanData?.data?.length-1; i++){
 		
-		scanDataIdArray[i] = scanData.data[i].attributes.location.data.id
+		scanDataIdArray[i] = scanData?.data[i]?.attributes?.location?.data?.id
 		
 	}
 	console.log(scanDataIdArray)
@@ -41,9 +41,9 @@ export default function Dashboard({userData,busLocData, scanData}) {
 	const countsObj = Object.entries(counts)
 	
 	//Weekly
-	const scanDataData = scanData.data
+	const scanDataData = scanData?.data
 	
-	const groupByCategory = scanDataData.groupBy(scan => {
+	const groupByCategory = scanDataData?.groupBy(scan => {
 		return scan.attributes.scannedAtDate
 	  });
 	/////// order by date
@@ -60,12 +60,12 @@ export default function Dashboard({userData,busLocData, scanData}) {
 
 	var busUsers = []
 	for(let i =0; i< scanData.data.length-1; i++){
-		busUsers[i] = scanData.data[i].attributes.users_permissions_user.data.attributes.username
+		busUsers[i] = scanData.data[i]?.attributes?.users_permissions_user?.data?.attributes?.username
 		
 	}
 	console.log('busUsers')
 	const uniqBusUsers = [...new Set(busUsers)];
-	const countUniqBusUsers = uniqBusUsers.length
+	const countUniqBusUsers = uniqBusUsers?.length
 	console.log(countUniqBusUsers)
 	
 	var weightAvg = 0
@@ -88,7 +88,7 @@ export default function Dashboard({userData,busLocData, scanData}) {
 		var result = [];
 		for (var i=0; i<7; i++) {
 			if (scanCountstoArrayLast7DaysVar[i] != undefined){
-			result[i] = scanCountstoArrayLast7DaysVar[i].length
+			result[i] = scanCountstoArrayLast7DaysVar[i]?.length
 			}
 			else{result[i] = 0}
 		}

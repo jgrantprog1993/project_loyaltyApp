@@ -40,7 +40,7 @@ export default function Discover({userData, locationsAll, page, total}) {
 							<DiscoverItem key={locationsData.data.id} location={location}/>
 						</div>
 						))}
-						{page == 1 && (
+						{(page == 1 && page != lastPage) && (
 							<div class="flex flex-col items-center">
 							<span class="text-sm text-gray-700 dark:text-gray-400">
 							Showing <span class="font-semibold text-gray-900 dark:text-white"> {(page * 3)-2} - {(page * 3)}</span> of <span class="font-semibold text-gray-900 dark:text-white">{total}</span> Entries
@@ -69,7 +69,7 @@ export default function Discover({userData, locationsAll, page, total}) {
 							</div>
 						  </div>
 						)}
-						{(page == lastPage)  && (
+						{(page != 1 && page == lastPage)  && (
 							<div class="flex flex-col items-center">
 							
 							<span class="text-sm text-gray-700 dark:text-gray-400">
@@ -82,9 +82,22 @@ export default function Discover({userData, locationsAll, page, total}) {
 							</div>
 						  </div>
 						)}
+						{(page== 1 && page == lastPage)  && (
+							<div class="flex flex-col items-center">
+							
+							<span class="text-sm text-gray-700 dark:text-gray-400">
+								Showing <span class="font-semibold text-gray-900 dark:text-white"> {(page * 3)-2} - {(page * 3)}</span> of <span class="font-semibold text-gray-900 dark:text-white">{total}</span> Entries
+							</span>
+							<div class="inline-flex mt-2 xs:mt-0">
+
+						
+
+							</div>
+						  </div>
+						)}
 					</>
 				:
-				<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+				<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16">
 					<div class="mx-auto  max-w-4xl">
 						<Map center={DEFAULT_CENTER} zoom={8}>
 							{({ TileLayer, Marker, Popup }) => (
