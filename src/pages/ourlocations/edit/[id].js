@@ -6,9 +6,13 @@ import {useRouter} from 'next/router'
 import Link from 'next/link'
 import Layout from '../../../components/layout'
 import { API_URL } from '../../../utils/config'
+import Image from 'next/image'
+import Modal from '../../../components/Modal'
+import ImageUpload from '../../../components/ImageUpload'
+import { FaImage } from 'react-icons/fa'
+import cookie from 'cookie'
 
-
-export default function editLocation({location}) {
+export default function editLocation({location, token}) {
     // console.log(location)
     const [values, setValues] = useState({
         name:location.data.attributes.name,
@@ -37,6 +41,11 @@ export default function editLocation({location}) {
        
     })
     const router = useRouter()
+    const [imagePreview, setImagePreview] = useState(
+        location.image ? location.image.formats.thumbnail.url : null
+      )
+    const [showModal, setShowModal] = useState(false)
+   
     const handleSubmit = async (e) => {
         e.preventDefault()
         //console.log(values)
@@ -79,6 +88,17 @@ export default function editLocation({location}) {
         const {name, value} = e.target
         setValues({...values,[name]:value})
     }
+
+    const imageUploaded = async (e) => {
+        const res = await fetch(`${API_URL}/api/locations/${location.data.id}?populate=*`)
+        const data = await res.json()
+        console.log(data)
+        // console.log(data.image.formats.thumbnail.url)
+        // setImagePreview(data.image.formats.thumbnail.url)
+
+        setShowModal(false)
+      }
+
     return (
     <Layout title='Edit Location'>
         <div className='my-20 h-screen'>
@@ -335,9 +355,33 @@ export default function editLocation({location}) {
                             </dl>
                         </div>
                     </div>
-                    
+  
+                        <p className="mb-2 font-semibold leading-none text-gray-900 dark:text-white" >Location Image</p>
+                    {imagePreview ? (
+                        <Image src={imagePreview} height={100} width={170} />
+                    ) : (
+                        <div>
+                        <p>No image uploaded</p>
+                        </div>
+                    )}
+
+                    <div>
+                        <button
+                        onClick={() => setShowModal(true)}
+                        className='text-white bg-purple-600 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2'
+                        >
+                        <FaImage /> Set Image
+                        </button>
+                    </div>
+
+                    <Modal show={showModal} onClose={() => setShowModal(false)}>
+                        <ImageUpload
+                        locationId={location.data.id}
+                        imageUploaded={imageUploaded}
+                        token={token}
+                        />
+                    </Modal>
                 </div>
-                
         </div> 
     </Layout>
   )
@@ -345,13 +389,16 @@ export default function editLocation({location}) {
 
 export async function getServerSideProps({params: {id}, req
 }) {
+    const {token} = cookie.parse(req.headers.cookie)
+
     const res = await fetch(`${API_URL}/api/locations/${id}`)
     const location = await res.json()
 
 
     return{
        props: {
-        location
+        location,
+        token
        } 
     }
 }
