@@ -3,9 +3,11 @@
 
 ![alt text](https://github.com/jgrantprog1993/project_PWA_test1/blob/main/public/images/playstore.png)
 
-### Description: 
+### Description
+This project is a prototype of a progressive web application (PWA), that allows benefits both consumer and business.
+The consumer can search for a nearby business, checkout the Opening hours, gain loyalty points from there and store them via the app.
+The business can promoter their store via special offers, and gets insights from the number of user interactions i.e. scans.
 ### Set Up
-To run this project, install it locally using npm:
 
 ### Technologies
 
