@@ -65,8 +65,11 @@ In short summary Business can:
 'Admin' logs directly into the backend on the backend project to update from there.
 
 ## Project status 
-- I will take a break from this for a couple of weeks starting next week (2-April-2023), but I would love If others could contribute ! Lets grow this together.
+- Phase 1 Prototype - [x] 
+- Phase 2 Prototype - [ ] 
+- I would love If others could contribute ! Lets grow this together.
 - I have started to create an issue log with possible updates that can be completed by contributers, why not have a look and have a go !
+- What do you think should be included in Phase 2? I would love to hear your ideas.
 ## References
 Common Header in Next.js -> https://stackoverflow.com/questions/57918626/have-a-common-header-layout-in-nextjs <br />
 Router -> https://nextjs.org/docs/api-reference/next/router <br />
