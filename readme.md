@@ -1,23 +1,38 @@
-# Final Project
-## Title: Loyalty App
+
+# Title: Loyalty App
 
 ![alt text](https://github.com/jgrantprog1993/project_PWA_test1/blob/main/public/images/playstore.png)
 
-### Description
+## Description
 This project is a prototype of a progressive web application (PWA), that allows benefits both consumer and business.
 The consumer can search for a nearby business, checkout the Opening hours, gain loyalty points from there and store them via the app.
-The business can promoter their store via special offers, and gets insights from the number of user interactions i.e. scans.
-### Set Up
+The business can promoter their store via special offers, and gets insights from the number of user interactions i.e.
 
-### Technologies
+## Associated Back End Proj. 
+https://github.com/jgrantprog1993/project_loyaltyApp_backend
+## Getting Started
+Open your terminal and then type
+    $ git clone {the url to the GitHub repo}
 
-### UI
+This clones the repo
 
-### Scope of functionalities 
+cd into the new folder and type
+    $ npm install
+
+This installs the required dependencies
+To run project.
+    $ npm start
 
 
-### Project status 
-### References
+## Technologies
+
+## UI
+
+## Scope of functionalities 
+
+
+## Project status 
+## References
 Common Header in Next.js -> https://stackoverflow.com/questions/57918626/have-a-common-header-layout-in-nextjs <br />
 Router -> https://nextjs.org/docs/api-reference/next/router <br />
 tailwind radio buttonss -> https://flowbite.com/docs/forms/radio/ <br />
