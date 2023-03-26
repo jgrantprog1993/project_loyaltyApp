@@ -1,4 +1,5 @@
 <p align="center"><img src="https://github.com/jgrantprog1993/project_PWA_test1/blob/main/public/images/playstore.png"  width="20%" height="10%"></p>
+
 # Title: Loyalty App 
 
 
@@ -11,14 +12,14 @@ The business can promoter their store via special offers, and gets insights from
 https://github.com/jgrantprog1993/project_loyaltyApp_backend
 ## Getting Started
 First open the link above and run the backend server.
-Open your terminal and then type (This clones the repo)
+Open your terminal and then type (This clones the repo)<br/>
 `git clone {the url to the GitHub repo}`
 
-cd into the new folder and type
+cd into the new folder and type<br/>
 `npm install`
 
 This installs the required dependencies.
-To run project.
+To run project.<br/>
 `npm start`
 
 
@@ -31,6 +32,7 @@ This project uses technologies such as:
 - chart.js
 - LeafLet.js
 - Font Awesome
+- Toastify
 
 ## UI
 The UI was developed in Tailwind, the below image is a taste of the general style that the project was developed in.
@@ -66,7 +68,7 @@ The functionalites are broken into two categories:
 ## Project status 
 - Phase 1 Prototype - ✅
 - Phase 2 Prototype - ⬜️ (To be started soon)
-- I would love If others could contribute ! Lets grow this together.
+- https://github.com/jgrantprog1993/project_loyaltyApp/issues I would love If others could contribute ! Lets grow this together.
 - I have started to create an issue log with possible updates that can be completed by contributers, why not have a look and have a go !
 - What do you think should be included in Phase 2? I would love to hear your ideas.
 ## References
