@@ -34,7 +34,11 @@ This project uses technologies such as:
 - Font Awesome
 
 ## UI
+The UI was developed in Tailwind, the below image is a taste of the general style that the project was developed in.
+The app is fully responsive and has different navigation headers depending on what the size of the screen is.
+![alt text](https://github.com/jgrantprog1993/project_PWA_test1/blob/dev_finalUpdates/public/images/12430732.jpg)
 
+Most of the images are inspired from my love of coffee !
 ## Scope of functionalities 
 
 
