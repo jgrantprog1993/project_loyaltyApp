@@ -129,7 +129,7 @@ export async function getServerSideProps({query: {page = 1}, req, res}) {
 	
 	if(query != '')
 	{	
-		const response3 = await fetch(`${API_URL}/api/vouchers?${query}&populate=*`,
+		const response3 = await fetch(`${API_URL}/api/vouchers?${query}&populate[location][populate]=*`,
 		{
 			method: 'GET',
 				headers: {

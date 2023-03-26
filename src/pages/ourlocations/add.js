@@ -97,7 +97,7 @@ export default function add(token) {
                     <div class="md:col-span-1">
                     <div class="px-4 sm:px-0">
                         <h3 class="text-base font-semibold leading-6 text-gray-900">Add Location</h3>
-                        <p class="mt-1 text-sm text-gray-600">PlaceHolder</p>
+                        <p class="mt-1 text-sm text-gray-600">Add your new location so new customers can discover you !</p>
                     </div>
                     </div>
                     <div class="mt-5 md:col-span-2 md:mt-0">

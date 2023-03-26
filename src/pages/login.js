@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import loginImg from '../../public/images/pic5.jpg'
+import Footer2 from '../components/footer'
 
 export default function Login(){
   const [email,setEmail] = useState('')
@@ -57,12 +58,13 @@ export default function Login(){
                   </button>
         </form>
         <hr class="my-6 border-gray-300 w-full"/>
-              <p> Don't have an Account yet? <Link class="text-blue-500 hover:text-blue-700 font-semibold" href='/register'>Create an Account</Link></p>
+          <p className='text-center'> Don't have an Account yet? <Link class="text-blue-500 hover:text-blue-700 font-semibold" href='/register'>Create an Account</Link></p>
           </div>
 
       </div>
   
   </section>
+  <Footer2/>
   </Layout>
   )
 }
