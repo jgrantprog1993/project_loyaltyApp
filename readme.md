@@ -1,7 +1,5 @@
 
-# Title: Loyalty App <img src="https://github.com/jgrantprog1993/project_PWA_test1/blob/main/public/images/playstore.png"  width="60%" height="30%">
-
-<img src="https://github.com/jgrantprog1993/project_PWA_test1/blob/main/public/images/playstore.png"  width="60%" height="30%">
+# Title: Loyalty App <img src="https://github.com/jgrantprog1993/project_PWA_test1/blob/main/public/images/playstore.png"  width="20%" height="10%">
 
 ## Description
 This project is a prototype of a loyalty rewards progressive web application (PWA), which uses a CMS to manage the backend. The app benefits both consumer and business.
