@@ -6,6 +6,7 @@ import Layout from "../components/layout"
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer2 from '../components/footer'
 
 export default function Register(){
   const [email,setEmail] = useState('')
@@ -61,11 +62,11 @@ export default function Register(){
                   <div className="flex flex-wrap -mx-3">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label className="block text-gray-700">First Name</label>
-                    <input type="text" value={fname} onChange={(e) => setFname(e.target.value)} placeholder='Jane' className='"appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white' />
+                    <input type="text" value={fname} onChange={(e) => setFname(e.target.value)} placeholder='Jane' className='"appearance-none block w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none' />
                     </div>
                     <div className="w-full md:w-1/2 px-3">
                       <label className="block text-gray-700">Last Name</label>
-                      <input type="text" value={lname} onChange={(e) => setLname(e.target.value)} placeholder='Doe' className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"/>
+                      <input type="text" value={lname} onChange={(e) => setLname(e.target.value)} placeholder='Doe' className="appearance-none block w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"/>
                     </div>
                   </div>
                   <div>
@@ -89,13 +90,14 @@ export default function Register(){
               </button>
           
         
-          </form>
+            </form>
               <hr className="my-6 border-gray-300 w-full"/>
-              <p> Already Have an Account?  <Link className="text-blue-500 hover:text-blue-700 font-semibold" href='/login'> Login</Link>
+              <p className='text-center'> Already have an Account?  <Link className="text-blue-500 hover:text-blue-700 font-semibold" href='/login'> Login</Link>
               </p>
           </div>
           </div>
       </section>
+      <Footer2/>
     </Layout>
   )
 }
