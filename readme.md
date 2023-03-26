@@ -1,7 +1,7 @@
 
-# Title: Loyalty App
+# Title: Loyalty App <img src="https://github.com/jgrantprog1993/project_PWA_test1/blob/main/public/images/playstore.png"  width="60%" height="30%">
 
-![alt text](https://github.com/jgrantprog1993/project_PWA_test1/blob/main/public/images/playstore.png)
+<img src="https://github.com/jgrantprog1993/project_PWA_test1/blob/main/public/images/playstore.png"  width="60%" height="30%">
 
 ## Description
 This project is a prototype of a loyalty rewards progressive web application (PWA), which uses a CMS to manage the backend. The app benefits both consumer and business.
@@ -45,7 +45,7 @@ The functionalites are broken into two categories:
 - Consumer
 - Business
 
-In short summary Consumer can:
+### In short summary Consumer can:
 - Register / Login
 - View Offers
 - View Business Details incl. Location, Descrip, Opening Hours
@@ -54,7 +54,7 @@ In short summary Consumer can:
 - Redeem loyalty Points for Reward
 - etc
 
-In short summary Business can:
+### In short summary Business can:
 - Register / Login
 - Create, Read, Update, Delete Locations
 - Create, Read, Update, Delete Offers
