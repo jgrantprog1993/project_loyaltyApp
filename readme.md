@@ -22,7 +22,11 @@ This installs the required dependencies.
 To run project.<br/>
 `npm start`
 
-
+You will have to generate the following of your own .env keys:
+- NEXT_PUBLIC_GOOGLE_MAP_API_KEY
+- NEXT_PUBLIC_MAPBOX_API_TOKEN
+- NEXT_PUBLIC_FRONTEND_URL (probably http://localhost:3000)
+- NEXT_PUBLIC_API_URL (probably http://localhost:1337) (This is the backend server)
 ## Technologies
 This project uses technologies such as:
 - Next.js
