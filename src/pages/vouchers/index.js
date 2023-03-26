@@ -8,7 +8,7 @@ import AuthContext from '../../context/AuthContext'
 const PER_PAGE = 3
 import Link from "next/link";
 
-export default function Vouchers({userInfo,locations, vouchers, page, total}) {
+export default function Vouchers({token, userInfo,locations, vouchers, page, total}) {
 	const {user} = useContext(AuthContext)
 	const userInfoData = userInfo
 	const locationsData = locations.data
@@ -40,7 +40,7 @@ export default function Vouchers({userInfo,locations, vouchers, page, total}) {
 								// <div className='grid place-items-center'>
 									<div className='flex grid justify-center p-4 flex-col text-zinc-600 dark:text-zinc-400'>
 
-										<VoucherItem voucher={voucher}/>
+										<VoucherItem token ={token} voucher={voucher}/>
 									</div>	
 								// </div>
 								))
@@ -142,6 +142,7 @@ export async function getServerSideProps({query: {page = 1}, req, res}) {
 	}
 	return {
 		props: {
+			token: token,
 			userInfo:userInfo,
 			locations:locations, 
 			vouchers:vouchers, 

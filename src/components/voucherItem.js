@@ -3,9 +3,11 @@ import { API_URL } from "../utils/config"
 import {  getCookie } from 'cookies-next';
 import Link from 'next/link'
 
-export default function VoucherItem({voucher}) {
-    console.log('voucherItem')
-    console.log(voucher)
+export default function VoucherItem({token, voucher}) {
+    // console.log('voucherItem')
+    // console.log(voucher)
+    // console.log('token')
+    // console.log(token)
     var voucherPoints = voucher.attributes.voucherPoints
     var voucherPointsPec 
     if(voucherPoints<10){
@@ -28,6 +30,10 @@ export default function VoucherItem({voucher}) {
             },
             body: raw
         })
+
+        // const dataCreated = await res.json()
+        // console.log('Created')
+        // console.log(dataCreated)
     }
 
     return(
