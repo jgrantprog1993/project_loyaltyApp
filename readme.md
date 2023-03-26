@@ -4,7 +4,7 @@
 ![alt text](https://github.com/jgrantprog1993/project_PWA_test1/blob/main/public/images/playstore.png)
 
 ## Description
-This project is a prototype of a progressive web application (PWA), that allows benefits both consumer and business.
+This project is a prototype of a loyalty rewards progressive web application (PWA), which uses a CMS to manage the backend. The app benefits both consumer and business.
 The consumer can search for a nearby business, checkout the Opening hours, gain loyalty points from there and store them via the app.
 The business can promoter their store via special offers, and gets insights from the number of user interactions i.e.
 
@@ -36,11 +36,33 @@ This project uses technologies such as:
 ## UI
 The UI was developed in Tailwind, the below image is a taste of the general style that the project was developed in.
 The app is fully responsive and has different navigation headers depending on what the size of the screen is.
+
 ![alt text](https://github.com/jgrantprog1993/project_PWA_test1/blob/dev_finalUpdates/public/images/12430732.jpg)
 
 Most of the images are inspired from my love of coffee !
 ## Scope of functionalities 
+The functionalites are broken into two categories:
+- Consumer
+- Business
 
+In short summary Consumer can:
+- Register / Login
+- View Offers
+- View Business Details incl. Location, Descrip, Opening Hours
+- Scan QRCode in business to gain loyalty points
+- View Loyalty Points Gain
+- Redeem loyalty Points for Reward
+- etc
+
+In short summary Business can:
+- Register / Login
+- Create, Read, Update, Delete Locations
+- Create, Read, Update, Delete Offers
+- View Dashboard for the business
+- View user Profile Info
+- etc
+
+'Admin' logs directly into the backend on the backend project to update from there.
 
 ## Project status 
 ## References
