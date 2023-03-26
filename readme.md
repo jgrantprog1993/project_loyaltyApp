@@ -13,14 +13,14 @@ https://github.com/jgrantprog1993/project_loyaltyApp_backend
 ## Getting Started
 First open the link above and run the backend server.
 Open your terminal and then type (This clones the repo)
-> git clone {the url to the GitHub repo}
+`git clone {the url to the GitHub repo}`
 
 cd into the new folder and type
-> npm install
+`npm install`
 
 This installs the required dependencies.
 To run project.
-> npm start
+`npm start`
 
 
 ## Technologies
