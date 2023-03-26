@@ -1,9 +1,20 @@
 # Final Project
-## Name: Loyalty App
+## Title: Loyalty App
 
 ![alt text](https://github.com/jgrantprog1993/project_PWA_test1/blob/main/public/images/playstore.png)
 
+### Description: 
+### Set Up
+To run this project, install it locally using npm:
 
+### Technologies
+
+### UI
+
+### Scope of functionalities 
+
+
+### Project status 
 ### References
 Common Header in Next.js -> https://stackoverflow.com/questions/57918626/have-a-common-header-layout-in-nextjs <br />
 Router -> https://nextjs.org/docs/api-reference/next/router <br />
