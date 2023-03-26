@@ -2,6 +2,7 @@
 import Layout from "../components/layout"
 import Hero from "../components/Hero"
 import 'react-toastify/dist/ReactToastify.css'
+import Footer2 from "../components/footer"
 export default function Home(){
 	return (
 
@@ -9,6 +10,7 @@ export default function Home(){
 			<div className='my-20'>
 				<Hero/>
 			</div>
+			<Footer2/>
 		</Layout>
 					
 	)

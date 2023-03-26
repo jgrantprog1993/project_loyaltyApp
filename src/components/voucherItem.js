@@ -4,10 +4,8 @@ import {  getCookie } from 'cookies-next';
 import Link from 'next/link'
 
 export default function VoucherItem({token, voucher}) {
-    // console.log('voucherItem')
-    // console.log(voucher)
-    // console.log('token')
-    // console.log(token)
+    console.log('voucherItem')
+    console.log(voucher)
     var voucherPoints = voucher.attributes.voucherPoints
     var voucherPointsPec 
     if(voucherPoints<10){
@@ -42,7 +40,7 @@ export default function VoucherItem({token, voucher}) {
            
             <div class="p-5">
             <div class="flex  space-x-4">
-                <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt=""></img>
+                <img class="w-10 h-10 rounded-full" src={voucher.attributes.location.data.attributes.logo.data?.attributes?.formats?.thumbnail?.url} alt=""></img>
                 <div class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{voucher.attributes.location.data.attributes.name}</div>
                 
             </div>        
@@ -60,7 +58,8 @@ export default function VoucherItem({token, voucher}) {
                     <div class=" bg-blue-600 h-2.5 rounded-full" style={{width: voucherPointsPec+'%'}}></div>
                 </div>
                 <p class=" text-right mb-3 font-normal text-gray-700 dark:text-gray-400">{voucherPoints}/ 10</p>
-            </div>
+            </div> 
+        
         </div>
         </>
     )

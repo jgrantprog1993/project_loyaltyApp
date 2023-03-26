@@ -11,12 +11,11 @@ require("core-js/actual/array/group-by");
 import dateFormat, { masks } from "dateformat";
 import moment from 'moment';
 
-import { FaQrcode } from 'react-icons/fa';
 
 export default function Dashboard({userData,busLocData, scanData}) {
   
+	console.log('busLocData')
 	console.log(busLocData)
-	console.log(scanData)
 	let busLocDataIdArray = []
 	let scanDataIdArray = []
 
@@ -31,7 +30,7 @@ export default function Dashboard({userData,busLocData, scanData}) {
 		scanDataIdArray[i] = scanData?.data[i]?.attributes?.location?.data?.id
 		
 	}
-	console.log(scanDataIdArray)
+	//console.log(scanDataIdArray)
 
 	const counts = {}
 
@@ -53,8 +52,7 @@ export default function Dashboard({userData,busLocData, scanData}) {
 	}).forEach(function(key) {
 		orderedDates[key] = groupByCategory[key];
 	})
-	console.log(orderedDates)
-	
+	//console.log(orderedDates)
 	
 	// No of Customers
 
@@ -63,10 +61,10 @@ export default function Dashboard({userData,busLocData, scanData}) {
 		busUsers[i] = scanData.data[i]?.attributes?.users_permissions_user?.data?.attributes?.username
 		
 	}
-	console.log('busUsers')
+	//console.log('busUsers')
 	const uniqBusUsers = [...new Set(busUsers)];
 	const countUniqBusUsers = uniqBusUsers?.length
-	console.log(countUniqBusUsers)
+	//console.log(countUniqBusUsers)
 	
 	var weightAvg = 0
 	function scanCountstoArrayLast7Days(countObj){
@@ -82,7 +80,8 @@ export default function Dashboard({userData,busLocData, scanData}) {
 		// }
 	}
 	const scanCountstoArrayLast7DaysVar = scanCountstoArrayLast7Days(orderedDates)
-	console.log(scanCountstoArrayLast7DaysVar)
+	//console.log('scanCountstoArrayLast7DaysVar')
+	//console.log(scanCountstoArrayLast7DaysVar)
 	
 	function scanCountsLast7Days(scanCountstoArrayLast7DaysVar){
 		var result = [];
@@ -92,7 +91,7 @@ export default function Dashboard({userData,busLocData, scanData}) {
 			}
 			else{result[i] = 0}
 		}
-		console.log(result)
+		//console.log(result)
 		return(result)
 	}
 
@@ -196,8 +195,8 @@ export default function Dashboard({userData,busLocData, scanData}) {
 			
         </main>
 		<body>
-			<div>
-				<dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
+			<div className='px-10'>
+				<dl class="px-5 mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
 					<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
 						<dt class="truncate text-sm font-medium text-gray-500">Total Scans </dt>
 						<dd class="mt-1 text-3xl font-semibold tracking-tight text-indigo-600">{scanDataIdArray.length}</dd>
@@ -210,7 +209,7 @@ export default function Dashboard({userData,busLocData, scanData}) {
 
 					<div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">
 						<dt class="truncate text-sm font-medium text-gray-500">Avg. Scans per Day</dt>
-						<dd class="mt-1 text-3xl font-semibold tracking-tight text-indigo-600">{weightAvg}</dd>
+						<dd class="mt-1 text-3xl font-semibold tracking-tight text-indigo-600">{weightAvg.toFixed(2)}</dd>
 					</div>
 				</dl>
 			<div/>
@@ -219,7 +218,7 @@ export default function Dashboard({userData,busLocData, scanData}) {
 			<div class="flex flex-row flex-wrap mt-2">
 				<div class="w-full lg:w-1/2 p-3">
 					<div class="w-full p-8 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-					<h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Total Scans per Location</h5>
+					<h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Total Scans last 7 Days</h5>
 						<canvas id="myChart" ref={canvasEl} height="100" />
 					</div>
 				</div>  
@@ -238,10 +237,11 @@ export default function Dashboard({userData,busLocData, scanData}) {
 									</div>
 									<div class="flex-1 min-w-0">
 										<p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-											{count[0]}
+											{/* {count[0]} */}
+											{busLocData.find(x => x.id == count[0])?.name}
 										</p>
 										<p class="text-sm text-gray-500 truncate dark:text-gray-400">
-											PlaceHolder
+										{busLocData.find(x => x.id == count[0])?.address}
 										</p>
 									</div>
 									<div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
@@ -258,6 +258,7 @@ export default function Dashboard({userData,busLocData, scanData}) {
 			</div>
 			</div>
 		</body> 
+		<br/><br/><br/>
         <BottomNav/>
     </>
   )
@@ -266,7 +267,7 @@ export default function Dashboard({userData,busLocData, scanData}) {
 export async function getServerSideProps({req, res}) {
 
   const cookieToken = getCookie('token', { req, res});
-	console.log(cookieToken)
+	//(cookieToken)
 	const response = await fetch(`${API_URL}/api/users/me?populate=*`,
 	{
 		method: 'GET',
@@ -283,8 +284,8 @@ export async function getServerSideProps({req, res}) {
 	}
 
   const query = string.substring(1);
-  console.log('query')
-  console.log(query)
+  //console.log('query')
+  //console.log(query)
   var scanData = null
   if(query.length>1)
   {
@@ -299,8 +300,8 @@ export async function getServerSideProps({req, res}) {
 		
 	}
 	else {scanData = null}
-	console.log('scanData')
-	console.log(scanData)
+	//console.log('scanData')
+	//console.log(scanData)
   
 	return {
 		props: {

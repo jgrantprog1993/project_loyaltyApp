@@ -21,7 +21,7 @@ export default function Discover({userData, locationsAll, page, total}) {
 	return (
 	<Layout title='Discover' keywords='' description=''>
 
-		<div className='my-20 h-screen'>
+		<div className='my-20 h-screen container mx-auto'>
 		
 				<div className="flex justify-right p-5">
 					
