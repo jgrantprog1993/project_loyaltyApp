@@ -65,8 +65,8 @@ In short summary Business can:
 'Admin' logs directly into the backend on the backend project to update from there.
 
 ## Project status 
-- Phase 1 Prototype - :heavy_check_mark:
-- Phase 2 Prototype - &#9744;   
+- Phase 1 Prototype - ✅
+- Phase 2 Prototype - ⬜️ (To be started soon)
 - I would love If others could contribute ! Lets grow this together.
 - I have started to create an issue log with possible updates that can be completed by contributers, why not have a look and have a go !
 - What do you think should be included in Phase 2? I would love to hear your ideas.
