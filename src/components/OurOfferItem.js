@@ -16,12 +16,12 @@ export default function OfferItem({offer}) {
    const router = useRouter()
    const deleteOffer= async (e) => {
     if(confirm('Are you sure?')){
-      const res = await fetch(`${API_URL}/api/offers/${offer[0].id}`,
+      const res = await fetch(`${API_URL}/api/offers/${offer.id}`,
       {
         method: 'DELETE',
       })
 
-      toast.success(`Deleted Offer: ${offer[0].attributes.title}`)
+      toast.success(`Deleted Offer: ${offer.attributes.title}`)
   
       router.push('/ouroffers')
     
@@ -32,15 +32,15 @@ export default function OfferItem({offer}) {
     <div className="my-2">
       <div className="flex bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 ">
       <figure className="flex slate-100 rounded-xl p-8 dark:bg-slate-800">
-                <img className="w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto" src={offer[0].attributes.image} alt=""/>
+                <img className="w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto" src={offer.attributes.image} alt=""/>
           <div className="pt-6 md:p-8 text-center md:text-left space-y-4">
-            <h1>{offer[0].attributes.title}</h1>
+            <h1>{offer.attributes.title}</h1>
               <p className="text-sm font-small">
-                {offer[0].attributes.description}
+                {offer.attributes.description}
               </p>
             <figcaption className="font-medium">
               <p className="text-sm font-small text-slate-700 dark:text-slate-500">
-                  EndDate: {offer[0].attributes.endDate}
+                  EndDate: {offer.attributes.endDate}
               </p>
             </figcaption> 
           </div>

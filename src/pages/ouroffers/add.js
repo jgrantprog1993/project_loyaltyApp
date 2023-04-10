@@ -38,7 +38,7 @@ export default function add({token, locations}) {
                 }
               });
               console.log(valuesObj)
-            const res =  await fetch (`https://loyalty-app-final-proj-jg1.herokuapp.com/api/offers`, {
+            const res =  await fetch (`${API_URL}/api/offers`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

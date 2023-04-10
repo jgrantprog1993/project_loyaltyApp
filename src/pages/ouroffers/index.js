@@ -18,11 +18,11 @@ export default function OurOffers({id,result2JSON,offers}) {
 
 					<div className='my-20 h-screen'>
 						<p className='text-zinc-600 dark:text-zinc-400'></p>
-						{resOffers.length===0 && <h3> No Offers to show </h3>}
+						{resOffers[0].length===0 && <h3> No Offers to show </h3>}
 						
-						{resOffers.map((offer) => (
+						{resOffers[0].map((offer) => (
 							<div className='my-2 flex justify-center items-center flex-col text-zinc-600 dark:text-zinc-400 '>
-								<OurOfferItem key={resOffers.id} offer={offer}/>
+								<OurOfferItem key={offer.id} offer={offer}/>
 							</div>
 						))}
 					</div>
