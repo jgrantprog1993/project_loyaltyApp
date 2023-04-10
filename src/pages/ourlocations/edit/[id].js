@@ -66,17 +66,17 @@ export default function editLocation({location, token}) {
                     category:values.category,
                 }
               });
-              //console.log(valuesObj)
-            // const res =  await fetch (`${API_URL}/api/ourlocations/${location.data.id}`, {
-            //     method: 'PUT',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: valuesObj,
-            // }).then((res) => res.json())
+              console.log(valuesObj)
+            const res =  await fetch (`${API_URL}/api/locations/${location.data.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: valuesObj,
+            }).then((res) => res.json())
             
            
-            // console.log(res.body)
+            console.log(res.body)
           
             
             //TODO Check if error first 
@@ -157,10 +157,11 @@ export default function editLocation({location, token}) {
                                     <div class="sm:col-span-2">
                                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
                                         <input 
-                                        type="text" 
-                                        name="name" 
-                                        id="name" 
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+                                         name='address'
+                                         id='address'
+                                         value={values.address}
+                                         onChange={handleInputChange}
+                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
                                     </div>
                                     <div class="sm:col-span-2">
                                         <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
@@ -192,8 +193,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='MonOpen'
+                                                id='MonOpen'
                                                 value={values.MonOpen}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -202,8 +203,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='MonClosed'
+                                                id='MonClosed'
                                                 value={values.MonClosed}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -215,8 +216,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='TuesOpen'
+                                                id='TuesOpen'
                                                 value={values.TuesOpen}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -225,8 +226,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='TuesClosed'
+                                                id='TuesClosed'
                                                 value={values.TuesClosed}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -239,8 +240,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='WedOpen'
+                                                id='WedOpen'
                                                 value={values.WedOpen}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -249,8 +250,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='WedClosed'
+                                                id='WedClosed'
                                                 value={values.WedClosed}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -263,8 +264,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='ThurOpen'
+                                                id='ThurOpen'
                                                 value={values.ThurOpen}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -273,8 +274,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='ThurClosed'
+                                                id='ThurClosed'
                                                 value={values.ThurClosed}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -287,8 +288,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='FriOpen'
+                                                id='FriOpen'
                                                 value={values.FriOpen}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -297,8 +298,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='FriClosed'
+                                                id='FriClosed'
                                                 value={values.FriClosed}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -311,8 +312,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='SatOpen'
+                                                id='SatOpen'
                                                 value={values.SatOpen}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -321,8 +322,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='SatClosed'
+                                                id='SatClosed'
                                                 value={values.SatClosed}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -335,8 +336,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='SunOpen'
+                                                id='SunOpen'
                                                 value={values.SunOpen}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
@@ -345,8 +346,8 @@ export default function editLocation({location, token}) {
                                         <div>
                                             <input
                                                 type='text'
-                                                name='description'
-                                                id='description'
+                                                name='SunClosed'
+                                                id='SunClosed'
                                                 value={values.SunClosed}
                                                 onChange={handleInputChange}
                                                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" /> 
