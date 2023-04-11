@@ -10,7 +10,7 @@ import cookie from 'cookie'
 
 
 
-export default async function VoucherPage({location, user, vouchers, token}) {
+export default function VoucherPage({location, user, vouchers, token}) {
     console.log('HERE 5')
     console.log(vouchers)
     console.log('location')
@@ -30,7 +30,7 @@ export default async function VoucherPage({location, user, vouchers, token}) {
             }
         })
         console.log(newVoucher)
-        const voucherCreated = await fetch (`${API_URL}/api/vouchers`, {
+        const voucherCreated = fetch (`${API_URL}/api/vouchers`, {
             method: 'POST',
             headers: {
                 Authorization:`Bearer ${token}`,
@@ -38,7 +38,7 @@ export default async function VoucherPage({location, user, vouchers, token}) {
             },
             body: newVoucher
         })
-        const dataCreated = await voucherCreated.json()
+        const dataCreated = voucherCreated.json()
         console.log('Created')
         console.log(dataCreated)
     }
@@ -51,9 +51,8 @@ export default async function VoucherPage({location, user, vouchers, token}) {
     console.log(voucherPoints)
     const newvoucherPoints = voucherPoints +1
     console.log(newvoucherPoints)
-    postNewLoyalty(newvoucherPoints,id)
     const router = useRouter();
-
+    postNewLoyalty(newvoucherPoints,id)
 
     async function postNewLoyalty(newvoucherPoints,id){
         console.log('HERE 6')
@@ -64,7 +63,7 @@ export default async function VoucherPage({location, user, vouchers, token}) {
         });
         console.log(raw)
         // const {token} = cookie.parse(req.headers.cookie)
-        const res = await fetch (`${API_URL}/api/vouchers/${id}`, {
+        const res = fetch (`${API_URL}/api/vouchers/${id}`, {
             method: 'PUT',
             headers: {
                 Authorization:`Bearer ${token}`,
@@ -73,17 +72,16 @@ export default async function VoucherPage({location, user, vouchers, token}) {
             body: raw
         })
 
-        const data = await res.json()
-        console.log(data)
+        
         console.log('HERE 7')
         
-        if(res.ok){
+        // if(res.ok){
         
             router.push('/vouchers')
-        } else {
-            console.log("ERRORR!!!!")
+        // } else {
+        //     console.log("ERRORR!!!!")
         
-        }   
+        // }   
         
     }
     return (
@@ -134,7 +132,7 @@ export async function getServerSideProps({ params: { slug} ,req}) {
    
     var valuesObj = JSON.stringify({
         'data': {
-            location:locIdJson.data[0].id,
+            location:locIdJson?.data[0]?.id,
             // users_permissions_user:userResJSON.id,
             // voucher:vouchers.data[0].id,
             scannedAt:new Date()
