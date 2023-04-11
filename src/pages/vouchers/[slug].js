@@ -15,17 +15,17 @@ export default function VoucherPage({location, user, vouchers, token}) {
     console.log(vouchers)
     console.log('location')
     console.log(location)
-    console.log(location.data[0].id)
-    console.log(user.id)
-    console.log(vouchers.data[0].id)
-    console.log(vouchers.data[0].attributes.voucherPoints)
+    console.log(location?.data[0]?.id)
+    console.log(user?.id)
+    console.log(vouchers?.data[0]?.id)
+    console.log(vouchers?.data[0]?.attributes?.voucherPoints)
     if(vouchers.data.length == 0)
     {
         console.log('HERE Creating')
         var newVoucher= JSON.stringify({
             "data": {
-                "location": location.data[0].id,
-                "users_permissions_user":user.id,
+                "location": location?.data[0]?.id,
+                "users_permissions_user":user?.id,
                 "voucherPoints":1
             }
         })
@@ -43,8 +43,8 @@ export default function VoucherPage({location, user, vouchers, token}) {
         console.log(dataCreated)
     }
     console.log('Finished Creating')
-    const id = vouchers.data[0].id
-    const voucherPoints = vouchers.data[0].attributes.voucherPoints
+    const id = vouchers?.data[0]?.id
+    const voucherPoints = vouchers?.data[0]?.attributes?.voucherPoints
     
     console.log(token)
     console.log(id)
@@ -75,13 +75,10 @@ export default function VoucherPage({location, user, vouchers, token}) {
         
         console.log('HERE 7')
         
-        // if(res.ok){
+       
         
-            router.push('/vouchers')
-        // } else {
-        //     console.log("ERRORR!!!!")
-        
-        // }   
+        router.push('/vouchers')
+         
         
     }
     return (
